@@ -8,7 +8,7 @@ require('dotenv').config({ path: '.env.development' });
 export default {
   keys: '1',
   koa: {
-    port: 7752,
+    port: 5277,
     // 添加body parser配置以支持UTF-8
     bodyParser: {
       enableTypes: ['json', 'form', 'text'],
