@@ -2,7 +2,8 @@ import { MidwayConfig } from '@midwayjs/core';
 import { busboyConfig } from './busboy.config';
 
 // 加载 .env 文件
-require('dotenv').config();
+require('dotenv').config({ path: '.env.development' });
+
 
 export default {
   keys: '1',
@@ -28,7 +29,7 @@ export default {
         password: process.env.DB_PASSWORD, //数据库密码
         database: process.env.DB_NAME, //数据库名称
         synchronize: false, // 是否自动同步数据库结构
-        logging: process.env.DB_LOGGING === 'true' ? ['query', 'error', 'warn'] : ['error'],
+        logging: ['error', 'warn'], // 降噪：只输出错误和警告
         entities: [
           'entity', // 特定目录
           '**/*.entity.{j,t}s', // 通配加后缀匹配

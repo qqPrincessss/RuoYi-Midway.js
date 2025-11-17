@@ -2,7 +2,7 @@ import { MidwayConfig } from '@midwayjs/core';
 import { busboyConfig } from './busboy.config';
 
 // 加载 .env 文件
-require('dotenv').config();
+require('dotenv').config({ path: '.env.production' });
 
 export default {
   keys: '1',

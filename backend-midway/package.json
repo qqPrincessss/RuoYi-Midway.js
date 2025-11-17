@@ -70,7 +70,7 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bootstrap.js",
-    "dev": "cross-env NODE_ENV=local mwtsc --watch --run @midwayjs/mock/app.js",
+    "dev": "cross-env NODE_ENV=development mwtsc --watch --run @midwayjs/mock/app.js",
     "test": "cross-env NODE_ENV=unittest jest",
     "cov": "jest --coverage",
     "lint": "mwts check",
