@@ -30,8 +30,7 @@ export default {
         synchronize: false, // 是否自动同步数据库结构
         logging: process.env.DB_LOGGING === 'true' ? ['query', 'error', 'warn'] : ['error'],
         entities: [
-          'entity', // 特定目录
-          '**/*.entity.{j,t}s', // 通配加后缀匹配
+           '**/module/**/entites/*.{ts,js}' , // 通配加后缀匹配
         ],
       },
     },

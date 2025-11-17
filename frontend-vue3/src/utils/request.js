@@ -11,230 +11,11 @@ let downloadLoadingInstance
 // 是否显示重新登录
 export let isRelogin = { show: false }
 
-// Tauri 环境下的文件保存
-let tauriSaveFile = null
-const isTauriEnv = typeof window !== 'undefined' && (window.__TAURI__ !== undefined || window.__TAURI_INTERNALS__ !== undefined || window.location.protocol === 'tauri:')
-
-if (isTauriEnv) {
-  // 异步加载 Tauri 文件插件
-  Promise.all([import('@tauri-apps/plugin-dialog'), import('@tauri-apps/plugin-fs')])
-    .then(([dialogModule, fsModule]) => {
-      tauriSaveFile = async (blob, defaultName) => {
-        try {
-          // 打开保存文件对话框
-          const filePath = await dialogModule.save({
-            defaultPath: defaultName,
-            filters: [
-              {
-                name: 'All Files',
-                extensions: ['*']
-              }
-            ]
-          })
-
-          if (filePath) {
-            // 将 Blob 转换为 Uint8Array
-            const arrayBuffer = await blob.arrayBuffer()
-            const uint8Array = new Uint8Array(arrayBuffer)
-
-            // 写入文件
-            await fsModule.writeFile(filePath, uint8Array)
-            ElMessage.success('文件已保存: ' + filePath)
-          }
-        } catch (error) {
-          console.error('Tauri 文件保存失败:', error)
-          ElMessage.error('文件保存失败: ' + error.message)
-        }
-      }
-    })
-    .catch((err) => {
-      console.error('加载 Tauri 文件插件失败:', err)
-    })
-}
-
-// 检测是否在 Tauri 环境中运行
-// Tauri 2.x 使用 window.__TAURI_INTERNALS__ 或检查 Tauri API 是否存在
-const isTauri =
-  typeof window !== 'undefined' &&
-  (window.__TAURI__ !== undefined ||
-    window.__TAURI_INTERNALS__ !== undefined ||
-    // 也可以通过检查协议来判断
-    window.location.protocol === 'tauri:')
-
-// Tauri 环境下的 fetch 加载 Promise
-let tauriFetchPromise = null
-if (isTauri) {
-  tauriFetchPromise = import('@tauri-apps/plugin-http')
-    .then((module) => {
-      return module.fetch
-    })
-    .catch((err) => {
-      console.error('❌ Failed to load Tauri HTTP plugin:', err)
-      return null
-    })
-}
-
-// 自定义 Tauri axios 适配器
-async function tauriAdapter(config) {
-  // 等待 Tauri fetch 加载完成
-  const tauriFetch = await tauriFetchPromise
-
-  if (!tauriFetch) {
-    throw new Error('Tauri HTTP plugin not available, falling back to default adapter')
-  }
-
-  let { url, method, data, headers, timeout, responseType, baseURL } = config
-
-  // 检查 URL 协议：Tauri HTTP plugin 只支持 HTTP/HTTPS
-  if (url.includes('://') && !url.startsWith('http://') && !url.startsWith('https://')) {
-    // 非 HTTP 协议（如 tauri://、file:// 等），拒绝处理
-    throw new Error(`Tauri HTTP plugin does not support ${url.split('://')[0]} protocol. URL: ${url}`)
-  }
-
-  // 处理 baseURL 拼接（axios 的默认行为）
-  if (baseURL && !url.startsWith('http://') && !url.startsWith('https://')) {
-    url = baseURL.replace(/\/+$/, '') + '/' + url.replace(/^\/+/, '')
-  }
-
-  // 最终检查：确保 URL 是完整的 HTTP/HTTPS URL
-  if (!url.startsWith('http://') && !url.startsWith('https://')) {
-    throw new Error(
-      `❌ Invalid URL for Tauri HTTP plugin: "${url}". ` +
-      `The URL must be a complete HTTP/HTTPS URL. ` +
-      `baseURL: "${baseURL || 'undefined'}". ` +
-      `This usually means VITE_APP_BASE_API is not configured correctly. ` +
-      `Please check your .env.production file.`
-    )
-  }
-
-  try {
-    // 处理请求体 - 正确处理 FormData
-    let body = undefined
-    let finalHeaders = { ...headers }
-
-    if (data) {
-      if (typeof data === 'string') {
-        body = data
-      } else if (data instanceof FormData) {
-        // FormData 直接传递，不进行序列化
-        body = data
-        // 移除 content-type，让浏览器/Tauri 自动设置 multipart/form-data 的 boundary
-        delete finalHeaders['content-type']
-        delete finalHeaders['Content-Type']
-      } else {
-        // 其他对象序列化为 JSON
-        body = JSON.stringify(data)
-      }
-    }
-
-    const response = await tauriFetch(url, {
-      method: method.toUpperCase(),
-      headers: finalHeaders,
-      body: body,
-      timeout: timeout || 10000
-    })
-
-    // 处理二进制响应
-    if (responseType === 'blob' || responseType === 'arraybuffer') {
-      const blob = await response.blob()
-      return {
-        data: blob,
-        status: response.status,
-        statusText: response.statusText,
-        headers: response.headers,
-        config,
-        request: {
-          responseType: config.responseType
-        }
-      }
-    }
-
-    // 处理 JSON 响应
-    let resData
-    try {
-      const text = await response.text()
-      resData = text ? JSON.parse(text) : {}
-    } catch (e) {
-      console.error('Failed to parse JSON response:', e)
-      resData = {}
-    }
-
-    const axiosResponse = {
-      data: resData,
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
-      config,
-      request: {
-        responseType: config.responseType
-      }
-    }
-
-    // 模拟 axios 的行为：HTTP 错误状态码应该抛出错误
-    if (!response.ok) {
-      const axiosError = new Error(response.statusText || 'Request failed')
-      axiosError.config = config
-      axiosError.code = `ERR_BAD_RESPONSE`
-      axiosError.request = {}
-      axiosError.response = axiosResponse
-      axiosError.isAxiosError = true
-      axiosError.toJSON = function () {
-        return {
-          message: this.message,
-          name: this.name,
-          stack: this.stack,
-          config: this.config,
-          code: this.code,
-          status: this.response?.status
-        }
-      }
-      throw axiosError
-    }
-
-    return axiosResponse
-  } catch (error) {
-    console.error('❌ Tauri fetch error:', error)
-
-    // 如果已经是 axios 错误（从上面的 HTTP 错误检查抛出的），直接重新抛出
-    if (error.isAxiosError) {
-      throw error
-    }
-
-    // 否则创建新的 axios 错误对象（网络错误等）
-    const axiosError = new Error(error.message || 'Tauri fetch failed')
-    axiosError.config = config
-    axiosError.code = error.code || 'ERR_NETWORK'
-    axiosError.request = {}
-    axiosError.response = null
-    axiosError.isAxiosError = true
-    axiosError.toJSON = function () {
-      return {
-        message: this.message,
-        name: this.name,
-        stack: this.stack,
-        config: this.config,
-        code: this.code
-      }
-    }
-    throw axiosError
-  }
-}
-
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
-// 获取 baseURL，确保在 Tauri 环境中必须是完整的 HTTP/HTTPS URL
+// 获取 baseURL
 const getBaseURL = () => {
-  const envBaseURL = import.meta.env.VITE_APP_BASE_API
-
-  // 在 Tauri 环境中，baseURL 必须是完整的 HTTP/HTTPS URL
-  if (isTauri) {
-    if (!envBaseURL || (!envBaseURL.startsWith('http://') && !envBaseURL.startsWith('https://'))) {
-      // 如果环境变量未配置，使用 fallback API URL
-      return 'https://sxxt.gdmu-stuorg.com/prod-api'
-    }
-  }
-
-  return envBaseURL
+  return import.meta.env.VITE_APP_BASE_API
 }
 
 // 创建axios实例
@@ -244,9 +25,7 @@ const service = axios.create({
   // 超时
   timeout: 10000,
   // 跨域请求时发送Cookie
-  withCredentials: true,
-  // 在 Tauri 环境中使用自定义适配器
-  adapter: isTauri ? tauriAdapter : undefined
+  withCredentials: true
 })
 
 // request拦截器
@@ -316,7 +95,7 @@ service.interceptors.response.use(
             useUserStore()
               .logOut()
               .then(() => {
-                location.href = '/index'
+                location.href = '/login'
               })
           })
           .catch(() => {
@@ -388,13 +167,8 @@ export async function download(url, params, filename, config) {
       if (isBlob) {
         const blob = new Blob([data])
 
-        // Tauri 环境使用原生文件对话框
-        if (isTauriEnv && tauriSaveFile) {
-          await tauriSaveFile(blob, filename)
-        } else {
-          // 浏览器环境使用 file-saver
-          saveAs(blob, filename)
-        }
+        // 使用 file-saver
+        saveAs(blob, filename)
       } else {
         const resText = await data.text()
         const rspObj = JSON.parse(resText)

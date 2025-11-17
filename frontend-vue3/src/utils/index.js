@@ -1,29 +1,6 @@
 import { parseTime } from './ruoyi'
 
 /**
- * 根据用户角色获取默认路由
- * @param {Array} roles 用户角色数组
- * @returns {string} 默认路由路径
- */
-export function getDefaultRouteByRole(roles) {
-  if (!roles || roles.length === 0) {
-    return '/index'
-  }
-  
-  // 角色优先级：admin > teacher > student
-  if (roles.includes('admin')) {
-    return '/index/admin'
-  } else if (roles.includes('teacher')) {
-    return '/index/teacher'
-  } else if (roles.includes('student')) {
-    return '/index/student'
-  }
-  
-  // 默认返回通用首页
-  return '/index'
-}
-
-/**
  * 表格时间格式化
  */
 export function formatDate(cellValue) {
