@@ -1,10 +1,8 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from "typeorm";
-import { SysRole } from "./SysRole";
+import { SysRole } from "../../role/entites/SysRole";
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { SysPost } from "./SysPost";
-import { SysDept } from "./SysDept";
-import { StudentEntity } from "../../user/student.entity";
-import { TeacherEntity } from "../../teacher.entity";
+import { SysPost } from "../../post/entites/SysPost";
+import { SysDept } from "../../dept/entites/SysDept";
 @Index("user_pkey", ["userId"], { unique: true })
 @Entity("sys_user", { schema: 'sys' })
 export class User extends CommonEntity {
@@ -72,9 +70,4 @@ export class User extends CommonEntity {
     inverseJoinColumn: { name: 'post_id' } // 岗位在中间表的列名
   })
   posts: SysPost[];
-  @OneToOne(() => StudentEntity, (student) => student.user)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'userId' })
-  student: StudentEntity;
-  @OneToOne(() => TeacherEntity, (teacher) => teacher.user)
-  teacher: TeacherEntity;
 }

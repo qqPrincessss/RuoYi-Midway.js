@@ -11,4 +11,5 @@ run/
 *.un~
 .tsbuildinfo
 .tsbuildinfo.*
-.env
+.env.development
+.env.production

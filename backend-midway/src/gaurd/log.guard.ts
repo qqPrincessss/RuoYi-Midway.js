@@ -1,7 +1,7 @@
 import { Guard, IGuard, getPropertyMetadata, Inject } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { OPERATION_META_KEY } from "@decorator/log.decorator";
-import { SysOperLog } from "@/entity/framework/monitor/SysOperLog";
+import { SysOperLog } from "@module/monitor/operLog/entites/SysOperLog";
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository } from "typeorm";
 import { getIp } from "@utils/device";

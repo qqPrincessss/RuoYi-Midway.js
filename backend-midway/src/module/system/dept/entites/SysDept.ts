@@ -1,7 +1,5 @@
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { GradeEntity } from "../../grade.entity";
-import { GroupEntity } from "../../group.entity";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 @Index("sys_dept_pkey", ["deptId"], { unique: true })
 @Entity("sys_dept", { schema: "sys" })
 export class SysDept extends CommonEntity {
@@ -53,8 +51,4 @@ export class SysDept extends CommonEntity {
     default: () => "'0'",
   })
   delFlag: string | null;
-  @OneToMany(() => GradeEntity, (gradeEntity) => gradeEntity.dept)
-  children: GradeEntity[];
-  @OneToMany(() => GroupEntity, (groupEntity) => groupEntity.dept)
-  groups: GroupEntity[];
 }

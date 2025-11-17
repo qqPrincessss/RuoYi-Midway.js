@@ -1,7 +1,7 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
-import { User } from "./SysUser";
+import { User } from "../../user/entites/SysUser";
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { SysMenu } from "./SysMenu";
+import { SysMenu } from "../../menu/entites/SysMenu";
 
 @Index("sys_role_pkey", ["roleId"], { unique: true })
 @Entity("sys_role", { schema: 'sys' })
