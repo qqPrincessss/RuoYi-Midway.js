@@ -1,6 +1,6 @@
 import { Provide, Inject } from '@midwayjs/core';
-import { OperLogDao } from '@dao/monitor/operLog.dao';
-import { ListOperLogDTO } from '@dto/monitor/operLog.dto';
+import { OperLogDao } from './operLog.dao';
+import { ListOperLogDTO } from './dto/operLog.dto';
 
 @Provide()
 export class OperLogService {

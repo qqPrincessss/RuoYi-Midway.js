@@ -1,9 +1,9 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from "typeorm";
 import { SysRole } from "./SysRole";
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "../../../common/entity/common.entity";
 import { SysPost } from "./SysPost";
 import { SysDept } from "./SysDept";
-import { StudentEntity  } from "../../user/student.entity";
+import { StudentEntity } from "../../user/student.entity";
 import { TeacherEntity } from "../../teacher.entity";
 @Index("user_pkey", ["userId"], { unique: true })
 @Entity("sys_user", { schema: 'sys' })
@@ -75,6 +75,6 @@ export class User extends CommonEntity {
   @OneToOne(() => StudentEntity, (student) => student.user)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'userId' })
   student: StudentEntity;
-   @OneToOne(() => TeacherEntity, (teacher) => teacher.user)
+  @OneToOne(() => TeacherEntity, (teacher) => teacher.user)
   teacher: TeacherEntity;
 }

@@ -1,7 +1,7 @@
-import { ListUserDTO, CreateUserDTO, UpdateUserDTO, UpdatePwdDto, ResetPwdDto, ChangeStatusDto, UpdateProfileDto, UpdateAuthRoleDTO } from "@dto/system/userDto";
+import { ListUserDTO, CreateUserDTO, UpdateUserDTO, UpdatePwdDto, ResetPwdDto, ChangeStatusDto, UpdateProfileDto, UpdateAuthRoleDTO } from "./dto/user.dto";
 import { Provide, Inject } from '@midwayjs/core';
-import { UserDao } from '../../dao/system/user.dao';
-import { ImportExcelDTO } from "@dto/common/excel.dto";
+import { UserDao } from './user.dao';
+import { ImportExcelDTO } from "../../common/excel/dto/excel.dto";
 import { UploadFileInfo } from "@midwayjs/busboy";
 
 @Provide()
@@ -48,9 +48,6 @@ export class UserService {
   }
   async profile() {
     return await this.userDao.profile()
-  }
-   async teacherList() {
-    return await this.userDao.teacherList();
   }
   async profileAvatar(file: UploadFileInfo) {
     return await this.userDao.profileAvatar(file)

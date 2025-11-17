@@ -1,6 +1,6 @@
 import { Provide, Inject } from '@midwayjs/core';
-import { GenTableDao } from '@dao/tool/genTable.dao';
-import { ListGenTableDTO, CreateGenTableDTO, UpdateGenTableDTO, GenDbTableList } from '@dto/tool/genTable.dto';
+import { GenTableDao } from './genTable.dao';
+import { ListGenTableDTO, CreateGenTableDTO, UpdateGenTableDTO, GenDbTableList } from './dto/genTable.dto';
 
 @Provide()
 export class GenTableService {

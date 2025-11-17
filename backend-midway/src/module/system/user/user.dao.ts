@@ -2,19 +2,17 @@ import { Inject, Provide, } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository, In, Not } from "typeorm";
-import { User } from "@entity/framework/system/SysUser";
-import { SysUserPost } from "@entity/framework/system/SysUserPost";
-import { SysUserRole } from "@entity/framework/system/SysUserRole";
-import { SysRoleDept } from "@entity/framework/system/SysRoleDept";
-import { SysRole } from "@entity/framework/system/SysRole";
-import { SysPost } from "@entity/framework/system/SysPost";
-import { StudentEntity } from '@entity/user/student.entity';
-import { TeacherEntity } from '@entity/teacher.entity';
+import { User } from "./entites/SysUser";
+import { SysUserPost } from "./entites/SysUserPost";
+import { SysUserRole } from "./entites/SysUserRole";
+import { SysRoleDept } from "../role/entites/SysRoleDept";
+import { SysRole } from "../role/entites/SysRole";
+import { SysPost } from "../post/entites/SysPost";
 
-import { ListUserDTO, CreateUserDTO, UpdateUserDTO, UpdatePwdDto, ResetPwdDto, ChangeStatusDto, UpdateProfileDto, UpdateAuthRoleDTO } from "@dto/system/userDto";
-import { ImportExcelDTO } from "@dto/common/excel.dto";
-import { DownloadExcelService } from "@service/common/downloadExcel";
-import { ResolveExcelService } from "@service/common/resolveWebExcel";
+import { ListUserDTO, CreateUserDTO, UpdateUserDTO, UpdatePwdDto, ResetPwdDto, ChangeStatusDto, UpdateProfileDto, UpdateAuthRoleDTO } from "./dto/user.dto";
+import { ImportExcelDTO } from "@/module/common/excel/dto/excel.dto";
+import { DownloadExcelService } from "../../common/excel/downloadExcel";
+import { ResolveExcelService } from "@/module/common/excel/resolveWebExcel";
 import { resBuild } from "@utils/resBuild";
 import { checkIfExsit } from "@utils/serviceHelp";
 import { getOperator, deepClone } from "@utils";
@@ -49,10 +47,7 @@ export class UserDao {
 
   @InjectEntityModel(SysUserRole)
   protected userRoleEntity: Repository<SysUserRole>;
-  @InjectEntityModel(StudentEntity)
-  protected studentRepo: Repository<StudentEntity>;
-  @InjectEntityModel(TeacherEntity)
-  protected teacherRepo: Repository<TeacherEntity>;
+
 
 
 
@@ -362,15 +357,6 @@ export class UserDao {
       },
       relations: [
         'dept',
-        'student.grade',
-        'student.major',
-        'student.user',
-        'student.studentTeam.team.group',
-        'student.studentTeam.team.studentTeams.student.user',
-        'student.studentTeam.team.studentTeams.student.grade',
-        'student.studentTeam.team.studentTeams.student.major',
-        'student.studentTeam.team.teamTeachers.teacher.user.dept',
-        'teacher',
         'roles',
         'posts']
     });
@@ -384,29 +370,6 @@ export class UserDao {
     })
   }
 
-  async teacherList() {
-    const userId = this.ctx.session.userInfo.userId;
-    const userInfo = await this.userEntity.findOne({
-      where: {
-        userId
-      },
-      relations: [
-        'student.major.group',
-      ]
-    });
-    const teacherIds = userInfo.student.major.group.teacherIds.split(',')
-    const teacherList = await this.teacherRepo.find({
-      where: {
-        teacherId: In(teacherIds.map(item => Number(item)))
-      }, relations: [
-        'user', 'user.dept'
-      ]
-    })
-    return resBuild.data({
-      group: userInfo.student.major.group,
-      rows: teacherList
-    })
-  }
 
   // 个人中心 - 修改头像
   async profileAvatar(file: UploadFileInfo) {

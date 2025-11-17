@@ -1,10 +1,10 @@
 import { Provide, Inject, Config } from '@midwayjs/core';
-import { AuthDao } from '../../dao/auth/auth.dao';
+import { AuthDao } from './auth.dao';
 import { JwtService } from '@midwayjs/jwt';
 import { Context } from '@midwayjs/koa';
 import { RedisService } from '@midwayjs/redis';
-import { LoginDTO } from '../../dto/system/loginDto';
-import { UserService } from '../system/user.service';
+import { LoginDTO } from './dto/auth.dto';
+import { UserService } from '../system/user/user.service';
 import { CaptchaService } from '@midwayjs/captcha';
 import { HttpService } from '@midwayjs/axios';
 import { isEqualPsw } from '../../utils/password';
@@ -15,6 +15,7 @@ import * as useragent from 'useragent';
 import { RedisEnum } from '../../utils/enum';
 import { Decrypt } from '../../utils/aes';
 import { uuidv7 } from 'uuidv7';
+import { httpError } from "@midwayjs/core";
 
 @Provide()
 export class AuthService {
@@ -137,7 +138,8 @@ export class AuthService {
 
   /** 退出登录 */
   async logout() {
-    this.ctx.cookies.set('token', '', {
+    try {
+     this.ctx.cookies.set('token', '', {
       maxAge: 0,
       httpOnly: true,
       signed: true,
@@ -153,7 +155,10 @@ export class AuthService {
     const tokenId = this.ctx.session.userInfo.tokenId;
     this.ctx.session.userInfo = null;
     await this.redisService.del(`${RedisEnum.LOGIN_TOKEN_KEY}${tokenId}`);
-    return resBuild.success();
+     return resBuild.success();
+    } catch (error) {
+      throw new  httpError.UnauthorizedError('token已失效，请重新登录');
+    }
   }
   async getLogData(userName: string) {
     const webAgent = this.ctx.request.header['user-agent']

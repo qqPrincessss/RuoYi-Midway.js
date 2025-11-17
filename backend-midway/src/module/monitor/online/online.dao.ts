@@ -1,7 +1,6 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { ListOnlineDTO } from '@dto/monitor/online.dto';
-// import { resBuild } from '@utils/resBuild';
+import { ListOnlineDTO } from './dto/online.dto';
 import { RedisService } from '@midwayjs/redis';
 import { RedisEnum } from '@utils/enum';
 import { Paginate } from '@utils/serviceHelp';

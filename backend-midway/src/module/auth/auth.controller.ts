@@ -1,12 +1,12 @@
 import { Inject, Controller,  Post,Body, Get, Query } from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiQuery } from '@midwayjs/swagger';
-import { LoginDTO } from '../../dto/system/loginDto';
-import { AuthService } from '../../service/auth/auth.service';
-import { GetRouterService } from "@service/common/getRouters.service";
+import { LoginDTO } from './dto/auth.dto';
+import { AuthService } from './auth.service';
+import { GetRouterService } from "./getRouters.service";
 import { Context } from '@midwayjs/koa';
-import { OriginCodeDTO } from "@dto/common/originCode.dto";
-import { GetCodeService } from "@service/common/originCode.service";
-import { UserInfoService } from "@service/common/userInfo.service";
+import { OriginCodeDTO } from "../common/originCode/dto/originCode.dto";
+import { GetCodeService } from "../common/originCode/originCode.service";
+import { UserInfoService } from "./userInfo.service";
 
 @ApiTags('认证管理')
 @Controller('/')
@@ -54,20 +54,7 @@ export class AuthController {
   async getRouters() {
     return await this.getRouterService.getRouters();
   }
-    // 获取系统信息
-  @ApiOperation({ summary: '获取系统信息', description: '获取系统信息' })
-  @ApiResponse({ status: 200, description: '成功获取系统信息' })
-  @Get('/getSystemInfo')
-  async getSystemInfo() {
-    return await this.userInfoService.getSystemInfo();
-  }
-      // 获取系统信息
-  @ApiOperation({ summary: '获取系统信息', description: '获取系统信息' })
-  @ApiResponse({ status: 200, description: '成功获取系统信息' })
-  @Get('/getSystemList')
-  async getSystemList() {
-    return await this.userInfoService.getSystemList();
-  }
+
     // 获取用户信息
   @ApiOperation({ summary: '获取用户信息', description: '获取当前登录用户的详细信息' })
   @ApiResponse({ status: 200, description: '成功获取用户信息' })

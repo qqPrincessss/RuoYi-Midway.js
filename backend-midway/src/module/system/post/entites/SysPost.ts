@@ -1,6 +1,6 @@
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "../../../common/entity/common.entity";
 import { Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./SysUser";
+import { User } from "../../user/entites/SysUser";
 
 @Index("sys_post_pkey", ["postId"], { unique: true })
 @Entity("sys_post", { schema: 'sys' })

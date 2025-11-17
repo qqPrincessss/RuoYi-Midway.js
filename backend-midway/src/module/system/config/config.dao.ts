@@ -2,12 +2,12 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { In, Repository } from 'typeorm';
-import { SysConfig } from '@entity/framework/system/SysConfig';
-import { ListConfigDTO, CreateConfigDTO, UpdateConfigDTO } from '@dto/system/config.dto';
+import { SysConfig } from './entites/SysConfig';
+import { ListConfigDTO, CreateConfigDTO, UpdateConfigDTO } from './dto/config.dto';
 import { resBuild } from '@utils/resBuild';
 import { checkIfExsit } from '@utils/serviceHelp';
 import { getOperator } from '@utils';
-import { DownloadExcelService } from '@service/common/downloadExcel';
+import { DownloadExcelService } from '../../common/excel/downloadExcel';
 
 @Provide()
 export class ConfigDao {

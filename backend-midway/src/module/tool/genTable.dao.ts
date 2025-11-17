@@ -3,7 +3,7 @@ import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
 import { GenTable } from '@module/tool/entites/GenTable';
-import { ListGenTableDTO, CreateGenTableDTO, UpdateGenTableDTO, GenDbTableList } from '@dto/tool/genTable.dto';
+import { ListGenTableDTO, CreateGenTableDTO, UpdateGenTableDTO, GenDbTableList } from './dto/genTable.dto';
 import { resBuild } from '@utils/resBuild';
 import { checkIfExsit } from '@utils/serviceHelp';
 import { capitalize, getColumnLength, getOperator } from '@utils';

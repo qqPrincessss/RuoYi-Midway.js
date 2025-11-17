@@ -2,10 +2,10 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
-import { SysLogininfor } from '@entity/framework/monitor/SysLogininfor';
-import { ListLoginInforDTO } from '@dto/monitor/loginInfor.dto';
+import { SysLogininfor } from './entites/SysLogininfor';
+import { ListLoginInforDTO } from './dto/loginInfor.dto';
 import { resBuild } from '@utils/resBuild';
-import { DownloadExcelService } from '@service/common/downloadExcel';
+import { DownloadExcelService } from '../../common/excel/downloadExcel';
 
 @Provide()
 export class LoginInforDao {

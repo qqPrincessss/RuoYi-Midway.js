@@ -1,10 +1,10 @@
 import { Provide } from '@midwayjs/core';
 import { Repository } from 'typeorm';
-import { User } from '../../entity/framework/system/SysUser';
+import { User } from '../system/user/entites/SysUser';
 import { InjectEntityModel } from '@midwayjs/typeorm';
-import { LoginDTO } from '../../dto/system/loginDto';
+import { LoginDTO } from './dto/auth.dto';
 import { resBuild } from '../../utils/resBuild';
-import { SysLogininfor } from '../../entity/framework/monitor/SysLogininfor';
+import { SysLogininfor } from '../monitor/loginInfor/entites/SysLogininfor';
 
 @Provide()
 export class AuthDao {

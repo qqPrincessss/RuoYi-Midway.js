@@ -1,8 +1,8 @@
 import { Controller, Inject, Get, Provide, Body, Post, Del, Param, Put, Query } from "@midwayjs/core";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { DictTypeService } from "../../service/system/dictType.service";
-import { ListDictTypeDTO, CreateDictTypeDTO, UpdateDictTypeDTO } from "../../dto/system/dictTypeDto";
-import { Auth } from "../../decorator/auth.decorator";
+import { DictTypeService } from "./dictType.service";
+import { ListDictTypeDTO, CreateDictTypeDTO, UpdateDictTypeDTO } from "./dto/dictType.dto";
+import { Auth } from "@decorator/auth.decorator";
 import { BusinessType, Log } from "@decorator/log.decorator";
 
 @ApiTags('字典类型')

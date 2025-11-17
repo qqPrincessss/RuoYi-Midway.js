@@ -1,6 +1,6 @@
 import { Controller, Inject, Get, Param, Del} from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse } from '@midwayjs/swagger';
-import { CacheService } from "@service/monitor/cache.service";
+import { CacheService } from "./cache.service";
 
 @ApiTags('缓存监控')
 @Controller('/monitor/cache')

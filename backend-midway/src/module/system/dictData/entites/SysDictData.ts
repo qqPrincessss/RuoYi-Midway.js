@@ -1,4 +1,4 @@
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "../../../common/entity/common.entity";
 import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("sys_dict_data_pkey", ["dictCode"], { unique: true })

@@ -1,5 +1,5 @@
 import { RuleType, Rule } from '@midwayjs/validate';
-import { PageDTO } from '../common/pageDto';
+import { PageDTO } from '@module/common/dto/pageDto';
 // 查询参数
 export class ListMenuDTO extends PageDTO {
   @Rule(RuleType.string().optional().allow(null).allow(''))

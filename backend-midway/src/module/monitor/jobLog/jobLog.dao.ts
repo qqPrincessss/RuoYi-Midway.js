@@ -2,12 +2,12 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository } from "typeorm";
-import { MonitorJob } from "@entity/framework/monitor/SysJob";
-import { ListJobDTO, CreateJobDTO, UpdateJobDTO, ChangeStatusDto, RunJobDto } from "@dto/monitor/job.dto";
+import { MonitorJob } from "../job/entites/SysJob";
+import { ListJobDTO, CreateJobDTO, UpdateJobDTO, ChangeStatusDto, RunJobDto } from "../job/dto/job.dto";
 import { resBuild } from "@utils/resBuild";
 import { checkIfExsit } from "@utils/serviceHelp";
 import { getOperator } from "@utils";
-import { DownloadExcelService } from "@service/common/downloadExcel";
+import { DownloadExcelService } from "../../common/excel/downloadExcel";
 
 @Provide()
 export class JobLogDao {

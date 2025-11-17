@@ -1,4 +1,4 @@
-import { CommonEntity } from '../../common.entity';
+import { CommonEntity } from '../../../common/entity/common.entity';
 import { Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { SysRole } from './SysRole';
 

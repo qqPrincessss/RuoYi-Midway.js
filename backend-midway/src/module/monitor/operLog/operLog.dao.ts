@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { SysOperLog } from '@entity/framework/monitor/SysOperLog';
 import { ListOperLogDTO } from '@dto/monitor/operLog.dto';
 import { resBuild } from '@utils/resBuild';
-import { DownloadExcelService } from '@service/common/downloadExcel';
+import { DownloadExcelService } from '../../common/excel/downloadExcel';
 import { BusinessType } from '@utils/enum';
 
 @Provide()

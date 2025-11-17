@@ -1,7 +1,7 @@
 import { Controller, Inject, Get, Query, Del, Param } from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@midwayjs/swagger';
-import { OnlineService } from "@service/monitor/online.service";
-import { ListOnlineDTO } from "@dto/monitor/online.dto";
+import { OnlineService } from "./online.service";
+import { ListOnlineDTO } from "./dto/online.dto";
 import { Auth } from "@decorator/auth.decorator";
 
 @ApiTags('在线用户')

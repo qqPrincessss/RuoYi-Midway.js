@@ -1,8 +1,8 @@
 import { Controller,Inject,Get,Body,Post,Del,Param,Put, Query } from "@midwayjs/core";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { DeptService } from "@service/system/dept.service";
-import { ListDeptDTO, CreateDeptDTO, UpdateDeptDTO } from "../../dto/system/deptDto";
-import { Auth } from "../../decorator/auth.decorator";
+import { DeptService } from "./dept.service";
+import { ListDeptDTO, CreateDeptDTO, UpdateDeptDTO } from "./dto/dept.dto";
+import { Auth } from "@decorator/auth.decorator";
 import { BusinessType, Log } from "@decorator/log.decorator";
 
 @ApiTags('部门管理')

@@ -1,9 +1,9 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "@module/common/entity/common.entity";
 
 @Index("gen_table_column_pkey", ["columnId"], { unique: true })
 @Entity("gen_table_column", { schema: "public" })
-export class GenTableColumn  extends CommonEntity{
+export class GenTableColumn extends CommonEntity {
   @PrimaryGeneratedColumn({ type: "integer", name: "column_id" })
   columnId: number;
 

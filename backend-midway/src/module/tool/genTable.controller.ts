@@ -1,7 +1,7 @@
 import { Controller, Inject, Get, Query, Body, Post, Put, Param, Del } from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { GenTableService } from "@service/tool/genTable.service";
-import { ListGenTableDTO, CreateGenTableDTO, UpdateGenTableDTO, GenDbTableList } from "@dto/tool/genTable.dto";
+import { GenTableService } from "./genTable.service";
+import { ListGenTableDTO, CreateGenTableDTO, UpdateGenTableDTO, GenDbTableList } from "./dto/genTable.dto";
 import { Auth } from "@decorator/auth.decorator";
 import { BusinessType, Log } from "@decorator/log.decorator";
 

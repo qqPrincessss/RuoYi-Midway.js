@@ -1,14 +1,14 @@
 import { Provide, Inject, Context } from "@midwayjs/core";
 import { In, Not, Repository } from 'typeorm';
 import { InjectEntityModel } from '@midwayjs/typeorm';
-import { SysRole } from '../../entity/framework/system/SysRole';
-import { ChangeStatusDto, ListRoleDTO, CreateRoleDTO, UpdateRoleDTO, ListAuthUserDTO, CancelAuthUserDTO, BatchCancelAuthUserDTO, BatchBindAuthUserDTO } from "@dto/system/roleDto";
-import { checkIfExsit, checkUpdateKeyRepeat } from "../../utils/serviceHelp";
-import { resBuild } from '../../utils/resBuild';
-import { User } from "@entity/framework/system/SysUser";
-import { SysUserRole } from "@entity/framework/system/SysUserRole";
-import { SysRoleMenu } from "@entity/framework/system/SysRoleMenu";
-import { SysDept } from "@entity/framework/system/SysDept";
+import { SysRole } from './entites/SysRole';
+import { ChangeStatusDto, ListRoleDTO, CreateRoleDTO, UpdateRoleDTO, ListAuthUserDTO, CancelAuthUserDTO, BatchCancelAuthUserDTO, BatchBindAuthUserDTO } from "./dto/role.dto";
+import { checkIfExsit, checkUpdateKeyRepeat } from "@/utils/serviceHelp";
+import { resBuild } from '@/utils/resBuild';
+import { User } from "../user/entites/SysUser";
+import { SysUserRole } from "../user/entites/SysUserRole";
+import { SysRoleMenu } from "./entites/SysRoleMenu";
+import { SysDept } from "../dept/entites/SysDept";
 import { getOperator } from "@utils";
 
 @Provide()

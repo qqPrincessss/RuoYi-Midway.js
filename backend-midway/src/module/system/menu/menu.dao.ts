@@ -1,11 +1,11 @@
 import { Provide, Context, Inject } from "@midwayjs/core";
 import { Repository } from 'typeorm';
 import { InjectEntityModel } from '@midwayjs/typeorm';
-import { SysMenu } from '../../entity/framework/system/SysMenu';
-import { SysRoleMenu } from "@entity/framework/system/SysRoleMenu";
-import { ListMenuDTO, CreateMenuDTO, UpdateMenuDTO } from "@dto/system/menuDto";
-import { checkIfExsit } from "../../utils/serviceHelp";
-import { resBuild } from '../../utils/resBuild';
+import { SysMenu } from './entites/SysMenu';
+import { SysRoleMenu } from "../role/entites/SysRoleMenu";
+import { ListMenuDTO, CreateMenuDTO, UpdateMenuDTO } from "./dto/menu.dto";
+import { checkIfExsit } from "@utils/serviceHelp";
+import { resBuild } from '@utils/resBuild';
 import { getOperator } from "@utils";
 import { listToTree } from "@utils/tree";
 

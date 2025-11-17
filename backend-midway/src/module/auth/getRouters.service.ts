@@ -2,8 +2,8 @@ import { Provide, Inject } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository } from "typeorm";
-import { SysMenu } from "@/entity/framework/system/SysMenu";
-import { User } from "@entity/framework/system/SysUser";
+import { SysMenu } from "../system/menu/entites/SysMenu";
+import { User } from "../system/user/entites/SysUser";
 import { handleMenuTree } from '@utils/tree';
 import { resBuild } from "@utils/resBuild";
 

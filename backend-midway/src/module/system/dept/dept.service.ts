@@ -1,7 +1,7 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { DeptDao } from '@dao/system/dept.dao';
-import { ListDeptDTO, CreateDeptDTO, UpdateDeptDTO } from '@dto/system/deptDto';
+import { DeptDao } from './dept.dao';
+import { ListDeptDTO, CreateDeptDTO, UpdateDeptDTO } from './dto/dept.dto';
 
 @Provide()
 export class DeptService {

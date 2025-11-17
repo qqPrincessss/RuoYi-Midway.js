@@ -1,6 +1,6 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { CacheDao } from '@dao/monitor/cache.dao';
+import { CacheDao } from './cache.dao';
 import { resBuild } from '@utils/resBuild';
 import { RedisService } from '@midwayjs/redis';
 import { DeepClone } from '@utils';

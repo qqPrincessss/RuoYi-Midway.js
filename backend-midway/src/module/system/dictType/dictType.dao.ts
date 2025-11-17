@@ -1,22 +1,22 @@
 import { Context, Inject, Provide } from "@midwayjs/core";
 import { Repository } from 'typeorm';
 import { InjectEntityModel } from "@midwayjs/typeorm";
-import { SysDictType } from '../../entity/framework/system/SysDictType';
-import { SysDictData } from '../../entity/framework/system/SysDictData';
-import {  ListDictTypeDTO, CreateDictTypeDTO, UpdateDictTypeDTO } from '../../dto/system/dictTypeDto';
-import { resBuild } from '../../utils/resBuild';
-import { checkIfExsit } from "../../utils/serviceHelp";
+import { SysDictType } from './entites/SysDictType';
+import { SysDictData } from '../dictData/entites/SysDictData';
+import { ListDictTypeDTO, CreateDictTypeDTO, UpdateDictTypeDTO } from './dto/dictType.dto';
+import { resBuild } from '@utils/resBuild';
+import { checkIfExsit } from "@utils/serviceHelp";
 import { getOperator } from "@utils";
 import { RedisService } from '@midwayjs/redis';
 import { RedisEnum } from "@utils/enum";
-import { DownloadExcelService } from "@service/common/downloadExcel";
+import { DownloadExcelService } from "../../common/excel/downloadExcel";
 @Provide()
 export class DictTypeDao {
-    @Inject()
+  @Inject()
   ctx: Context;
-    @Inject()
+  @Inject()
   redisService: RedisService;
-    @Inject()
+  @Inject()
   downloadExcelService: DownloadExcelService;
 
   @InjectEntityModel(SysDictType)
@@ -43,7 +43,7 @@ export class DictTypeDao {
         endTime: queryParams['params[endTime]'] + ' 23:59:59',
       });
     }
-    if(queryParams.pageNum && queryParams.pageSize) {
+    if (queryParams.pageNum && queryParams.pageSize) {
       queryBuilder.skip((queryParams.pageNum - 1) * queryParams.pageSize).take(queryParams.pageSize)
     }
     const [rows, total] = await queryBuilder.getManyAndCount()
@@ -79,7 +79,7 @@ export class DictTypeDao {
     });
     return resBuild.data(detailInfo)
   }
-   // 导出
+  // 导出
   async export(queryParams: ListDictTypeDTO) {
     let headers = [
       { label: "字典编号", prop: "dictId", },
@@ -106,9 +106,9 @@ export class DictTypeDao {
   // 刷新缓存
   async refreshCache() {
     const allDictTypeList = await this.dictTypeModel.find();
-    for(const item of allDictTypeList) {
-      const dictDataList = await this.dictDataModel.find({  
-        select: ['cssClass','dictValue', 'dictLabel', 'dictSort',  "dictType", 'isDefault', 'status', 'listClass'],
+    for (const item of allDictTypeList) {
+      const dictDataList = await this.dictDataModel.find({
+        select: ['cssClass', 'dictValue', 'dictLabel', 'dictSort', "dictType", 'isDefault', 'status', 'listClass'],
         where: {
           dictType: item.dictType,
           status: '0'

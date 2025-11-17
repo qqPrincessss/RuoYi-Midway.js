@@ -2,8 +2,8 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { RedisService } from '@midwayjs/redis';
 import { RedisEnum } from '@utils/enum';
-import { ConfigDao } from '@module/system/config/config.dao';
-import { ListConfigDTO, CreateConfigDTO, UpdateConfigDTO } from '@dto/system/config.dto';
+import { ConfigDao } from './config.dao';
+import { ListConfigDTO, CreateConfigDTO, UpdateConfigDTO } from './dto/config.dto';
 import { resBuild } from '@utils/resBuild';
 
 @Provide()

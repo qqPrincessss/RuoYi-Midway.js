@@ -1,10 +1,10 @@
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "@module/common/entity/common.entity";
 import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("gen_table_pkey", ["tableId"], { unique: true })
 @Entity("gen_table", { schema: "public" })
 export class GenTable extends CommonEntity {
-  @PrimaryGeneratedColumn({ type:"integer",  name: "table_id" })
+  @PrimaryGeneratedColumn({ type: "integer", name: "table_id" })
   tableId: number;
 
   @Column("character varying", {

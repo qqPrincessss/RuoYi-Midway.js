@@ -2,10 +2,10 @@ import { Provide, Inject } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository } from "typeorm";
-import { User as NormalEntity } from "@entity/framework/system/SysUser";
-import { SysRole as RoleEntity } from "@entity/framework/system/SysRole";
+import { User as NormalEntity } from "../system/user/entites/SysUser";
+import { SysRole as RoleEntity } from "../system/role/entites/SysRole";
 import { resBuild } from "@utils/resBuild";
-import { SysDept } from '@entity/framework/system/SysDept';
+import { SysDept } from '../system/dept/entites/SysDept';
 
 // role中加入admin字段、断言，这时多出来的返回给前端字段
 interface RoleEntityWithAdmin extends RoleEntity {

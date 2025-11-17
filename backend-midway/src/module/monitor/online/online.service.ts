@@ -1,7 +1,7 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { ListOnlineDTO } from '@dto/monitor/online.dto';
-import { OnlineDao } from '@dao/monitor/online.dao';
+import { ListOnlineDTO } from './dto/online.dto';
+import { OnlineDao } from './online.dao';
 
 @Provide()
 export class OnlineService {

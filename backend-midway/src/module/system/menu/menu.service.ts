@@ -1,7 +1,7 @@
 
 import { Inject, Provide } from "@midwayjs/core";
-import { MenuDao } from "../../dao/system/menu.dao";
-import { ListMenuDTO, CreateMenuDTO, UpdateMenuDTO } from "@dto/system/menuDto";
+import { MenuDao } from "./menu.dao";
+import { ListMenuDTO, CreateMenuDTO, UpdateMenuDTO } from "./dto/menu.dto";
 @Provide()
 export class MenuService {
   @Inject()

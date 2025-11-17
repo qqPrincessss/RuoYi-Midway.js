@@ -1,7 +1,7 @@
 import { Controller, Inject, Get, Query, Param, Del, Post } from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@midwayjs/swagger';
-import { LoginInforService } from "@service/monitor/loginInfor.service";
-import { ListLoginInforDTO } from "@dto/monitor/loginInfor.dto";
+import { LoginInforService } from "./loginInfor.service";
+import { ListLoginInforDTO } from "./dto/loginInfor.dto";
 import { Auth } from "@decorator/auth.decorator";
 import { BusinessType, Log } from "@decorator/log.decorator";
 

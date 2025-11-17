@@ -1,5 +1,5 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "../../../common/entity/common.entity";
 @Index("monitor_job_pkey", ["jobGroup", "jobId", "jobName"], { unique: true })
 @Index("idx_monitor_job_jg", ["jobGroup"], {})
 @Entity("sys_job", { schema: "sys" })

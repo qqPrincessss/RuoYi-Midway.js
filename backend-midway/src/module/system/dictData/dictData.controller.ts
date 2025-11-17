@@ -1,7 +1,7 @@
 import { Controller, Inject, Get, Query, Body, Post, Put, Param, Del } from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { DictDataService } from "@service/system/dictData.service";
-import { ListDictDataDTO, CreateDictDataDTO, UpdateDictDataDTO } from "@dto/system/dictDataDto";
+import { DictDataService } from "./dictData.service";
+import { ListDictDataDTO, CreateDictDataDTO, UpdateDictDataDTO } from "./dto/dictData.dto";
 import { Auth } from "@decorator/auth.decorator";
 import { BusinessType, Log } from "@decorator/log.decorator";
 

@@ -1,4 +1,4 @@
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "../../../common/entity/common.entity";
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { GradeEntity } from "../../grade.entity";
 import { GroupEntity } from "../../group.entity";

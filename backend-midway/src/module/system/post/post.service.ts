@@ -1,7 +1,7 @@
 import { Provide, Inject } from '@midwayjs/core';
-import { PostDao } from '@dao/system/post.dao';
-import { ListPostDTO, CreatePostDTO, UpdatePostDTO } from '@dto/system/post.dto';
-import { DownloadExcelService } from '@service/common/downloadExcel';
+import { PostDao } from './post.dao';
+import { ListPostDTO, CreatePostDTO, UpdatePostDTO } from './dto/post.dto';
+import { DownloadExcelService } from '../../common/excel/downloadExcel';
 
 @Provide()
 export class PostService {

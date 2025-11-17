@@ -1,6 +1,6 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { OriginCodeDTO } from "@dto/common/originCode.dto";
+import { OriginCodeDTO } from "./dto/originCode.dto";
 import * as fs from 'fs';
 import { resBuild } from "@utils/resBuild";
 

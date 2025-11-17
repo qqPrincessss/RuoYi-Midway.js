@@ -1,6 +1,6 @@
 import { Provide, Inject } from '@midwayjs/core';
-import { LoginInforDao } from '@dao/monitor/loginInfor.dao';
-import { ListLoginInforDTO } from '@dto/monitor/loginInfor.dto';
+import { LoginInforDao } from './loginInfor.dao';
+import { ListLoginInforDTO } from './dto/loginInfor.dto';
 
 @Provide()
 export class LoginInforService {

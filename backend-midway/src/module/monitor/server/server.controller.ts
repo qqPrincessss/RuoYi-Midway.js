@@ -1,6 +1,6 @@
 import { Controller, Inject, Get} from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse } from '@midwayjs/swagger';
-import { ServerService } from "@service/monitor/server.service";
+import { ServerService } from "./server.service";
 
 @ApiTags('服务监控')
 @Controller('/monitor/server')

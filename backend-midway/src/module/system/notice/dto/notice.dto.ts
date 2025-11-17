@@ -1,5 +1,5 @@
 import { Rule, RuleType } from "@midwayjs/validate";
-import { PageDTO } from "@dto/common/pageDto";
+import { PageDTO } from "@module/common/dto/pageDto";
 
 // 查询参数
 export class ListNoticeDTO extends PageDTO {

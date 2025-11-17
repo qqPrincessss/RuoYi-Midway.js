@@ -1,6 +1,6 @@
 import{ Inject, Provide } from "@midwayjs/core";
-import { RoleDao } from "../../dao/system/role.dao";
-import { ListRoleDTO, CreateRoleDTO, UpdateRoleDTO, ListAuthUserDTO, CancelAuthUserDTO, BatchCancelAuthUserDTO, BatchBindAuthUserDTO,ChangeStatusDto } from "@dto/system/roleDto";
+import { RoleDao } from "./role.dao";
+import { ListRoleDTO, CreateRoleDTO, UpdateRoleDTO, ListAuthUserDTO, CancelAuthUserDTO, BatchCancelAuthUserDTO, BatchBindAuthUserDTO,ChangeStatusDto } from "./dto/role.dto";
 @Provide()
 export class RoleService {
   @Inject()

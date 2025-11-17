@@ -1,7 +1,7 @@
 import { Controller ,Inject, Get, Body,Post,Put, Query, Del, Param } from "@midwayjs/core";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { RoleService } from "../../service/system/role.service";
-import { ChangeStatusDto, ListRoleDTO, CreateRoleDTO, UpdateRoleDTO, ListAuthUserDTO, CancelAuthUserDTO, BatchCancelAuthUserDTO, BatchBindAuthUserDTO } from "@dto/system/roleDto";
+import { RoleService } from "./role.service";
+import { ChangeStatusDto, ListRoleDTO, CreateRoleDTO, UpdateRoleDTO, ListAuthUserDTO, CancelAuthUserDTO, BatchCancelAuthUserDTO, BatchBindAuthUserDTO } from "./dto/role.dto";
 import { Auth } from "@decorator/auth.decorator";
 import { BusinessType, Log } from "@decorator/log.decorator";
 

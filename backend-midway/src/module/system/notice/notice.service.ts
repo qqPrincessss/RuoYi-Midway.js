@@ -1,6 +1,6 @@
 import { Provide, Inject } from '@midwayjs/core';
-import { NoticeDao } from '@dao/system/notice.dao';
-import { ListNoticeDTO, CreateNoticeDTO, UpdateNoticeDTO } from '@dto/system/notice.dto';
+import { NoticeDao } from './notice.dao';
+import { ListNoticeDTO, CreateNoticeDTO, UpdateNoticeDTO } from './dto/notice.dto';
 
 @Provide()
 export class NoticeService {

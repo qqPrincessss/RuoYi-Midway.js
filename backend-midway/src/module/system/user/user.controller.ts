@@ -1,13 +1,13 @@
 import { Inject, Controller, Body, Post, Get, Query, Put, Files, Param, Del, createMiddleware } from "@midwayjs/core";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { AuthService } from "../../service/auth/auth.service";
-import { UserService } from "../../service/system/user.service";
-import { ListUserDTO, CreateUserDTO, UpdateUserDTO, UpdatePwdDto, ResetPwdDto, ChangeStatusDto, UpdateProfileDto, UpdateAuthRoleDTO } from "@dto/system/userDto";
+import { AuthService } from "../../auth/auth.service";
+import { UserService } from "./user.service";
+import { ListUserDTO, CreateUserDTO, UpdateUserDTO, UpdatePwdDto, ResetPwdDto, ChangeStatusDto, UpdateProfileDto, UpdateAuthRoleDTO } from "./dto/user.dto";
 import { Auth } from "@decorator/auth.decorator";
 import { BusinessType } from "@utils/enum";
 import { Log } from "@decorator/log.decorator";
 import { UploadFileInfo, UploadMiddleware, UploadStreamFileInfo } from "@midwayjs/busboy";
-import { DeptService } from "@service/system/dept.service";
+import { DeptService } from "../dept/dept.service";
 
 @ApiTags('用户管理')
 @Controller('/system/user')
@@ -167,12 +167,6 @@ export class UserController {
   @Get('/profile')
   async profile() {
     return await this.userService.profile();
-  }
-  @ApiOperation({ summary: '获取可选教师列表', description: '获取当前登录用户的教师列表' })
-  @ApiResponse({ status: 200, description: '成功获取教师列表' })
-  @Get('/teacherList')
-  async teacherList() {
-    return await this.userService.teacherList();
   }
   // 修改个人信息
   @ApiOperation({ summary: '修改个人信息', description: '修改当前登录用户的个人信息' })

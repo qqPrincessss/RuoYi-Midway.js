@@ -1,5 +1,5 @@
 import { RuleType, Rule } from "@midwayjs/validate";
-import { PageDTO } from "@dto/common/pageDto";
+import { PageDTO } from "@module/common/dto/pageDto";
 // const required =RuleType.string().required();
 // 查询参数
 export class ListDictDataDTO extends PageDTO {

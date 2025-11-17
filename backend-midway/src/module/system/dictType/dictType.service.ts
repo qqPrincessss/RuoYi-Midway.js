@@ -1,6 +1,6 @@
 import { Provide, Inject } from "@midwayjs/core";
-import { DictTypeDao } from "../../dao/system/dictType.dao";
-import { ListDictTypeDTO, CreateDictTypeDTO, UpdateDictTypeDTO } from "../../dto/system/dictTypeDto";
+import { DictTypeDao } from "./dictType.dao";
+import { ListDictTypeDTO, CreateDictTypeDTO, UpdateDictTypeDTO } from "./dto/dictType.dto";
 
 @Provide()
 export class DictTypeService {

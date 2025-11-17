@@ -1,7 +1,7 @@
 import { Controller, Inject, Get, Query, Body, Post, Put, Param, Del } from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { NoticeService } from "@service/system/notice.service";
-import { ListNoticeDTO, CreateNoticeDTO, UpdateNoticeDTO } from "@dto/system/notice.dto";
+import { NoticeService } from "./notice.service";
+import { ListNoticeDTO, CreateNoticeDTO, UpdateNoticeDTO } from "./dto/notice.dto";
 import { Auth } from "@decorator/auth.decorator";
 import { BusinessType, Log } from "@decorator/log.decorator";
 

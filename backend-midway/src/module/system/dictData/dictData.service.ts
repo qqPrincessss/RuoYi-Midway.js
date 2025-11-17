@@ -1,7 +1,7 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { DictDataDao } from '@dao/system/dictData.dao';
-import { ListDictDataDTO, CreateDictDataDTO, UpdateDictDataDTO } from '@dto/system/dictDataDto';
+import { DictDataDao } from './dictData.dao';
+import { ListDictDataDTO, CreateDictDataDTO, UpdateDictDataDTO } from './dto/dictData.dto';
 
 @Provide()
 export class DictDataService {

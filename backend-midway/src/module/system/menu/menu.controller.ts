@@ -1,9 +1,9 @@
 import { Controller,Inject,Get,  Body,Post,Del,Param, Put, Query } from "@midwayjs/core";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
-import { MenuService } from '../../service/system/menu.service';
+import { MenuService } from './menu.service';
 import { Context } from "vm";
-import { Auth } from "../../decorator/auth.decorator";
-import { ListMenuDTO, CreateMenuDTO, UpdateMenuDTO } from "@dto/system/menuDto";
+import { Auth } from "@decorator/auth.decorator";
+import { ListMenuDTO, CreateMenuDTO, UpdateMenuDTO } from "./dto/menu.dto";
 import { BusinessType } from "@utils/enum";
 import { Log } from "@decorator/log.decorator";
 

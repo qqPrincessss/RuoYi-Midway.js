@@ -1,4 +1,4 @@
-import { CommonEntity } from "../../common.entity";
+import { CommonEntity } from "../../../common/entity/common.entity";
 import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("sys_notice_pkey", ["noticeId"], { unique: true })

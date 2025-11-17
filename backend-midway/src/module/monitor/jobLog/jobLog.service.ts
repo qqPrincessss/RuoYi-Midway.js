@@ -1,6 +1,6 @@
 import { Provide, Inject} from '@midwayjs/core';
-import { ListJobLogDTO } from "@dto/monitor/jobLog.dto";
-import { JobLogDao } from "@dao/monitor/jobLog.dao";
+import { ListJobLogDTO } from "./dto/jobLog.dto";
+import { JobLogDao } from "./jobLog.dao";
 @Provide()
 export class JobLogService {
   @Inject()
