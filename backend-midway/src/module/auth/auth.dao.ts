@@ -1,19 +1,19 @@
 import { Provide } from '@midwayjs/core';
 import { Repository } from 'typeorm';
-import { User } from '../system/user/entites/SysUser';
+import { SysUser } from '../system/user/entites/SysUser';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { LoginDTO } from './dto/auth.dto';
 import { resBuild } from '../../utils/resBuild';
-import { SysLogininfor } from '../monitor/loginInfor/entites/SysLogininfor';
+import { MonitorLogininfor } from '../monitor/loginInfor/entites/MonitorLogininfor';
 
 @Provide()
 export class AuthDao {
 
-  @InjectEntityModel(User)
-  userModel: Repository<User>;
+  @InjectEntityModel(SysUser)
+  userModel: Repository<SysUser>;
 
-  @InjectEntityModel(SysLogininfor)
-  loginInforEntity: Repository<SysLogininfor>;
+  @InjectEntityModel(MonitorLogininfor)
+  loginInforEntity: Repository<MonitorLogininfor>;
 
   //查找是否存在用户
   async checkId(id: number): Promise<any> {
@@ -28,7 +28,7 @@ export class AuthDao {
   }
 
   // 根据用户名查找用户
-  async getUserByUserName(userName: string): Promise<User | null> {
+  async getUserByUserName(userName: string): Promise<SysUser | null> {
     return await this.userModel.findOne({
       where: {
         userName: userName

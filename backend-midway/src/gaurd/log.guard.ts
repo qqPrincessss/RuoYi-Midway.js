@@ -1,7 +1,7 @@
 import { Guard, IGuard, getPropertyMetadata, Inject } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { OPERATION_META_KEY } from "@decorator/log.decorator";
-import { SysOperLog } from "@module/monitor/operLog/entites/SysOperLog";
+import { MonitorOperLog } from "@module/monitor/operLog/entites/MonitorOperLog";
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository } from "typeorm";
 import { getIp } from "@utils/device";
@@ -19,8 +19,8 @@ export class LogGuard implements IGuard<Context> {
   @Inject()
   redisService: RedisService;
 
-  @InjectEntityModel(SysOperLog)
-  protected SysOperLog: Repository<SysOperLog>;
+  @InjectEntityModel(MonitorOperLog)
+  protected MonitorOperLog: Repository<MonitorOperLog>;
 
   async canActivate(ctx: Context, supplierClz: any, methodName: string): Promise<any> {
     const logInfo: any = getPropertyMetadata<string[]>(OPERATION_META_KEY, supplierClz, methodName);
@@ -83,8 +83,8 @@ export class LogGuard implements IGuard<Context> {
           }
 
           // 构建新增的实体类，并赋值保存到数据库，这种方式能自动记录创建人、创建时间
-          const tempEntity: any = this.SysOperLog.create(logData);
-          await this.SysOperLog.save(tempEntity);
+          const tempEntity: any = this.MonitorOperLog.create(logData);
+          await this.MonitorOperLog.save(tempEntity);
         }
       }, 1)
     }

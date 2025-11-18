@@ -1,83 +1,55 @@
 import { CommonEntity } from '../../../common/entity/common.entity';
-import { Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity,  JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { SysRole } from '../../role/entites/SysRole';
 
-@Index('sys_menu_pkey', ['menuId'], { unique: true })
-@Entity('sys_menu', { schema: 'sys' })
+// 菜单表-实体类
+@Entity('sys_menu', {comment: '菜单信息表'})
 export class SysMenu extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "menu_id" })
+  @PrimaryGeneratedColumn({ type: 'int', name: 'menu_id', comment: '菜单ID' })
   menuId: number;
 
-  @Column('character varying', { name: 'menu_name', length: 255 })
+  @Column({ type: 'varchar', name: 'menu_name', length: 50, comment: '菜单名称' })
   menuName: string;
 
-  @Column('integer', { name: 'parent_id', nullable: true, default: () => '0' })
-  parentId: number | null;
+  @Column({ type: 'int', name: 'parent_id', default: 0, comment: '父菜单ID' })
+  parentId: number;
 
-  @Column('integer', { name: 'order_num', nullable: true, default: () => '0' })
-  orderNum: number | null;
+  @Column({ type: 'bigint', name: 'order_num', default: 0, comment: '显示顺序' })
+  orderNum: number;
 
-  @Column('character varying', { name: 'path', nullable: true, length: 255 })
-  path: string | null;
+  @Column({ type: 'varchar', length: 200, comment: '路由地址' })
+  path: string;
 
-  @Column('character varying', { name: 'route_name', nullable: true, length: 255 })
-  routeName: string | null;
+  @Column({ type: 'varchar', length: 255, comment: '组件路径' })
+  component: string;
 
-  @Column('character varying', {
-    name: 'component',
-    nullable: true,
-    length: 255,
-  })
-  component: string | null;
+  @Column({ type: 'varchar', length: 255, comment: '路由参数' })
+  query: string;
 
-  @Column('character varying', { name: 'query', nullable: true, length: 255 })
-  query: string | null;
+  @Column({ type: 'int', name: 'is_frame', default: 1, comment: '是否为外链（0是 1否）' })
+  isFrame: number;
 
-  @Column('integer', { name: 'is_frame', nullable: true, default: () => '1' })
-  isFrame: number | null;
+  @Column({ type: 'int', name: 'is_cache', default: 0, comment: '是否缓存（0缓存 1不缓存）' })
+  isCache: number;
 
-  @Column('integer', { name: 'is_cache', nullable: true, default: () => '0' })
-  isCache: number | null;
+  @Column({ type: 'char', name: 'menu_type', length: 1, default: 'M', comment: '菜单类型（M目录 C菜单 F按钮）' })
+  menuType: string;
 
-  @Column('character', {
-    name: 'menu_type',
-    nullable: true,
-    length: 1,
-    default: () => "'M'",
-  })
-  menuType: string | null;
+  @Column({ type: 'char', length: 1, default: 0, comment: '菜单状态（0显示 1隐藏）' })
+  visible: string;
 
-  @Column('character', {
-    name: 'visible',
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  visible: string | null;
+  @Column({ type: 'char', length: 1, default: 0, comment: '菜单状态（0正常 1停用）' })
+  status: string;
 
-  @Column('character', {
-    name: 'status',
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  status: string | null;
+  @Column({ type: 'varchar', name: 'perms', length: 100, comment: '权限标识' })
+  perms: string;
 
-  @Column('character varying', { name: 'perms', nullable: true, length: 100 })
-  perms: string | null;
+  @Column({ type: 'varchar', length: 100, comment: '菜单图标' })
+  icon: string;
 
-  @Column('character varying', { name: 'icon', nullable: true, length: 100 })
-  icon: string | null;
+  @Column({ type: 'varchar', name: 'remark', default: null, comment: '备注', length: 500 })
+  remark: string;
 
-  @Column('character varying', { name: 'remark', nullable: true, length: 500 })
-  remark: string | null;
-  @Column("character", {
-    name: "del_flag",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  delFlag: string | null;
   @ManyToMany(type => SysRole, role => role.menus)
   @JoinTable({
     name: 'sys_role_menu', // 中间表名，与Menu实体中的一致

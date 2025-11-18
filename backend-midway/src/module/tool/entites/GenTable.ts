@@ -1,152 +1,58 @@
 import { CommonEntity } from "@module/common/entity/common.entity";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
 
-@Index("gen_table_pkey", ["tableId"], { unique: true })
-@Entity("gen_table", { schema: "public" })
+
+// 参数配置表 -  实体类
+@Entity('gen_table', { comment: '代码生成' })
 export class GenTable extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "table_id" })
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'table_id', comment: '编号' })
   tableId: number;
 
-  @Column("character varying", {
-    name: "table_name",
-    nullable: true,
-    length: 200,
-    default: () => "''",
-  })
-  tableName: string | null;
+  @Column({ type: 'varchar', name: 'table_name', length: 100, default: '', comment: '表名称' })
+  tableName: string;
 
-  @Column("character varying", {
-    name: "table_comment",
-    nullable: true,
-    length: 500,
-    default: () => "''",
-  })
-  tableComment: string | null;
+  @Column({ type: 'varchar', name: 'table_comment', length: 500, default: '', comment: '表描述' })
+  tableComment: string;
 
-  @Column("character varying", {
-    name: "sub_table_name",
-    nullable: true,
-    length: 64,
-    default: () => "NULL::character varying",
-  })
-  subTableName: string | null;
+  @Column({ type: 'varchar', name: 'sub_table_name', length: 64, default: null, comment: '关联子表的表名' })
+  subTableName: string;
 
-  @Column("character varying", {
-    name: "sub_table_fk_name",
-    nullable: true,
-    length: 64,
-    default: () => "NULL::character varying",
-  })
-  subTableFkName: string | null;
+  @Column({ type: 'varchar', name: 'sub_table_fk_name', length: 64, default: null, comment: '子表关联的外键名' })
+  subTableFkName: string;
 
-  @Column("character varying", {
-    name: "class_name",
-    nullable: true,
-    length: 100,
-    default: () => "''",
-  })
-  className: string | null;
+  @Column({ type: 'varchar', name: 'class_name', length: 100, default: '', comment: '实体类名称' })
+  className: string;
 
-  @Column("character varying", {
-    name: "tpl_category",
-    nullable: true,
-    length: 200,
-    default: () => "'crud'",
-  })
-  tplCategory: string | null;
+  @Column({ type: 'varchar', name: 'tpl_category', length: 200, default: 'crud', comment: '使用的模板（crud单表操作 tree树表操作）' })
+  tplCategory: string;
 
-  @Column("character varying", {
-    name: "tpl_web_type",
-    nullable: true,
-    length: 30,
-    default: () => "''",
-  })
-  tplWebType: string | null;
+  @Column({ type: 'varchar', name: 'tpl_web_type', length: 30, default: '', comment: '前端模板类型（element-ui模版 element-plus模版）' })
+  tplWebType: string;
 
-  @Column("character varying", {
-    name: "package_name",
-    nullable: true,
-    length: 100,
-    default: () => "NULL::character varying",
-  })
-  packageName: string | null;
+  @Column({ type: 'varchar', name: 'package_name', length: 100, comment: '生成包路径' })
+  packageName: string;
 
-  @Column("character varying", {
-    name: "module_name",
-    nullable: true,
-    length: 30,
-    default: () => "NULL::character varying",
-  })
-  moduleName: string | null;
+  @Column({ type: 'varchar', name: 'module_name', length: 30, comment: '生成模块名' })
+  moduleName: string;
 
-  @Column("character varying", {
-    name: "business_name",
-    nullable: true,
-    length: 30,
-    default: () => "NULL::character varying",
-  })
-  businessName: string | null;
+  @Column({ type: 'varchar', name: 'business_name', length: 30, comment: '生成业务名' })
+  businessName: string;
 
-  @Column("character varying", {
-    name: "function_name",
-    nullable: true,
-    length: 50,
-    default: () => "NULL::character varying",
-  })
-  functionName: string | null;
+  @Column({ type: 'varchar', name: 'function_name', length: 50, comment: '生成功能名' })
+  functionName: string;
 
-  @Column("character varying", {
-    name: "function_author",
-    nullable: true,
-    length: 50,
-    default: () => "NULL::character varying",
-  })
-  functionAuthor: string | null;
+  @Column({ type: 'varchar', name: 'function_author', length: 50, comment: '生成功能作者' })
+  functionAuthor: string;
 
-  @Column("character", {
-    name: "gen_type",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  genType: string | null;
+  @Column({ type: 'varchar', name: 'gen_type', length: 1, default: '0', comment: '生成代码方式（0zip压缩包 1自定义路径）' })
+  genType: string;
 
-  @Column("character varying", {
-    name: "gen_path",
-    nullable: true,
-    length: 200,
-    default: () => "'/'",
-  })
-  genPath: string | null;
+  @Column({ type: 'varchar', name: 'gen_path', length: 200, default: '/', comment: '生成路径（不填默认项目路径）' })
+  genPath: string;
 
-  @Column("character varying", {
-    name: "options",
-    nullable: true,
-    length: 1000,
-    default: () => "NULL::character varying",
-  })
-  options: string | null;
+  @Column({ type: 'varchar', name: 'options', length: 1000, comment: '其它生成选项' })
+  options: string;
 
-
-  @Column("character varying", {
-    name: "remark",
-    nullable: true,
-    length: 500,
-    default: () => "NULL::character varying",
-  })
-  remark: string | null;
-  @Column("character", {
-    name: "status",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  status: string | null;
-  @Column("character", {
-    name: "del_flag",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  delFlag: string | null;
+  @Column({ type: 'varchar', name: 'remark', default: null, length: 500, comment: '备注', })
+  remark: string;
 }

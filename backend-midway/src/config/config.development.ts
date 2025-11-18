@@ -22,7 +22,7 @@ export default {
   typeorm: {
     dataSource: {
       default: {
-        type: 'postgres',
+        type: 'mysql',
         host: process.env.DB_HOST, //数据库地址
         port: Number(process.env.DB_PORT), //数据库端口
         username: process.env.DB_USER, //数据库用户名

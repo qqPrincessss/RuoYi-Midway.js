@@ -1,48 +1,48 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
-import { User } from "../../user/entites/SysUser";
+import { Column, Entity,  PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
+import { SysUser  } from "../../user/entites/SysUser";
 import { CommonEntity } from "../../../common/entity/common.entity";
 import { SysMenu } from "../../menu/entites/SysMenu";
 
-@Index("sys_role_pkey", ["roleId"], { unique: true })
-@Entity("sys_role", { schema: 'sys' })
+// 角色表-实体类
+@Entity('sys_role', { comment: '角色信息表' })
 export class SysRole extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "role_id" })
+ @PrimaryGeneratedColumn({ type: 'bigint', name: 'role_id', comment: '角色ID' })
   roleId: number;
 
-  @Column("character varying", { name: "role_name", length: 100 })
+  @Column({ type: 'varchar', name: 'role_name', comment: '角色名称' })
   roleName: string;
 
-  @Column("character varying", { name: "role_key", length: 100 })
+  @Column({ type: 'varchar', name: 'role_key', comment: '角色权限字符' })
   roleKey: string;
 
-  @Column("integer", { name: "role_sort", default: () => "0" })
+  @Column({ type: 'bigint', name: 'role_sort', comment: '角色排序' })
   roleSort: number;
 
-  @Column("integer", { name: "data_scope", default: () => "0" })
+  @Column({ type: 'bigint', name: 'data_scope', comment: '数据范围（0全部数据权限 1自定数据权限 2本部门数据权限 3本部门及以下数据权限 4仅本人数据权限）' })
   dataScope: number;
 
-  @Column("integer", { name: "menu_check_strictly", default: () => 1 })
-  menuCheckStrictly: number;
+  @Column({ type: 'boolean', name: 'menu_check_strictly', default: true, comment: '菜单树选择项是否关联显示' })
+  menuCheckStrictly: boolean;
 
-  @Column("integer", { name: "dept_check_strictly", default: () => 1 })
-  deptCheckStrictly: number;
+  @Column({ type: 'boolean', name: 'dept_check_strictly', default: true, comment: '部门树选择项是否关联显示' })
+  deptCheckStrictly: boolean;
 
-  @Column("character", { name: "status", length: 1, default: () => "'0'" })
+  @Column({ type: 'char', name: 'status', comment: '状态（0正常 1停用）' })
   status: string;
 
-  @Column("integer", { name: "del_flag", default: () => "0" })
+  @Column({ type: 'bigint', name: 'del_flag', comment: '删除标志（0代表存在 2代表删除）' })
   delFlag: number;
 
-  @Column("character varying", { name: "remark", nullable: true, length: 500 })
-  remark: string | null;
+  @Column({ type: 'varchar', name: 'remark', default: null, comment: '备注', length: 500 })
+  remark: string;
 
-  @ManyToMany(type => User, user => user.roles)
+  @ManyToMany(type => SysUser, user => user.roles)
   @JoinTable({
     name: 'sys_user_role',
     joinColumn: { name: 'role_id' },
     inverseJoinColumn: { name: 'user_id' }
   })
-  users: User[];
+  users: SysUser[];
 
   @ManyToMany(type => SysMenu, menu => menu.roles)
   @JoinTable({

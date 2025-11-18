@@ -1,11 +1,10 @@
-import { Column, Entity, Index } from "typeorm";
+import {  Entity, PrimaryColumn } from "typeorm";
 
-@Index("sys_user_post_pkey", ["postId", "userId"], { unique: true })
-@Entity("sys_user_post", { schema: 'sys' })
+@Entity("sys_user_post", { comment: '用户和岗位关联表' })
 export class SysUserPost {
-  @Column("integer", { primary: true, name: "user_id" })
+  @PrimaryColumn({ type: 'bigint', name: 'user_id', comment: '用户ID' })
   userId: number;
 
-  @Column("integer", { primary: true, name: "post_id" })
+  @PrimaryColumn({ type: 'bigint', name: 'post_id', comment: '岗位ID' })
   postId: number;
 }

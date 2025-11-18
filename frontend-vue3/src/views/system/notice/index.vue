@@ -195,7 +195,7 @@ const { queryParams, form, rules } = toRefs(data);
 function getList() {
   loading.value = true;
   listNotice(queryParams.value).then(response => {
-    noticeList.value = response.data.list;
+    noticeList.value = response.data.rows;
     total.value = response.data.total;
     loading.value = false;
   });

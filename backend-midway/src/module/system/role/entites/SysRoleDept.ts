@@ -1,11 +1,10 @@
-import { Column, Entity, Index } from "typeorm";
+import { Entity, PrimaryColumn} from "typeorm";
 
-@Index("sys_role_dept_pkey", ["deptId", "roleId"], { unique: true })
-@Entity("sys_role_dept", { schema: 'sys' })
+@Entity("sys_role_dept", { comment: '角色和部门关联表' })
 export class SysRoleDept {
-  @Column("integer", { primary: true, name: "role_id" })
+  @PrimaryColumn({ type: 'bigint', name: 'role_id', comment: '角色ID' })
   roleId: string;
 
-  @Column("integer", { primary: true, name: "dept_id" })
+  @PrimaryColumn({ type: 'bigint', name: 'dept_id', comment: '部门ID' })
   deptId: string;
 }

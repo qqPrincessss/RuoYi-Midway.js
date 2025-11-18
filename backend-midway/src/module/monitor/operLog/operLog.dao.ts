@@ -2,7 +2,7 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
-import { SysOperLog } from '@module/monitor/operLog/entites/SysOperLog';
+import { MonitorOperLog } from '@module/monitor/operLog/entites/MonitorOperLog';
 import { ListOperLogDTO } from './dto/operLog.dto';
 import { resBuild } from '@utils/resBuild';
 import { DownloadExcelService } from '../../common/excel/downloadExcel';
@@ -13,8 +13,8 @@ export class OperLogDao {
   @Inject()
   ctx: Context;
 
-  @InjectEntityModel(SysOperLog)
-  operLogRepo: Repository<SysOperLog>;
+  @InjectEntityModel(MonitorOperLog)
+  operLogRepo: Repository<MonitorOperLog>;
 
   @Inject()
   downloadExcelService: DownloadExcelService;

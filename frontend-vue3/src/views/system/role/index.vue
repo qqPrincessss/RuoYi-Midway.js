@@ -225,7 +225,7 @@ const { queryParams, form, rules } = toRefs(data)
 function getList() {
   loading.value = true
   listRole(proxy.addDateRange(queryParams.value, dateRange.value)).then((response) => {
-    roleList.value = response.data.list
+    roleList.value = response.data.rows
     total.value = response.data.total
     loading.value = false
   })

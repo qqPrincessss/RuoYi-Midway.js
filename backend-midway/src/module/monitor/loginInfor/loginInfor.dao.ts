@@ -2,7 +2,7 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
-import { SysLogininfor } from './entites/SysLogininfor';
+import { MonitorLogininfor } from './entites/MonitorLogininfor';
 import { ListLoginInforDTO } from './dto/loginInfor.dto';
 import { resBuild } from '@utils/resBuild';
 import { DownloadExcelService } from '../../common/excel/downloadExcel';
@@ -12,8 +12,8 @@ export class LoginInforDao {
   @Inject()
   ctx: Context;
 
-  @InjectEntityModel(SysLogininfor)
-  loginInforRepo: Repository<SysLogininfor>;
+  @InjectEntityModel(MonitorLogininfor)
+  loginInforRepo: Repository<MonitorLogininfor>;
 
   @Inject()
   downloadExcelService: DownloadExcelService;

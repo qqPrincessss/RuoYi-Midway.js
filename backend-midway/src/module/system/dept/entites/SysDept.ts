@@ -1,54 +1,35 @@
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
-@Index("sys_dept_pkey", ["deptId"], { unique: true })
-@Entity("sys_dept", { schema: "sys" })
+import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
+// 部门表-实体类
+@Entity('sys_dept', { comment: '部门表' })
 export class SysDept extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "dept_id" })
-  deptId: Number;
+  @PrimaryGeneratedColumn({ type: 'int', name: 'dept_id', comment: '部门ID' })
+  deptId: number;
 
-  @Column("integer", { name: "parent_id", nullable: true, default: () => 0 })
-  parentId: Number | null;
+  @Column({ type: 'int', name: 'parent_id', default: 0, comment: '父部门ID' })
+  parentId: number;
 
-  @Column("character varying", {
-    name: "ancestors",
-    nullable: true,
-    length: 50,
-    default: () => "''",
-  })
-  ancestors: string | null;
+  @Column({ type: 'varchar', name: 'ancestors', default: '', comment: '祖级列表' })
+  ancestors: string;
 
-  @Column("character varying", {
-    name: "dept_name",
-    nullable: true,
-    length: 30,
-    default: () => "''",
-  })
-  deptName: string | null;
+  @Column({ type: 'varchar', name: 'dept_name', default: '', comment: '部门名称' })
+  deptName: string;
 
-  @Column("integer", { name: "order_num", nullable: true, default: () => "0" })
-  orderNum: number | null;
+  @Column({ type: 'bigint', name: 'order_num', default: 0, comment: '显示顺序' })
+  orderNum: number;
 
-  @Column("character varying", { name: "leader", nullable: true, length: 20 })
-  leader: string | null;
+  @Column({ type: 'varchar', name: 'leader', default: '', comment: '负责人' })
+  leader: string;
 
-  @Column("character varying", { name: "phone", nullable: true, length: 11 })
-  phone: string | null;
+  @Column({ type: 'varchar', name: 'phone', default: '', comment: '联系电话' })
+  phone: string;
 
-  @Column("character varying", { name: "email", nullable: true, length: 50 })
-  email: string | null;
+  @Column({ type: 'varchar', name: 'email', default: '', comment: '邮箱' })
+  email: string;
 
-  @Column("character", {
-    name: "status",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  status: string | null;
-  @Column("character", {
-    name: "del_flag",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  delFlag: string | null;
+  @Column({ type: 'varchar', name: 'status', default: '0', comment: '部门状态（0正常 1停用）' })
+  status: string;
+
+  @Column({ type: 'varchar', name: 'del_flag', default: '0', comment: '删除标志（0代表存在 2代表删除）' })
+  delFlag: string;
 }

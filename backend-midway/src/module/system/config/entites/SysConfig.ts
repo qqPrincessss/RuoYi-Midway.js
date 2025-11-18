@@ -1,63 +1,24 @@
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Index("sys_config_pkey", ["configId"], { unique: true })
-@Entity("sys_config", { schema: "sys" })
+// 参数配置表 -  实体类
+@Entity('sys_config', { comment: '参数配置表' })
 export class SysConfig extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "config_id" })
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'config_id', comment: '参数主键' })
   configId: number;
 
-  @Column("character varying", {
-    name: "config_name",
-    nullable: true,
-    length: 100,
-    default: () => "''",
-  })
-  configName: string | null;
+  @Column({ type: 'varchar', name: 'config_name', length: 100, default: '', comment: '参数名称' })
+  configName: string;
 
-  @Column("character varying", {
-    name: "config_key",
-    nullable: true,
-    length: 100,
-    default: () => "''",
-  })
-  configKey: string | null;
+  @Column({ type: 'varchar', name: 'config_key', length: 100, default: '', comment: '参数键名' })
+  configKey: string;
 
-  @Column("character varying", {
-    name: "config_value",
-    nullable: true,
-    length: 500,
-    default: () => "''",
-  })
-  configValue: string | null;
+  @Column({ type: 'varchar', name: 'config_value', length: 500, default: '', comment: '参数键值' })
+  configValue: string;
 
-  @Column("character", {
-    name: "config_type",
-    nullable: true,
-    length: 1,
-    default: () => "'N'",
-  })
-  configType: string | null;
+  @Column({ type: 'char', name: 'config_type', length: 1, default: 'N', comment: '系统内置（Y是 N否）' })
+  configType: string;
 
-  @Column("character varying", {
-    name: "remark",
-    nullable: true,
-    length: 500,
-    default: () => "NULL::character varying",
-  })
-  remark: string | null;
-  @Column("character", {
-    name: "status",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  status: string;
-  @Column("character", {
-    name: "del_flag",
-    nullable: true,
-    length: 1,
-    default: () => "'N'",
-  })
-  delFlag: string;
+  @Column({ type: 'varchar', name: 'remark', default: null, comment: '备注', length: 500 })
+  remark: string;
 }

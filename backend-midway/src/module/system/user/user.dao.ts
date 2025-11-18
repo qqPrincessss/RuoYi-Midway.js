@@ -2,7 +2,7 @@ import { Inject, Provide, } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository, In, Not } from "typeorm";
-import { User } from "./entites/SysUser";
+import { SysUser } from "./entites/SysUser";
 import { SysUserPost } from "./entites/SysUserPost";
 import { SysUserRole } from "./entites/SysUserRole";
 import { SysRoleDept } from "../role/entites/SysRoleDept";
@@ -30,8 +30,8 @@ export class UserDao {
   @Inject()
   protected resolveExcelService: ResolveExcelService;
 
-  @InjectEntityModel(User)
-  protected userEntity: Repository<User>;
+  @InjectEntityModel(SysUser)
+  protected userEntity: Repository<SysUser>;
 
   @InjectEntityModel(SysRoleDept)
   protected deptEntity: Repository<SysRoleDept>;
@@ -76,8 +76,8 @@ export class UserDao {
 
     if (queryParams.deptId) {
       queryBuilder.orWhere('dept.deptId = :deptId', { deptId: queryParams.deptId });
-      // Postgres 等价写法：在 ancestors 的逗号分隔字符串中查找 deptId
-      queryBuilder.orWhere(":ancestors = ANY(string_to_array(dept.ancestors, ','))", { ancestors: String(queryParams.deptId) });
+      // MySQL 兼容写法：在 ancestors 的逗号分隔字符串中查找 deptId
+      queryBuilder.orWhere("FIND_IN_SET(:ancestors, dept.ancestors)", { ancestors: String(queryParams.deptId) });
     }
 
     if (queryParams.pageNum && queryParams.pageSize) {
@@ -422,7 +422,7 @@ export class UserDao {
 
   // 个人中心 - 修改用户信息
   async updateProfile(user: UpdateProfileDto) {
-    const myUserInfo: User = this.ctx.session.userInfo
+    const myUserInfo: SysUser = this.ctx.session.userInfo
     await this.userEntity.update({
       userId: myUserInfo.userId
     }, {

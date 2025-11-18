@@ -3,7 +3,7 @@ import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
 import { SysDept } from './entites/SysDept';
-import { User } from '../user/entites/SysUser';
+import { SysUser } from '../user/entites/SysUser';
 import { ListDeptDTO, CreateDeptDTO, UpdateDeptDTO } from './dto/dept.dto';
 import { resBuild } from '@utils/resBuild';
 import { checkIfExsit } from '@utils/serviceHelp';
@@ -18,8 +18,8 @@ export class DeptDao {
   @InjectEntityModel(SysDept)
   deptRepo: Repository<SysDept>;
 
-  @InjectEntityModel(User)
-  userRepo: Repository<User>;
+  @InjectEntityModel(SysUser)
+  userRepo: Repository<SysUser>;
 
   // 列表
   async list(queryParams: ListDeptDTO) {

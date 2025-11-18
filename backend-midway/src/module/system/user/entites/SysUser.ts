@@ -1,16 +1,17 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from "typeorm";
-import { SysRole } from "../../role/entites/SysRole";
+import { Column, Entity,  PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from "typeorm";
 import { CommonEntity } from "../../../common/entity/common.entity";
+import { SysRole } from "../../role/entites/SysRole";
 import { SysPost } from "../../post/entites/SysPost";
 import { SysDept } from "../../dept/entites/SysDept";
-@Index("user_pkey", ["userId"], { unique: true })
-@Entity("sys_user", { schema: 'sys' })
-export class User extends CommonEntity {
+
+// 用户表-实体类
+@Entity('sys_user', { comment: '用户信息表' })
+export class SysUser extends CommonEntity {
   @PrimaryGeneratedColumn({ comment: '用户ID', name: 'user_id' })
   userId: number;
 
   @Column({ comment: '部门ID', name: 'dept_id', default: null, })
-  deptId: number;
+  deptId: number; 
 
   @Column({ comment: '登录账号', name: 'user_name', length: 30, })
   userName: string;

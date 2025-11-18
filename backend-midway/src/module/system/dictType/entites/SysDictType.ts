@@ -1,51 +1,21 @@
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
 
-@Index("sys_dict_type_pkey", ["dictId"], { unique: true })
-@Index("sys_dict_type_dict_type_key", ["dictType"], { unique: true })
-@Entity("sys_dict_type", { schema: "sys" })
+// 字典类型表 -  实体类
+@Entity('sys_dict_type', { comment: '字典类型表' })
 export class SysDictType extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "dict_id" })
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'dict_id', comment: '字典主键' })
   dictId: number;
 
-  @Column("character varying", {
-    name: "dict_name",
-    nullable: true,
-    length: 100,
-    default: () => "''",
-  })
-  dictName: string | null;
+  @Column({ type: 'varchar', name: 'dict_name', length: 100, default: '', comment: '字典名称' })
+  dictName: string;
 
-  @Column("character varying", {
-    name: "dict_type",
-    nullable: true,
-    unique: true,
-    length: 100,
-    default: () => "''",
-  })
-  dictType: string | null;
+  @Column({ type: 'varchar', name: 'dict_type', length: 100, default: '', comment: '字典类型', unique: true })
+  dictType: string;
 
-  @Column("character", {
-    name: "status",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  status: string | null;
+  @Column({ type: 'char', name: 'status', length: 1, default: '0', comment: '状态（0正常 1停用）' })
+  status: string;
 
-  @Column("character varying", {
-    name: "remark",
-    nullable: true,
-    length: 500,
-    default: () => "NULL::character varying",
-  })
-  remark: string | null;
-
-  @Column("character", {
-    name: "del_flag",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  delFlag: string | null;
+  @Column({ type: 'varchar', name: 'remark', default: null, comment: '备注', length: 500 })
+  remark: string;
 }

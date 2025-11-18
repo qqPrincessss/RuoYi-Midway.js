@@ -1,47 +1,24 @@
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
 
-@Index("sys_notice_pkey", ["noticeId"], { unique: true })
-@Entity("sys_notice", { schema: 'sys' })
+// 通知公告表 -  实体类
+@Entity('sys_notice', { comment: '通知公告表' })
 export class SysNotice extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "notice_id" })
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'notice_id', comment: '公告ID' })
   noticeId: number;
 
-  @Column("character varying", { name: "notice_title", length: 50 })
+  @Column({ type: 'varchar', name: 'notice_title', length: 50, default: '', comment: '公告标题' })
   noticeTitle: string;
 
-  @Column("character", { name: "notice_type", length: 1 })
+  @Column({ type: 'char', name: 'notice_type', nullable: false, comment: '公告类型（1通知 2公告）' })
   noticeType: string;
 
-  @Column("character varying", {
-    name: "notice_content",
-    nullable: true,
-    length: 2000,
-    default: () => "NULL::character varying",
-  })
-  noticeContent: string | null;
+  @Column({ type: 'varchar', name: 'notice_content', length: 2000, default: null, comment: '公告内容' })
+  noticeContent: string;
 
-  @Column("character", {
-    name: "status",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  status: string | null;
+  @Column({ type: 'char', name: 'status', nullable: false, comment: '公告状态（0正常 1关闭）' })
+  status: string;
 
-  @Column("character varying", {
-    name: "remark",
-    nullable: true,
-    length: 255,
-    default: () => "NULL::character varying",
-  })
-  remark: string | null;
-
-  @Column("character", {
-    name: "del_flag",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  delFlag: string | null;
+  @Column({ type: 'varchar', name: 'remark', default: null, comment: '备注', length: 500 })
+  remark: string;
 }

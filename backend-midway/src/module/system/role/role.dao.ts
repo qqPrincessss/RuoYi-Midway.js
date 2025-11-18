@@ -5,7 +5,7 @@ import { SysRole } from './entites/SysRole';
 import { ChangeStatusDto, ListRoleDTO, CreateRoleDTO, UpdateRoleDTO, ListAuthUserDTO, CancelAuthUserDTO, BatchCancelAuthUserDTO, BatchBindAuthUserDTO } from "./dto/role.dto";
 import { checkIfExsit, checkUpdateKeyRepeat } from "@/utils/serviceHelp";
 import { resBuild } from '@/utils/resBuild';
-import { User } from "../user/entites/SysUser";
+import { SysUser } from "../user/entites/SysUser";
 import { SysUserRole } from "../user/entites/SysUserRole";
 import { SysRoleMenu } from "./entites/SysRoleMenu";
 import { SysDept } from "../dept/entites/SysDept";
@@ -15,8 +15,9 @@ import { getOperator } from "@utils";
 export class RoleDao {
   @InjectEntityModel(SysRole)
   roleModel: Repository<SysRole>;
-  @InjectEntityModel(User)
-  protected userEntity: Repository<User>;
+
+  @InjectEntityModel(SysUser)
+  protected userEntity: Repository<SysUser>;
 
   @InjectEntityModel(SysUserRole)
   protected userRoleEntity: Repository<SysUserRole>;
@@ -69,9 +70,13 @@ export class RoleDao {
     await checkIfExsit(this.roleModel, "roleName", role.roleName)
     await checkIfExsit(this.roleModel, "roleKey", role.roleKey)
     const payload = {
-      ...role,
-      deptCheckStrictly: role.deptCheckStrictly ? 1 : 0,
-      menuCheckStrictly: role.menuCheckStrictly ? 1 : 0,
+      roleName: role.roleName,
+      roleKey: role.roleKey,
+      roleSort: role.roleSort,
+      status: role.status,
+      remark: role.remark,
+      deptCheckStrictly: role.deptCheckStrictly === 1,
+      menuCheckStrictly: role.menuCheckStrictly === 1,
     };
     const myEntity = this.roleModel.create(payload);
     myEntity.setCreateBy(getOperator(this.ctx));
@@ -94,7 +99,17 @@ export class RoleDao {
   async update(role: UpdateRoleDTO) {
     await checkUpdateKeyRepeat(this.roleModel, "roleName", role.roleName)
     await checkUpdateKeyRepeat(this.roleModel, "roleKey", role.roleKey)
-    const entity = this.roleModel.create(role);
+    const payload = {
+      roleId: role.roleId,
+      roleName: role.roleName,
+      roleKey: role.roleKey,
+      roleSort: role.roleSort,
+      status: role.status,
+      remark: role.remark,
+      deptCheckStrictly: role.deptCheckStrictly === 1,
+      menuCheckStrictly: role.menuCheckStrictly === 1,
+    };
+    const entity = this.roleModel.create(payload);
     entity.setUpdateBy(getOperator(this.ctx));
     await this.roleModel.save(entity);
     // 先删除角色和菜单关联信息，再重新添加

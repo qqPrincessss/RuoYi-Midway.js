@@ -3,7 +3,7 @@ import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from "@midwayjs/typeorm";
 import { Repository } from "typeorm";
 import { SysMenu } from "../system/menu/entites/SysMenu";
-import { User } from "../system/user/entites/SysUser";
+import { SysUser } from "../system/user/entites/SysUser";
 import { handleMenuTree } from '@utils/tree';
 import { resBuild } from "@utils/resBuild";
 
@@ -20,8 +20,8 @@ export class GetRouterService {
   @InjectEntityModel(SysMenu)
   protected SysMenu: Repository<SysMenu>;
 
-  @InjectEntityModel(User)
-  protected User: Repository<User>;
+  @InjectEntityModel(SysUser)
+  protected SysUser: Repository<SysUser>;
 
   // 查询菜单路由
   async getRouters() {
@@ -42,7 +42,7 @@ export class GetRouterService {
       return resBuild.data(handleMenuTree(filterMenus) || [])
     } else {
       // 用 QB 加载并排序角色与菜单
-      const userResult = await this.User
+      const userResult = await this.SysUser
         .createQueryBuilder('user')
         .leftJoinAndSelect('user.roles', 'roles')
         .leftJoinAndSelect('roles.menus', 'menus')
@@ -76,6 +76,6 @@ export class GetRouterService {
   }
   // 获取系统信息
   async getSystemInfo() {
-    
+
   }
 }

@@ -2,7 +2,7 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
-import { MonitorJob } from './entites/SysJob';
+import { MonitorJob } from './entites/MonitorJob';
 import { ListJobDTO, CreateJobDTO, UpdateJobDTO, ChangeStatusDto, RunJobDto } from './dto/job.dto';
 import { resBuild } from '@utils/resBuild';
 import { checkIfExsit } from '@utils/serviceHelp';

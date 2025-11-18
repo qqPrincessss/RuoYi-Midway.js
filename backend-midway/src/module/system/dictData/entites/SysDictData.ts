@@ -1,83 +1,36 @@
 import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Index("sys_dict_data_pkey", ["dictCode"], { unique: true })
-@Entity("sys_dict_data", { schema: "sys" })
+// 字典数据表 -  实体类
+@Entity('sys_dict_data', { comment: '字典数据表' })
 export class SysDictData extends CommonEntity {
-  @PrimaryGeneratedColumn({ type: "integer", name: "dict_code" })
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'dict_code', comment: '字典编码' })
   dictCode: number;
 
-  @Column("integer", { name: "dict_sort", nullable: true, default: () => "0" })
-  dictSort: number | null;
+  @Column({ type: 'integer', name: 'dict_sort', default: 0, comment: '字典排序' })
+  dictSort: number;
 
-  @Column("character varying", {
-    name: "dict_label",
-    nullable: true,
-    length: 100,
-    default: () => "''",
-  })
-  dictLabel: string | null;
+  @Column({ type: 'varchar', name: 'dict_label', default: '', comment: '字典标签' })
+  dictLabel: string;
 
-  @Column("character varying", {
-    name: "dict_value",
-    nullable: true,
-    length: 100,
-    default: () => "''",
-  })
-  dictValue: string | null;
+  @Column({ type: 'varchar', name: 'dict_value', default: '', comment: '字典键值' })
+  dictValue: string;
 
-  @Column("character varying", {
-    name: "dict_type",
-    nullable: true,
-    length: 100,
-    default: () => "''",
-  })
-  dictType: string | null;
+  @Column({ type: 'varchar', name: 'dict_type', default: '', comment: '字典类型' })
+  dictType: string;
 
-  @Column("character varying", {
-    name: "css_class",
-    nullable: true,
-    length: 100,
-    default: () => "NULL::character varying",
-  })
-  cssClass: string | null;
+  @Column({ type: 'varchar', name: 'css_class', default: null, comment: '样式属性（其他样式扩展）' })
+  cssClass: string;
 
-  @Column("character varying", {
-    name: "list_class",
-    nullable: true,
-    length: 100,
-    default: () => "NULL::character varying",
-  })
-  listClass: string | null;
+  @Column({ type: 'varchar', name: 'list_class', default: null, comment: '表格回显样式' })
+  listClass: string;
 
-  @Column("character", {
-    name: "is_default",
-    nullable: true,
-    length: 1,
-    default: () => "'N'",
-  })
-  isDefault: string | null;
+  @Column({ type: 'char', name: 'is_default', default: 'N', comment: '是否默认（Y是 N否）' })
+  isDefault: string;
 
-  @Column("character", {
-    name: "status",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  status: string | null;
+  @Column({ type: 'char', name: 'status', default: '0', comment: '状态（0正常 1停用）' })
+  status: string;
 
-  @Column("character varying", {
-    name: "remark",
-    nullable: true,
-    length: 500,
-    default: () => "NULL::character varying",
-  })
-  remark: string | null;
-  @Column("character", {
-    name: "del_flag",
-    nullable: true,
-    length: 1,
-    default: () => "'0'",
-  })
-  delFlag: string | null;
+  @Column({ type: 'varchar', name: 'remark', default: null, comment: '备注', length: 500 })
+  remark: string;
 }

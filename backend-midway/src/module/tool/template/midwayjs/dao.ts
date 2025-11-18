@@ -120,7 +120,7 @@ const getListQueryStr = (options) => {
     }`;
         case GenConstants.QUERY_LIKE:
           return `if (!isEmpty(query.${column.javaField})) {
-      entity.andWhere("entity.${column.javaField} ILIKE :${column.javaField}", { ${column.javaField}: \`%\${query.${column.javaField}}%\` });
+      entity.andWhere("entity.${column.javaField} LIKE :${column.javaField}", { ${column.javaField}: \`%\${query.${column.javaField}}%\` });
     }`;
         case GenConstants.QUERY_BETWEEN:
           return `if (!isEmpty(query.${column.javaField})) {

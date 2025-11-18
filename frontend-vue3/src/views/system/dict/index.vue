@@ -158,7 +158,6 @@
   <dictGroupEdit ref="dictGroupEditRef" @refresh="dictGroup.handleRefresh" />
   <dictDataEdit ref="dictDataEditRef" @refresh="dictData.handleRefresh" />
 </template>
-
 <script setup name="Dict">
 import dictGroupEdit from './components/dictGroupEdit'
 import dictDataEdit from './components/dictDataEdit'
@@ -180,6 +179,7 @@ const dictGroupEditRef = ref()
 const dictDataEditRef = ref()
 // 页面loading效果
 const loading = ref(false)
+const multiple = ref(true)
 
 // 字典组
 const dictGroup = reactive({
@@ -192,13 +192,13 @@ const dictGroup = reactive({
   },
   data: [
     {
-      dictId: 0,
+      dictCode: 0,
       dictName: '全部字典项',
       children: []
     }
   ],
   selectNode: {
-    dictId: 0,
+    dictCode: 0,
     dictName: '全部字典项'
   },
   selection: [],
@@ -207,7 +207,7 @@ const dictGroup = reactive({
     loading.value = true
     try {
       const result = await listType(dictGroup.query)
-      dictGroup.data[0].children = result.data.list
+      dictGroup.data[0].children = result.data.rows
     } catch (e) {
       console.log('dictGroup:', e)
     } finally {
@@ -221,7 +221,7 @@ const dictGroup = reactive({
     dictGroupEditRef.value.handleDialogOpen('edit', row)
   },
   handleDelete: (row) => {
-    const dictIds = row.dictId || dictGroup.selection.map((item) => item.dictId).join(',')
+    const dictIds = row?.dictId || dictGroup.selection.map((item) => item.dictId).join(',')
     proxy.$modal
       .confirm('是否确认删除字典编号为"' + dictIds + '"的数据项？')
       .then(() => {
@@ -251,16 +251,18 @@ const dictGroup = reactive({
   },
   handleNodeSelect: (data) => {
     dictGroup.selectNode = data
-    if (data.dictId !== 0) {
+    if (data.dictCode !== 0) {
       dictData.request()
     }
   },
   handleGroupSelect: (data) => {
-    dictGroup.selectNode.dictId = data.dictId
+    dictGroup.selectNode.dictCode = data.dictCode
     dictGroup.request()
   },
   handleSelectionChange: (val) => {
     dictGroup.selection = val
+    console.log(val)
+    multiple.value = !val.length
   },
   filterNode: (value, data) => {
     if (!value) return true
@@ -294,7 +296,7 @@ const dictData = reactive({
     loading.value = true
     dictData.query.dictType = dictGroup.selectNode.dictType
     listData(dictData.query).then((res) => {
-      dictData.data = res.data.list
+      dictData.data = res.data.rows
       loading.value = false
     })
   },
@@ -305,11 +307,11 @@ const dictData = reactive({
     dictDataEditRef.value.handleDialogOpen('edit', dictGroup.selectNode, row)
   },
   handleDelete: (row) => {
-    const dictCodes = row.dictCode || dictData.selection.map((item) => item.dictCode).join(',')
+    const dictIds = row?.dictCode || dictData.selection.map((item) => item.dictCode).join(',')
     proxy.$modal
-      .confirm('是否确认删除字典编码为"' + dictCodes + '"的数据项？')
+      .confirm('是否确认删除字典编码为"' + dictIds + '"的数据项？')
       .then(() => {
-        return delData(dictCodes)
+        return delData(dictIds)
       })
       .then(() => {
         dictData.request()
@@ -340,7 +342,6 @@ watch(dictGroup.query, (val) => {
 
 dictGroup.request()
 </script>
-
 <style lang="scss" scoped>
 .dict {
   width: 100%;
