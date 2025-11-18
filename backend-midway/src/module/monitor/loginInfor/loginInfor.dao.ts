@@ -20,6 +20,7 @@ export class LoginInforDao {
 
   // 列表
   async list(queryParams: ListLoginInforDTO) {
+    console.log('queryParams', queryParams);
     const queryBuilder = this.loginInforRepo.createQueryBuilder('entity');
     if (queryParams.ipaddr) {
       queryBuilder.andWhere('entity.ipaddr LIKE :ipaddr', { ipaddr: `%${queryParams.ipaddr}%` });
@@ -29,6 +30,13 @@ export class LoginInforDao {
     }
     if (queryParams.status) {
       queryBuilder.andWhere('entity.status = :status', { status: queryParams.status });
+    }
+    
+    if (queryParams['params[beginTime]'] && queryParams['params[endTime]']) {
+      queryBuilder.andWhere('entity.loginTime BETWEEN :start AND :end', {
+        start: queryParams['params[beginTime]'],
+        end: queryParams['params[endTime]'],
+      });
     }
     if (queryParams.orderByColumn && queryParams.isAsc) {
       const orderWay = queryParams.isAsc === 'ascending' ? 'ASC' : 'DESC';

@@ -92,7 +92,7 @@
           <el-table-column label="操作" align="center" width="160" fixed="right">
             <template #default="scope">
               <el-button v-hasPermi="['system:dict:edit']" link type="primary" icon="Edit" @click="dictGroup.handleUpdate(scope.row)">修改</el-button>
-              <el-button v-hasPermi="['system:dict:remove']" link type="primary" icon="Delete" @click="dictGroup.handleDelete(scope.row)">删除</el-button>
+              <el-button v-hasPermi="['system:dict:remove']" link type="danger" icon="Delete" @click="dictGroup.handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -147,7 +147,7 @@
           <el-table-column label="操作" align="center" width="160" fixed="right">
             <template #default="scope">
               <el-button v-hasPermi="['system:dict:edit']" link type="primary" icon="Edit" @click="dictData.handleUpdate(scope.row)">修改</el-button>
-              <el-button v-hasPermi="['system:dict:remove']" link type="primary" icon="Delete" @click="dictData.handleDelete(scope.row)">删除</el-button>
+              <el-button v-hasPermi="['system:dict:remove']" link type="danger" icon="Delete" @click="dictData.handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>

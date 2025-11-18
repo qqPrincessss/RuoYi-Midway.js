@@ -311,7 +311,7 @@ function getList() {
   list(proxy.addDateRange(queryParams.value, dateRange.value)).then(
     (response) => {
       console.log('response', response);
-      operlogList.value = response.data.list;
+      operlogList.value = response.data.rows;
       total.value = response.data.total;
       loading.value = false;
     }

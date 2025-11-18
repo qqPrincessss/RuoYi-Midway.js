@@ -69,7 +69,8 @@ export class MenuDao {
   async update(menu: UpdateMenuDTO) {
     const entity = this.menuModel.create(menu);
     entity.setUpdateBy(getOperator(this.ctx))
-    await this.menuModel.save(entity);
+    console.log(entity);
+    await this.menuModel.update(entity.menuId, entity);
     return resBuild.success();
   }
 

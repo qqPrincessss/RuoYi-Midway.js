@@ -40,6 +40,12 @@ export class OperLogDao {
         queryBuilder.andWhere('entity.status = :status', { status });
       }
     }
+    if (queryParams['params[beginTime]'] && queryParams['params[endTime]']) {
+      queryBuilder.andWhere('entity.operTime BETWEEN :start AND :end', {
+        start: queryParams['params[beginTime]'],
+        end: queryParams['params[endTime]'],
+      });
+    }
 
     if (queryParams.orderByColumn && queryParams.isAsc) {
       const orderWay = queryParams.isAsc === 'ascending' ? 'ASC' : 'DESC';
