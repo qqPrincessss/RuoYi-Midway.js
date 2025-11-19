@@ -35,9 +35,19 @@ export default defineConfig(({ mode, command }) => {
       proxy: {
         // https://cn.vitejs.dev/config/#server-proxy
         '/dev-api': {
-          target: 'http://localhost:5277',
+          target: 'http://localhost:7725',
           changeOrigin: true,
           rewrite: (p) => p.replace(/^\/dev-api/, '')
+        },
+        // Swagger UI 代理
+        '/swagger-ui': {
+          target: 'http://localhost:7725',
+          changeOrigin: true
+        },
+        // Swagger docs 代理
+        '/swagger': {
+          target: 'http://localhost:7725',
+          changeOrigin: true
         }
       }
     },

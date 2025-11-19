@@ -33,7 +33,7 @@ import * as swagger from '@midwayjs/swagger';
     redis,
     {
       component: info,
-      enabledEnvironment: ['local'],
+      enabledEnvironment: ['development'],
     },
   ],
   importConfigs: [join(__dirname, './config')],

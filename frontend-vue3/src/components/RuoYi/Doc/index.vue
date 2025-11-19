@@ -5,9 +5,9 @@
 </template>
 
 <script setup>
-const url = ref('https://midway-admin.dooring.vip/prod-api/swagger-ui')
+const url = ref('https://nest-admin.dooring.vip/prod-api/swagger-ui');
 
 function goto() {
-  window.open(url.value)
+  window.open(url.value);
 }
 </script>

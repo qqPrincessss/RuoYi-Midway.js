@@ -1,9 +1,10 @@
 <template>
-   <i-frame v-model:src="url"></i-frame>
+   <i-frame :src="url"></i-frame>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import iFrame from '@/components/iFrame'
 
-const url = ref(import.meta.env.VITE_APP_BASE_API + "/swagger-ui")
+const url = ref("http://127.0.0.1:7725/swagger-ui/index.html")
 </script>
