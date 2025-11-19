@@ -11,7 +11,9 @@ const whiteList = [
   '/captchaImage',
   '/login',
   '/logout',
+  '/registerUser',
   '/public',
+  '/register'
 ]
 
 @Middleware()

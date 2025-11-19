@@ -1,6 +1,6 @@
 import { Inject, Controller,  Post,Body, Get, Query } from '@midwayjs/core';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiQuery } from '@midwayjs/swagger';
-import { LoginDTO } from './dto/auth.dto';
+import { LoginDTO, RegisterDTO } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 import { GetRouterService } from "./getRouters.service";
 import { Context } from '@midwayjs/koa';
@@ -69,5 +69,21 @@ export class AuthController {
   @Get('/getOriginCode')
   async getCode(@Query() body: OriginCodeDTO) {
     return this.getCodeService.getCode(body);
+  }
+  //获取是否开启注册
+  @ApiOperation({ summary: '获取是否开启注册', description: '获取是否开启注册功能' })
+  @ApiResponse({ status: 200, description: '成功获取是否开启注册' })
+  @Get('/registerUser')
+  async getRegisterUser() {
+    return await this.authService.getRegisterUser();
+  }
+
+  // 用户注册
+  @ApiOperation({ summary: '用户注册', description: '用户注册接口' })
+  @ApiBody({ type: RegisterDTO, description: '注册信息' })
+  @ApiResponse({ status: 200, description: '注册成功' })
+  @Post('/register')
+  async register(@Body() user: RegisterDTO) {
+    return await this.authService.register(user);
   }
 }

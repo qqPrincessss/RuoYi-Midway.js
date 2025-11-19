@@ -41,4 +41,10 @@ export class AuthDao {
     const tempEntity = this.loginInforEntity.create(logData);
     await this.loginInforEntity.save(tempEntity);
   }
+
+  // 创建新用户
+  async createUser(userData: Partial<SysUser>): Promise<SysUser> {
+    const newUser = this.userModel.create(userData);
+    return await this.userModel.save(newUser);
+  }
 }

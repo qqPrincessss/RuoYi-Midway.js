@@ -19,7 +19,7 @@ export function login(userName, password, code, uuid) {
 }
 
 // 注册方法
-export function register(data) {
+export function registerUser(data) {
   return request({
     url: '/register',
     headers: {
