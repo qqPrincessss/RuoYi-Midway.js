@@ -1,5 +1,5 @@
-import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
+import { CommonEntity } from "@module/common/entity/common.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 // 通知公告表 -  实体类
 @Entity('sys_notice', { comment: '通知公告表' })

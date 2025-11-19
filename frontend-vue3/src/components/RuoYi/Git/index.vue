@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-const url = ref('https://gitee.com/tao-zhi/nest-admin');
+const url = ref('https://github.com/qqPrincessss/RuoYi-Midway.js');
 
 function goto() {
   window.open(url.value);

@@ -6,11 +6,11 @@ export const controllerTem = (options) => {
   const name = functionName.replace(/表/g, '');
   return `
 import { Controller, Inject, Get, Query, Param, Del, Post, Put, Body } from '@midwayjs/core';
-import { Auth } from "../decorator/auth.decorator";
+import { Auth } from "../../decorator/auth.decorator";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@midwayjs/swagger';
-import { BusinessType, Log } from "../decorator/log.decorator";
-import { ${serviceName} } from '@service/${businessName}.service';
-import { Create${Lodash.upperFirst(BusinessName)}Dto, Update${Lodash.upperFirst(BusinessName)}Dto, Query${Lodash.upperFirst(BusinessName)}Dto} from '@dto/${businessName}.dto';
+import { BusinessType, Log } from "../../decorator/log.decorator";
+import { ${serviceName} } from './${businessName}.service';
+import { Create${Lodash.upperFirst(BusinessName)}Dto, Update${Lodash.upperFirst(BusinessName)}Dto, Query${Lodash.upperFirst(BusinessName)}Dto} from './dto/${businessName}.dto';
 
 @ApiTags('${name}')
 @Controller('${moduleName}/${businessName}')

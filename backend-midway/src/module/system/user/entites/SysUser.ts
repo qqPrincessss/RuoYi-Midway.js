@@ -1,5 +1,5 @@
-import { Column, Entity,  PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from "typeorm";
-import { CommonEntity } from "../../../common/entity/common.entity";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from "typeorm";
+import { CommonEntity } from "@module/common/entity/common.entity";
 import { SysRole } from "../../role/entites/SysRole";
 import { SysPost } from "../../post/entites/SysPost";
 import { SysDept } from "../../dept/entites/SysDept";
@@ -11,7 +11,7 @@ export class SysUser extends CommonEntity {
   userId: number;
 
   @Column({ comment: '部门ID', name: 'dept_id', default: null, })
-  deptId: number; 
+  deptId: number;
 
   @Column({ comment: '登录账号', name: 'user_name', length: 30, })
   userName: string;

@@ -1,5 +1,5 @@
-import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
+import { CommonEntity } from "@module/common/entity/common.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 // 字典类型表 -  实体类
 @Entity('sys_dict_type', { comment: '字典类型表' })

@@ -1,9 +1,9 @@
-import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
-import { CommonEntity } from "../../../common/entity/common.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { CommonEntity } from "@module/common/entity/common.entity";
 // 定时任务表 -  实体类
 @Entity('monitor_job', { comment: '定时任务表' })
 export class MonitorJob extends CommonEntity {
- @PrimaryGeneratedColumn({ type: 'bigint', name: 'job_id', comment: '任务ID' })
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'job_id', comment: '任务ID' })
   jobId: number;
 
   @Column({ type: 'varchar', name: 'job_name', length: 100, default: '', comment: '参数名称' })

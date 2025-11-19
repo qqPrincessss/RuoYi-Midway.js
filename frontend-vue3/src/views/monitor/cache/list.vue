@@ -50,7 +50,7 @@
               <template #default="scope">
                 <el-button
                   link
-                  type="primary"
+                  type="danger"
                   icon="Delete"
                   @click="handleClearCacheName(scope.row)"
                 ></el-button>

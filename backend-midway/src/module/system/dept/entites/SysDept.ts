@@ -1,4 +1,4 @@
-import { CommonEntity } from "../../../common/entity/common.entity";
+import { CommonEntity } from "@module/common/entity/common.entity";
 import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
 // 部门表-实体类
 @Entity('sys_dept', { comment: '部门表' })

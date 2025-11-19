@@ -286,15 +286,15 @@ export class GenTableDao {
     for (const item of tableList) {
       const list = templateIndex(item);
       const templates = [
-        { content: list['tool/template/midwayjs/entity.ts.vm'], path: `midwayjs/${item.BusinessName}/entities/${item.businessName}.entity.ts` },
-        { content: list['tool/template/midwayjs/dto.ts.vm'], path: `midwayjs/${item.BusinessName}/dto/${item.businessName}.dto.ts` },
-        { content: list['tool/template/midwayjs/controller.ts.vm'], path: `midwayjs/${item.BusinessName}/${item.businessName}.controller.ts` },
-        { content: list['tool/template/midwayjs/service.ts.vm'], path: `midwayjs/${item.BusinessName}/${item.businessName}.service.ts` },
-        { content: list['tool/template/midwayjs/dao.ts.vm'], path: `midwayjs/${item.BusinessName}/${item.businessName}.dao.ts` },
-        { content: list['tool/template/vue/api.js.vm'], path: `vue/${item.BusinessName}/${item.businessName}.js` },
-        { content: list['tool/template/vue/index.vue.vm'], path: `vue/${item.BusinessName}/${item.businessName}/index.vue` },
-        { content: list['tool/template/vue/dialogVue.vue.vm'], path: `vue/${item.BusinessName}/${item.businessName}/components/indexDialog.vue` },
-        { content: list['tool/template/pg/pg.sql.vm'], path: `pg/${item.BusinessName}/${item.businessName}.sql` },
+        { content: list['tool/template/midwayjs/entity.ts.vm'], path: `src/module/${item.businessName}/entities/${item.businessName}.entity.ts` },
+        { content: list['tool/template/midwayjs/dto.ts.vm'], path: `src/module/${item.businessName}/dto/${item.businessName}.dto.ts` },
+        { content: list['tool/template/midwayjs/controller.ts.vm'], path: `src/module/${item.businessName}/${item.businessName}.controller.ts` },
+        { content: list['tool/template/midwayjs/service.ts.vm'], path: `src/module/${item.businessName}/${item.businessName}.service.ts` },
+        { content: list['tool/template/midwayjs/dao.ts.vm'], path: `src/module/${item.businessName}/${item.businessName}.dao.ts` },
+        { content: list['tool/template/vue/api.js.vm'], path: `vue/api/${item.businessName}.js` },
+        { content: list['tool/template/vue/index.vue.vm'], path: `vue/views/${item.businessName}/index.vue` },
+        { content: list['tool/template/vue/dialogVue.vue.vm'], path: `vue/views/${item.businessName}/components/indexDialog.vue` },
+        { content: list['tool/template/mysql/mysql.sql.vm'], path: `sql/${item.businessName}.sql` },
       ];
 
       for (const template of templates) {

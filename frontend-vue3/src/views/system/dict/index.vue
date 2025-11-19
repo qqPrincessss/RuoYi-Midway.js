@@ -22,7 +22,7 @@
               <span class="custom-tree-node-text" :title="node.label">{{ node.label }}</span>
               <span class="custom-tree-node-icon">
                 <el-button v-hasPermi="['system:dict:edit']" link type="primary" :title="'编辑'" icon="Edit" @click.stop="dictGroup.handleUpdate(data)" />
-                <el-button v-hasPermi="['system:dict:remove']" link type="primary" :title="'删除'" icon="Delete" @click.stop="dictGroup.handleDelete(data)" />
+                <el-button v-hasPermi="['system:dict:remove']" link type="danger" :title="'删除'" icon="Delete" @click.stop="dictGroup.handleDelete(data)" />
               </span>
             </span>
 

@@ -8,10 +8,10 @@ import { Inject, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { In, Repository } from 'typeorm';
-import { Create${Lodash.upperFirst(BusinessName)}Dto, Update${Lodash.upperFirst(BusinessName)}Dto, Query${Lodash.upperFirst(BusinessName)}Dto} from '@dto/${businessName}.dto';
-import { ${Lodash.upperFirst(BusinessName)}Entity } from '@entity/${businessName}.entity';
-import { resBuild } from '../utils/resBuild';
-import { getOperator, isEmpty } from '../utils';
+import { Create${Lodash.upperFirst(BusinessName)}Dto, Update${Lodash.upperFirst(BusinessName)}Dto, Query${Lodash.upperFirst(BusinessName)}Dto} from './dto/${businessName}.dto';
+import { ${Lodash.upperFirst(BusinessName)}Entity } from './entites/${businessName}.entity';
+import { resBuild } from '../../utils/resBuild';
+import { getOperator, isEmpty } from '../../utils';
 
 @Provide()
 export class ${Lodash.upperFirst(BusinessName)}Dao {

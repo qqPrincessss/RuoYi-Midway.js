@@ -7,10 +7,9 @@ export const entityTem = (options) => {
   const contentTem = content(options);
   return `
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { CommonEntity } from "./common.entity";
+import { CommonEntity } from '../../common/entity/common.entity';
 @Entity('${tableName}', {
-    comment: '${tableComment}',
-    schema: "public"
+    comment: '${tableComment}'
 })
 export class ${Lodash.upperFirst(BusinessName)}Entity extends CommonEntity{
 ${contentTem}

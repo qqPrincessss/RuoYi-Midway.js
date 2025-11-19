@@ -173,7 +173,7 @@
           <el-tooltip content="删除" placement="top">
             <el-button
               link
-              type="primary"
+              type="danger"
               icon="Delete"
               @click="handleDelete(scope.row)"
               v-hasPermi="['tool:gen:remove']"

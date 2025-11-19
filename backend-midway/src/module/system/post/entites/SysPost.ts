@@ -1,5 +1,5 @@
-import { CommonEntity } from "../../../common/entity/common.entity";
-import { Column, Entity,  JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CommonEntity } from "@module/common/entity/common.entity";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { SysUser } from "../../user/entites/SysUser";
 
 @Entity('sys_post', { comment: '岗位信息表' })

@@ -1,4 +1,4 @@
-import { CommonEntity } from "../../../common/entity/common.entity";
+import { CommonEntity } from "@module/common/entity/common.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 // 参数配置表 -  实体类

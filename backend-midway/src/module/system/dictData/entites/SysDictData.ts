@@ -1,4 +1,4 @@
-import { CommonEntity } from "../../../common/entity/common.entity";
+import { CommonEntity } from "@module/common/entity/common.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 // 字典数据表 -  实体类

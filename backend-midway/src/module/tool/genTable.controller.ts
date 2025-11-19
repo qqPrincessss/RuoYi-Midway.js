@@ -2,8 +2,8 @@ import { Controller, Inject, Get, Query, Body, Post, Put, Param, Del } from '@mi
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiBody } from '@midwayjs/swagger';
 import { GenTableService } from "./genTable.service";
 import { ListGenTableDTO, CreateGenTableDTO, UpdateGenTableDTO, GenDbTableList } from "./dto/genTable.dto";
-import { Auth } from "@decorator/auth.decorator";
-import { BusinessType, Log } from "@decorator/log.decorator";
+import { Auth } from "../../decorator/auth.decorator";
+import { BusinessType, Log } from "../../decorator/log.decorator";
 
 @ApiTags('代码生成')
 @Controller('/tool/gen')

@@ -1,12 +1,12 @@
-import { Column, Entity,  PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
-import { SysUser  } from "../../user/entites/SysUser";
-import { CommonEntity } from "../../../common/entity/common.entity";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
+import { SysUser } from "../../user/entites/SysUser";
+import { CommonEntity } from "@module/common/entity/common.entity";
 import { SysMenu } from "../../menu/entites/SysMenu";
 
 // 角色表-实体类
 @Entity('sys_role', { comment: '角色信息表' })
 export class SysRole extends CommonEntity {
- @PrimaryGeneratedColumn({ type: 'bigint', name: 'role_id', comment: '角色ID' })
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'role_id', comment: '角色ID' })
   roleId: number;
 
   @Column({ type: 'varchar', name: 'role_name', comment: '角色名称' })

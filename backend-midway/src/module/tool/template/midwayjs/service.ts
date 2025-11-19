@@ -24,9 +24,9 @@ export const serviceTem = (options) => {
   const daoInstance = `${businessName}Dao`;
   return `
 import { Provide, Inject } from '@midwayjs/core';
-import { ${daoName} } from '@dao/${businessName}.dao';
-import { Create${Lodash.upperFirst(BusinessName)}Dto, Update${Lodash.upperFirst(BusinessName)}Dto, Query${Lodash.upperFirst(BusinessName)}Dto } from '@dto/${businessName}.dto';
-import { DownloadExcelService } from '../service/common/downloadExcel';
+import { ${daoName} } from './${businessName}.dao';
+import { Create${Lodash.upperFirst(BusinessName)}Dto, Update${Lodash.upperFirst(BusinessName)}Dto, Query${Lodash.upperFirst(BusinessName)}Dto } from './dto/${businessName}.dto';
+import { DownloadExcelService } from '../common/excel/downloadExcel';
 @Provide()
 export class ${Lodash.upperFirst(BusinessName)}Service {
   @Inject()
