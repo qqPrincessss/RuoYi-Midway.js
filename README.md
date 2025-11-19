@@ -8,145 +8,149 @@
   <img src="https://img.shields.io/badge/License-MIT-green.svg"/>
 </p>
 
-<p align="center">基于 Midway.js + Vue3 + Element Plus 的现代化后台管理系统</p>
+<p align="center">A modern admin management system based on Midway.js + Vue3 + Element Plus</p>
 
-## 项目介绍
+<p align="center">
+  <a href="./README.zh-CN.md">中文</a> | English
+</p>
 
-RuoYi-Midwayjs 是一个基于若依框架思想，使用 Node.js 全栈技术重构的后台管理系统。后端采用 Midway.js 框架，前端使用 Vue3 + Element Plus，提供了一套完整的企业级后台管理解决方案。
+## Introduction
 
-## 技术栈
+RuoYi-Midwayjs is a modern admin management system rebuilt with Node.js full-stack technology based on the RuoYi framework concept. The backend uses Midway.js framework, and the frontend uses Vue3 + Element Plus, providing a complete enterprise-level admin management solution.
 
-### 前端技术
+## Tech Stack
 
-| 技术 | 说明 |
+### Frontend
+
+| Technology | Description |
 | --- | --- |
-| Vue 3 | 渐进式 JavaScript 框架 |
-| Vite | 下一代前端构建工具 |
-| Element Plus | Vue 3 组件库 |
-| Pinia | Vue 状态管理库 |
-| Vue Router | Vue 官方路由管理器 |
-| Axios | HTTP 请求库 |
-| ECharts | 可视化图表库 |
-| Sass | CSS 预处理器 |
+| Vue 3 | Progressive JavaScript Framework |
+| Vite | Next Generation Frontend Build Tool |
+| Element Plus | Vue 3 Component Library |
+| Pinia | Vue State Management |
+| Vue Router | Official Vue Router |
+| Axios | HTTP Client |
+| ECharts | Visualization Library |
+| Sass | CSS Preprocessor |
 
-### 后端技术
+### Backend
 
-| 技术 | 说明 |
+| Technology | Description |
 | --- | --- |
-| Midway.js | Node.js 企业级框架 |
-| TypeORM | TypeScript ORM 框架 |
-| MySQL | 关系型数据库 |
-| Redis | 缓存数据库 |
-| JWT | 身份认证 |
-| Swagger | API 文档 |
-| TypeScript | JavaScript 超集 |
+| Midway.js | Node.js Enterprise Framework |
+| TypeORM | TypeScript ORM Framework |
+| MySQL | Relational Database |
+| Redis | Cache Database |
+| JWT | Authentication |
+| Swagger | API Documentation |
+| TypeScript | JavaScript Superset |
 
-## 功能特性
+## Features
 
-- **快速开发** - 基于成熟框架，开箱即用
-- **权限管理** - 完善的 RBAC 权限控制
-- **代码生成** - 一键生成前后端代码
-- **系统监控** - 实时监控系统运行状态
-- **用户管理** - 用户、角色、部门、岗位管理
-- **菜单管理** - 动态菜单，按钮级别权限控制
-- **字典管理** - 系统字典数据维护
-- **参数管理** - 系统参数配置
-- **通知公告** - 系统通知公告发布
-- **操作日志** - 系统操作日志记录
-- **登录日志** - 系统登录日志记录
-- **在线用户** - 在线用户监控
-- **定时任务** - 定时任务调度管理
-- **服务监控** - 服务器状态监控
+- **Rapid Development** - Based on mature frameworks, ready to use out of the box
+- **Permission Management** - Complete RBAC permission control
+- **Code Generation** - One-click generation of frontend and backend code
+- **System Monitoring** - Real-time system status monitoring
+- **User Management** - User, role, department, position management
+- **Menu Management** - Dynamic menus, button-level permission control
+- **Dictionary Management** - System dictionary data maintenance
+- **Parameter Management** - System parameter configuration
+- **Notifications** - System notification publishing
+- **Operation Logs** - System operation log recording
+- **Login Logs** - System login log recording
+- **Online Users** - Online user monitoring
+- **Scheduled Tasks** - Task scheduling management
+- **Server Monitoring** - Server status monitoring
 
-## 目录结构
+## Directory Structure
 
 ```
 RuoYi-Midwayjs
-├── backend-midway          # 后端项目
+├── backend-midway          # Backend project
 │   ├── src
-│   │   ├── config          # 配置文件
-│   │   ├── controller      # 控制器
-│   │   ├── service         # 服务层
-│   │   ├── entity          # 实体类
-│   │   ├── middleware      # 中间件
-│   │   └── utils           # 工具类
+│   │   ├── config          # Configuration
+│   │   ├── controller      # Controllers
+│   │   ├── service         # Services
+│   │   ├── entity          # Entities
+│   │   ├── middleware      # Middleware
+│   │   └── utils           # Utilities
 │   └── package.json
-├── frontend-vue3           # 前端项目
+├── frontend-vue3           # Frontend project
 │   ├── src
-│   │   ├── api             # API 接口
-│   │   ├── assets          # 静态资源
-│   │   ├── components      # 公共组件
-│   │   ├── layout          # 布局组件
-│   │   ├── router          # 路由配置
-│   │   ├── store           # 状态管理
-│   │   ├── utils           # 工具函数
-│   │   └── views           # 页面组件
+│   │   ├── api             # API interfaces
+│   │   ├── assets          # Static assets
+│   │   ├── components      # Components
+│   │   ├── layout          # Layout
+│   │   ├── router          # Router
+│   │   ├── store           # Store
+│   │   ├── utils           # Utilities
+│   │   └── views           # Views
 │   └── package.json
 └── README.md
 ```
 
-## 快速开始
+## Quick Start
 
-### 环境要求
+### Requirements
 
 - Node.js >= 16
 - MySQL >= 5.7
 - Redis >= 5.0
 
-### 后端启动
+### Backend Setup
 
 ```bash
-# 进入后端目录
+# Enter backend directory
 cd backend-midway
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 配置数据库连接
-# 修改 .env.development 文件中的数据库配置
+# Configure database connection
+# Modify database configuration in .env.development file
 
-# 启动开发服务
+# Start development server
 npm run dev
 ```
 
-### 前端启动
+### Frontend Setup
 
 ```bash
-# 进入前端目录
+# Enter frontend directory
 cd frontend-vue3
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 启动开发服务
+# Start development server
 npm run dev
 ```
 
-### 访问地址
+### Access URLs
 
-- 前端地址：http://localhost:80
-- 后端地址：http://localhost:7001
-- Swagger 文档：http://localhost:7001/swagger-ui/index.html
+- Frontend: http://localhost:8888
+- Backend: http://localhost:7725
+- Swagger Docs: http://localhost:7725/swagger-ui/index.html
 
-## 其他版本
+## Other Versions
 
-| 版本 | 说明 | 链接 |
+| Version | Description | Link |
 | --- | --- | --- |
-| PostgreSQL 版本 | 基于 PostgreSQL 数据库，页面体验优化 | [查看](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/pg) |
-| Tauri 跨平台版本 | 基于 Tauri 构建跨平台桌面应用，Monorepo 统一管理 | [查看](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/Tauri) |
+| PostgreSQL Version | Based on PostgreSQL database, optimized page experience | [View](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/pg) |
+| Tauri Cross-platform Version | Cross-platform desktop app built with Tauri, Monorepo management | [View](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/Tauri) |
 
-## 关于作者
+## About Author
 
-- 个人博客：[https://www.xierfloat.top](https://www.xierfloat.top)
-- 微信公众号：**增七**
+- Blog: [https://www.xierfloat.top](https://www.xierfloat.top)
+- WeChat Official Account: **增七**
 
-## 特别感谢
+## Special Thanks
 
-感谢以下开源项目提供的参考和灵感：
+Thanks to the following open source projects for reference and inspiration:
 
-- [nest-admin](https://gitee.com/tao-zhi/nest-admin) - NestJS 后台管理系统
-- [ruoyi_nodejs_open](https://gitee.com/ruirui-study/ruoyi_nodejs_open) - 若依 midway.js 版本
+- [nest-admin](https://gitee.com/tao-zhi/nest-admin) - NestJS Admin System
+- [ruoyi_nodejs_open](https://gitee.com/ruirui-study/ruoyi_nodejs_open) - RuoYi Midway.js Version
 
-## 许可证
+## License
 
 [MIT](LICENSE)
