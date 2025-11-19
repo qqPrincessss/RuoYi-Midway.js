@@ -1,5 +1,5 @@
 import { CommonEntity } from "@module/common/entity/common.entity";
-import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 // 参数配置表 -  实体类
@@ -55,4 +55,6 @@ export class GenTable extends CommonEntity {
 
   @Column({ type: 'varchar', name: 'remark', default: null, length: 500, comment: '备注', })
   remark: string;
+  @Column({ type: 'char', name: 'status', length: 1, default: '0', comment: '状态（0正常 1停用）' })
+  status: string;
 }
