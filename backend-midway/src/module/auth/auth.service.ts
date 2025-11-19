@@ -48,7 +48,10 @@ export class AuthService {
   async captchaImage() {
     const temp = await this.redisService.get(`${RedisEnum.SYS_CONFIG_KEY}sys.account.captchaEnabled`);
     const isCaptchaEnabled = temp === null ? true : JSON.parse(temp)
-    if (JSON.parse(isCaptchaEnabled)) {
+    // 将验证码开关状态存到 session，供登录时校验使用
+    this.ctx.session.isCaptchaEnabled = isCaptchaEnabled;
+
+    if (isCaptchaEnabled) {
       // 如果开启了验证码，则生成验证码
       const { id, imageBase64 } = await this.captchaService.formula({ noise: 1 }); // noise是干扰项条数，具体配置可看文档
       // 把校验id存起来，和后面的登录时的参数、对比值是否一致
@@ -58,6 +61,7 @@ export class AuthService {
         message: '操作成功',
         img: imageBase64, // 此处直接返回base64图片，和若依的base64位字符串不一样
         captchaEnabled: isCaptchaEnabled, // 是否开启验证码校验
+        uuid: id // 添加 uuid 字段，与前端保持一致
       }
     } else {
       // 如果关闭了验证码，则返回captchaEnabled值为false

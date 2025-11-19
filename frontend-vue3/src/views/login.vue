@@ -21,13 +21,15 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item prop="code" v-if="captchaEnabled.value">
-        <el-input v-model.trim="loginForm.model.code" maxlength="3" size="large" auto-complete="off" placeholder="验证码" style="width: 63%" @keyup.enter="handleLogin">
+      <el-form-item prop="code" v-if="captchaEnabled">
+        <el-input v-model.trim="loginForm.code" maxlength="5" size="large" auto-complete="off" placeholder="验证码" style="width: 63%" @keyup.enter="handleLogin">
           <template #prefix>
             <svg-icon icon-class="validCode" class="input-icon" />
           </template>
         </el-input>
-        <div class="login-code" v-html="authCodeInfo.imgUrl" @click="useAuthCode.getValidateCode(loginForm.model, true)" />
+        <div class="login-code">
+          <img :src="codeUrl" @click="getCode" class="login-code-img" />
+        </div>
       </el-form-item>
 
       <div class="login-tips">
@@ -122,10 +124,10 @@ function handleLogin() {
 
 function getCode() {
   getCodeImg().then((res) => {
-    captchaEnabled.value = res.data.captchaEnabled === undefined ? true : res.data.captchaEnabled
+    captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled
     if (captchaEnabled.value) {
-      codeUrl.value = res.data.img // 此处后端直接返回图片，不用拼接了
-      loginForm.value.uuid = res.data.uuid
+      codeUrl.value = res.img // 此处后端直接返回图片，不用拼接了
+      loginForm.value.uuid = res.uuid
     }
   })
 }
@@ -140,7 +142,6 @@ function getCookie() {
     rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
   }
 }
-
 
 getCode()
 getCookie()
