@@ -70,5 +70,29 @@ export default {
   cors: {
     origin: '*', // 跨域
   },
+  midwayLogger: {
+    default: {
+      dir: './logs',
+      level: 'info',
+      consoleLevel: 'warn',
+      enableFile: true,
+      enableError: true,
+      format: (info) => {
+        return `${info.timestamp} ${info.LEVEL} ${info.pid} ${info.message}`;
+      },
+    },
+    clients: {
+      appLogger: {
+        fileLogName: 'ruoyi-midway-project.log',
+        level: 'info',
+        enableFile: true,
+      },
+      coreLogger: {
+        fileLogName: 'ruoyi-midway-core.log',
+        level: 'warn',
+        enableFile: true,
+      },
+    },
+  },
 } as MidwayConfig;
 

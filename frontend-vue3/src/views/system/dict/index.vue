@@ -5,7 +5,7 @@
         <div class="tree">
           <div class="tree-header">
             <el-button v-hasPermi="['system:dict:add']" style="width: 100%; margin-bottom: 8px" type="primary" size="mini" icon="el-icon-plus" @click="dictGroup.handleAdd">添加字典分类</el-button>
-            <el-input  v-model="dictGroup.query.dictName" style="width: 100%; margin-bottom: 8px" placeholder="请输入字典项筛选" />
+            <el-input v-model="dictGroup.query.dictName" style="width: 100%; margin-bottom: 8px" placeholder="请输入字典项筛选" />
           </div>
 
           <div class="tree-body">
@@ -44,13 +44,13 @@
         <div class="table" v-if="dictGroup.selectNode.dictCode === 0">
           <el-form class="search-container" :model="dictGroup.query" ref="queryDictGroupRef" :inline="true">
             <el-form-item label="字典名称" prop="menuName">
-              <el-input  v-model="dictGroup.query.dictName" placeholder="请输入字典名称" clearable style="width: 200px" @keyup.enter="dictGroup.handleRefresh" />
+              <el-input v-model="dictGroup.query.dictName" placeholder="请输入字典名称" clearable style="width: 200px" @keyup.enter="dictGroup.handleRefresh" />
             </el-form-item>
             <el-form-item label="字典类型" prop="status">
-              <el-input  v-model="dictGroup.query.dictType" placeholder="请输入字典类型" clearable style="width: 200px" @keyup.enter="dictGroup.handleRefresh" />
+              <el-input v-model="dictGroup.query.dictType" placeholder="请输入字典类型" clearable style="width: 200px" @keyup.enter="dictGroup.handleRefresh" />
             </el-form-item>
             <el-form-item label="状态" prop="status">
-              <el-select  v-model="dictGroup.query.status" placeholder="请选择字典状态" clearable style="width: 200px">
+              <el-select v-model="dictGroup.query.status" placeholder="请选择字典状态" clearable style="width: 200px">
                 <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
               </el-select>
             </el-form-item>
@@ -170,6 +170,7 @@ import { listType, delType, refreshCache } from '@/api/system/dict/type'
 import { listData, delData } from '@/api/system/dict/data'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
 
 // 字典组树和列表的ref

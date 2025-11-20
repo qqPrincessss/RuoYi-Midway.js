@@ -63,6 +63,7 @@ const affixTags = ref([])
 const scrollPaneRef = ref(null)
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const route = useRoute()
 const router = useRouter()
 const visitedViews = computed(() => useTagsViewStore().visitedViews)
@@ -286,23 +287,23 @@ function handleScroll() {
         color: #fff;
         border-color: #42b983;
         transition: all 0.1s ease;
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        z-index: 1000;
-        bottom: 0;
-      }
-      &::before{
-        left: -15px;
-        background: radial-gradient(circle at 0 0,transparent 15px,var(--theme-color, #495060) 15px);
-      }
-      &::after{
-        right: -15px;
-         background: radial-gradient(circle at 100% 0,transparent 15px,var(--theme-color, #495060) 15px);
-      }
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          z-index: 1000;
+          bottom: 0;
+        }
+        &::before {
+          left: -15px;
+          background: radial-gradient(circle at 0 0, transparent 15px, var(--theme-color, #495060) 15px);
+        }
+        &::after {
+          right: -15px;
+          background: radial-gradient(circle at 100% 0, transparent 15px, var(--theme-color, #495060) 15px);
+        }
       }
     }
   }

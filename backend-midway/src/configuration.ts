@@ -11,7 +11,6 @@ import * as axios from '@midwayjs/axios';
 import * as redis from '@midwayjs/redis';
 import { join } from 'path';
 import { ErrorFilter } from './filter/error.filter';
-// import { DefaultErrorFilter } from './filter/default.filter';
 import { ReportMiddleware } from './middleware/report.middleware';
 import { JwtMiddleware } from './middleware/jwt.middleware'; // token校验
 import { EncryptMiddleware } from "./middleware/encrypt.middleware"; // 接口加密

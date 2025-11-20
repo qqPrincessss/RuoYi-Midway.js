@@ -3,15 +3,15 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
         <el-form-item label="任务名称" prop="jobName">
-          <el-input  v-model="queryParams.jobName" placeholder="请输入任务名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.jobName" placeholder="请输入任务名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="任务组名" prop="jobGroup">
-          <el-select  v-model="queryParams.jobGroup" placeholder="请选择任务组名" clearable style="width: 200px">
+          <el-select v-model="queryParams.jobGroup" placeholder="请选择任务组名" clearable style="width: 200px">
             <el-option v-for="dict in sys_job_group" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="执行状态" prop="status">
-          <el-select  v-model="queryParams.status" placeholder="请选择执行状态" clearable style="width: 200px">
+          <el-select v-model="queryParams.status" placeholder="请选择执行状态" clearable style="width: 200px">
             <el-option v-for="dict in sys_common_status" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
@@ -75,6 +75,7 @@
 
     <!-- 调度日志详细 -->
     <el-dialog title="调度日志详细" v-model="open" width="700px" append-to-body>
+      <Title :title="title" />
       <el-form :model="form" label-width="100px">
         <el-row>
           <el-col :span="12">
@@ -116,6 +117,7 @@ import { getJob } from '@/api/monitor/job'
 import { listJobLog, delJobLog, cleanJobLog } from '@/api/monitor/jobLog'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_common_status, sys_job_group } = proxy.useDict('sys_common_status', 'sys_job_group')
 
 const jobLogList = ref([])

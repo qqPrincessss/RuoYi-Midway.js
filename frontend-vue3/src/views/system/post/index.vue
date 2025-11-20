@@ -3,13 +3,13 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
         <el-form-item label="岗位编码" prop="postCode">
-          <el-input  v-model="queryParams.postCode" placeholder="请输入岗位编码" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.postCode" placeholder="请输入岗位编码" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="岗位名称" prop="postName">
-          <el-input  v-model="queryParams.postName" placeholder="请输入岗位名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.postName" placeholder="请输入岗位名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-select  v-model="queryParams.status" placeholder="岗位状态" clearable style="width: 200px">
+          <el-select v-model="queryParams.status" placeholder="岗位状态" clearable style="width: 200px">
             <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
@@ -66,13 +66,14 @@
     </div>
 
     <!-- 添加或修改岗位对话框 -->
-    <el-dialog :title="title" v-model="open" width="832px" append-to-body>
+    <el-dialog v-model="open" width="832px" append-to-body>
+      <Title :title="title" />
       <el-form ref="postRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="岗位名称" prop="postName">
-          <el-input  v-model="form.postName" placeholder="请输入岗位名称" />
+          <el-input v-model="form.postName" placeholder="请输入岗位名称" />
         </el-form-item>
         <el-form-item label="岗位编码" prop="postCode">
-          <el-input  v-model="form.postCode" placeholder="请输入编码名称" />
+          <el-input v-model="form.postCode" placeholder="请输入编码名称" />
         </el-form-item>
         <el-form-item label="岗位顺序" prop="postSort">
           <el-input-number v-model="form.postSort" controls-position="right" :min="0" />
@@ -83,7 +84,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input  v-model="form.remark" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -100,6 +101,7 @@
 import { listPost, addPost, delPost, getPost, updatePost } from '@/api/system/post'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
 
 const postList = ref([])

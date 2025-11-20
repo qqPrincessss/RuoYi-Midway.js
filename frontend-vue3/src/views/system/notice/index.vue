@@ -3,13 +3,13 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
         <el-form-item label="公告标题" prop="noticeTitle">
-          <el-input  v-model="queryParams.noticeTitle" placeholder="请输入公告标题" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.noticeTitle" placeholder="请输入公告标题" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="操作人员" prop="createBy">
-          <el-input  v-model="queryParams.createBy" placeholder="请输入操作人员" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.createBy" placeholder="请输入操作人员" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="类型" prop="noticeType">
-          <el-select  v-model="queryParams.noticeType" placeholder="公告类型" clearable style="width: 200px">
+          <el-select v-model="queryParams.noticeType" placeholder="公告类型" clearable style="width: 200px">
             <el-option v-for="dict in sys_notice_type" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
@@ -69,17 +69,18 @@
       </div>
     </div>
     <!-- 添加或修改公告对话框 -->
-    <el-dialog :title="title" v-model="open" width="780px" append-to-body>
+    <el-dialog v-model="open" width="780px" append-to-body>
+      <Title :title="title" />
       <el-form ref="noticeRef" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
             <el-form-item label="公告标题" prop="noticeTitle">
-              <el-input  v-model="form.noticeTitle" placeholder="请输入公告标题" />
+              <el-input v-model="form.noticeTitle" placeholder="请输入公告标题" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="公告类型" prop="noticeType">
-              <el-select  v-model="form.noticeType" placeholder="请选择">
+              <el-select v-model="form.noticeType" placeholder="请选择">
                 <el-option v-for="dict in sys_notice_type" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
               </el-select>
             </el-form-item>
@@ -112,6 +113,7 @@
 import { listNotice, getNotice, delNotice, addNotice, updateNotice } from '@/api/system/notice'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_notice_status, sys_notice_type } = proxy.useDict('sys_notice_status', 'sys_notice_type')
 
 const noticeList = ref([])

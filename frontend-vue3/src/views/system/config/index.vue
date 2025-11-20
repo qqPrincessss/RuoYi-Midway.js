@@ -3,10 +3,10 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
         <el-form-item label="参数名称" prop="configName">
-          <el-input  v-model="queryParams.configName" placeholder="请输入参数名称" clearable style="width: 160px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.configName" placeholder="请输入参数名称" clearable style="width: 160px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="参数键名" prop="configKey">
-          <el-input  v-model="queryParams.configKey" placeholder="请输入参数键名" clearable style="width: 160px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.configKey" placeholder="请输入参数键名" clearable style="width: 160px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="系统内置" prop="configType" label-width="100px">
           <template #label>
@@ -17,7 +17,7 @@
             </el-tooltip>
             <span style="width: 80px">系统内置</span>
           </template>
-          <el-select  v-model="queryParams.configType" placeholder="系统内置" clearable style="width: 160px">
+          <el-select v-model="queryParams.configType" placeholder="系统内置" clearable style="width: 160px">
             <el-option v-for="dict in sys_yes_no" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
@@ -78,16 +78,17 @@
   </div>
 
   <!-- 添加或修改参数配置对话框 -->
-  <el-dialog :title="title" v-model="open" width="600px" append-to-body>
+  <el-dialog v-model="open" width="600px" append-to-body>
+    <Title :title="title" />
     <el-form ref="configRef" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="参数名称" prop="configName">
-        <el-input  v-model="form.configName" placeholder="请输入参数名称" />
+        <el-input v-model="form.configName" placeholder="请输入参数名称" />
       </el-form-item>
       <el-form-item label="参数键名" prop="configKey">
-        <el-input  v-model="form.configKey" placeholder="请输入参数键名" />
+        <el-input v-model="form.configKey" placeholder="请输入参数键名" />
       </el-form-item>
       <el-form-item label="参数键值" prop="configValue">
-        <el-input  v-model="form.configValue" placeholder="请输入参数键值" />
+        <el-input v-model="form.configValue" placeholder="请输入参数键值" />
       </el-form-item>
       <el-form-item prop="configType">
         <template #label>
@@ -103,7 +104,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input  v-model="form.remark" type="textarea" placeholder="请输入内容" />
+        <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -119,6 +120,7 @@
 import { listConfig, getConfig, delConfig, addConfig, updateConfig, refreshCache } from '@/api/system/config'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_yes_no } = proxy.useDict('sys_yes_no')
 
 const configList = ref([])

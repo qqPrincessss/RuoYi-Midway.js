@@ -118,6 +118,7 @@ import genInfoForm from './genInfoForm'
 
 const route = useRoute()
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 const activeName = ref('columnInfo')
 const tableHeight = ref(document.documentElement.scrollHeight - 245 + 'px')

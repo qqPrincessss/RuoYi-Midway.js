@@ -77,5 +77,29 @@ export default {
     version: '1.0.0',
     path: '/swagger-ui/index.html',
   },
+  midwayLogger: {
+    default: {
+      dir: './logs',
+      level: 'info',
+      consoleLevel: 'info',
+      enableFile: true,
+      enableError: true,
+      format: (info) => {
+        return `${info.timestamp} ${info.LEVEL} ${info.pid} ${info.message}`;
+      },
+    },
+    clients: {
+      appLogger: {
+        fileLogName: 'ruoyi-midway-project.log',
+        level: 'info',
+        enableFile: true,
+      },
+      coreLogger: {
+        fileLogName: 'ruoyi-midway-core.log',
+        level: 'warn',
+        enableFile: true,
+      },
+    },
+  },
 } as MidwayConfig;
 

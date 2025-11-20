@@ -6,12 +6,12 @@
         <el-row>
           <el-col :span="8" :offset="2">
             <el-form-item label="用户昵称" prop="nickName">
-              <el-input  v-model="form.nickName" disabled />
+              <el-input v-model="form.nickName" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="8" :offset="2">
             <el-form-item label="登录账号" prop="userName">
-              <el-input  v-model="form.userName" disabled />
+              <el-input v-model="form.userName" disabled />
             </el-form-item>
           </el-col>
         </el-row>
@@ -44,7 +44,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <div class="pagination-container" style="text-align: right;">
+        <div class="pagination-container" style="text-align: right">
           <el-button type="primary" @click="submitForm()">提交</el-button>
           <el-button @click="close()">返回</el-button>
         </div>
@@ -58,6 +58,7 @@ import { getAuthRole, updateAuthRole } from '@/api/system/user'
 
 const route = useRoute()
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 const loading = ref(true)
 const total = ref(0)

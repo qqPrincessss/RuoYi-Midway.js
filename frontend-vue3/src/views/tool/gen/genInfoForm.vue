@@ -216,6 +216,7 @@ import { listMenu } from '@/api/system/menu'
 const subColumns = ref([])
 const menuOptions = ref([])
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 const props = defineProps({
   info: {

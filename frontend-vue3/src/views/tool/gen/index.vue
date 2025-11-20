@@ -3,10 +3,10 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
         <el-form-item label="表名称" prop="tableName">
-          <el-input  v-model="queryParams.tableName" placeholder="请输入表名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.tableName" placeholder="请输入表名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="表描述" prop="tableComment">
-          <el-input  v-model="queryParams.tableComment" placeholder="请输入表描述" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.tableComment" placeholder="请输入表描述" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="创建时间" style="width: 308px">
           <el-date-picker v-model="dateRange" value-format="YYYY-MM-DD" type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
@@ -65,7 +65,7 @@
                 <el-button link type="primary" icon="Edit" @click="handleEditTable(scope.row)" v-hasPermi="['tool:gen:edit']"></el-button>
               </el-tooltip>
               <el-tooltip content="删除" placement="top">
-                <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['tool:gen:remove']"></el-button>
+                <el-button link type="danger" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['tool:gen:remove']"></el-button>
               </el-tooltip>
               <el-tooltip content="同步" placement="top">
                 <el-button link type="primary" icon="Refresh" @click="handleSynchDb(scope.row)" v-hasPermi="['tool:gen:edit']"></el-button>
@@ -80,7 +80,8 @@
       </div>
     </div>
     <!-- 预览界面 -->
-    <el-dialog :title="preview.title" v-model="preview.open" width="80%" top="5vh" append-to-body class="scrollbar">
+    <el-dialog  v-model="preview.open" width="80%" append-to-body class="scrollbar">
+      <Title :title="preview.title"  />
       <el-tabs v-model="preview.activeName">
         <el-tab-pane
           v-for="(value, key) in preview.data"
@@ -104,6 +105,7 @@ import importTable from './importTable'
 
 const route = useRoute()
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 const tableList = ref([])
 const loading = ref(true)

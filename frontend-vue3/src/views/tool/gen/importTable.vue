@@ -1,12 +1,13 @@
 <template>
   <!-- 导入表 -->
-  <el-dialog title="导入表" v-model="visible" width="800px"  append-to-body>
+  <el-dialog  v-model="visible" width="800px" append-to-body>
+    <Title title="导入表" />
     <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true">
       <el-form-item label="表名称" prop="tableName">
-        <el-input  v-model="queryParams.tableName" placeholder="请输入表名称" @keyup.enter="handleQuery" />
+        <el-input v-model="queryParams.tableName" placeholder="请输入表名称" @keyup.enter="handleQuery" />
       </el-form-item>
       <el-form-item label="表描述" prop="tableComment">
-        <el-input  v-model="queryParams.tableComment" placeholder="请输入表描述" @keyup.enter="handleQuery" />
+        <el-input v-model="queryParams.tableComment" placeholder="请输入表描述" @keyup.enter="handleQuery" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -40,6 +41,7 @@ const visible = ref(false)
 const tables = ref([])
 const dbTableList = ref([])
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 const queryParams = reactive({
   pageNum: 1,

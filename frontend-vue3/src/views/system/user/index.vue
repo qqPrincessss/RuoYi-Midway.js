@@ -5,7 +5,7 @@
       <el-col :span="4" :xs="24">
         <div class="tree">
           <div class="tree-header">
-            <el-input  v-model="deptName" placeholder="请输入部门名称" clearable prefix-icon="Search" style="margin-bottom: 20px" />
+            <el-input v-model="deptName" placeholder="请输入部门名称" clearable prefix-icon="Search" style="margin-bottom: 20px" />
           </div>
           <div class="tree-body">
             <el-tree
@@ -27,13 +27,13 @@
         <div class="table">
           <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
             <el-form-item label="用户账号" prop="userName">
-              <el-input  v-model="queryParams.userName" placeholder="请输入用户账号" clearable style="width: 240px" @keyup.enter="handleQuery" />
+              <el-input v-model="queryParams.userName" placeholder="请输入用户账号" clearable style="width: 240px" @keyup.enter="handleQuery" />
             </el-form-item>
             <el-form-item label="手机号码" prop="phonenumber">
-              <el-input  v-model="queryParams.phonenumber" placeholder="请输入手机号码" clearable style="width: 200px" @keyup.enter="handleQuery" />
+              <el-input v-model="queryParams.phonenumber" placeholder="请输入手机号码" clearable style="width: 200px" @keyup.enter="handleQuery" />
             </el-form-item>
             <el-form-item label="状态" prop="status">
-              <el-select  v-model="queryParams.status" placeholder="用户状态" clearable style="width: 200px">
+              <el-select v-model="queryParams.status" placeholder="用户状态" clearable style="width: 200px">
                 <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
               </el-select>
             </el-form-item>
@@ -107,24 +107,25 @@
     </el-row>
 
     <!-- 添加或修改用户配置对话框 -->
-    <el-dialog :title="title" v-model="open" width="600px" append-to-body>
+    <el-dialog v-model="open" width="600px" append-to-body>
+      <Title :title="title" />
       <el-form :model="form" :rules="rules" ref="userRef" label-width="80px">
         <el-row>
           <el-col :span="12">
             <el-form-item v-if="form.userId == undefined" label="用户账号" prop="userName">
-              <el-input  v-model="form.userName" placeholder="请输入用户账号" maxlength="30" />
+              <el-input v-model="form.userName" placeholder="请输入用户账号" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item v-if="form.userId == undefined" label="用户密码" prop="password">
-              <el-input  v-model="form.password" placeholder="请输入用户密码" type="password" maxlength="20" show-password />
+              <el-input v-model="form.password" placeholder="请输入用户密码" type="password" maxlength="20" show-password />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
             <el-form-item label="用户昵称" prop="nickName">
-              <el-input  v-model="form.nickName" placeholder="请输入用户昵称" maxlength="30" />
+              <el-input v-model="form.nickName" placeholder="请输入用户昵称" maxlength="30" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -136,12 +137,12 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="手机号码" prop="phonenumber">
-              <el-input  v-model="form.phonenumber" placeholder="请输入手机号码" maxlength="11" />
+              <el-input v-model="form.phonenumber" placeholder="请输入手机号码" maxlength="11" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="邮箱" prop="email">
-              <el-input  v-model="form.email" placeholder="请输入邮箱" maxlength="50" />
+              <el-input v-model="form.email" placeholder="请输入邮箱" maxlength="50" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -149,7 +150,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="用户性别">
-              <el-select  v-model="form.sex" placeholder="请选择">
+              <el-select v-model="form.sex" placeholder="请选择">
                 <el-option v-for="dict in sys_user_sex" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
               </el-select>
             </el-form-item>
@@ -165,14 +166,14 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="岗位">
-              <el-select  v-model="form.postIds" multiple placeholder="请选择">
+              <el-select v-model="form.postIds" multiple placeholder="请选择">
                 <el-option v-for="item in postOptions" :key="item.postId" :label="item.postName" :value="item.postId" :disabled="item.status == 1"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="角色">
-              <el-select  v-model="form.roleIds" multiple placeholder="请选择">
+              <el-select v-model="form.roleIds" multiple placeholder="请选择">
                 <el-option v-for="item in roleOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId" :disabled="item.status == 1"></el-option>
               </el-select>
             </el-form-item>
@@ -181,7 +182,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="备注">
-              <el-input  v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
+              <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -195,7 +196,8 @@
     </el-dialog>
 
     <!-- 用户导入对话框 -->
-    <el-dialog :title="upload.title" v-model="upload.open" width="400px" append-to-body>
+    <el-dialog v-model="upload.open" width="400px" append-to-body>
+      <Title :title="upload.title" />
       <el-upload
         ref="uploadRef"
         :limit="1"
@@ -240,6 +242,7 @@ import { changeUserStatus, listUser, resetUserPwd, delUser, getUser, updateUser,
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_normal_disable, sys_user_sex } = proxy.useDict('sys_normal_disable', 'sys_user_sex')
 
 const userList = ref([])

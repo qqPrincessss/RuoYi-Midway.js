@@ -1,12 +1,13 @@
 <template>
   <!-- 添加或修改数据字典项配置 -->
-  <el-dialog :title="form.title" v-model="dialogTableVisible" width="600px" append-to-body>
+  <el-dialog  v-model="dialogTableVisible" width="600px" append-to-body>
+    <Title :title="form.title" />
     <el-form ref="formRef" :model="form.model" :rules="form.rules" label-width="100px">
       <el-form-item label="字典名称" prop="dictName">
-        <el-input  v-model="form.model.dictName" placeholder="请输入字典名称" />
+        <el-input v-model="form.model.dictName" placeholder="请输入字典名称" />
       </el-form-item>
       <el-form-item label="字典类型" prop="dictType">
-        <el-input  v-model="form.model.dictType" placeholder="请输入字典类型" />
+        <el-input v-model="form.model.dictType" placeholder="请输入字典类型" />
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="form.model.status">
@@ -14,7 +15,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input  v-model="form.model.remark" type="textarea" placeholder="请输入内容"></el-input>
+        <el-input v-model="form.model.remark" type="textarea" placeholder="请输入内容"></el-input>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -31,6 +32,7 @@
 import { addType, updateType } from '@/api/system/dict/type'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
 
 const dialogTableVisible = ref(false)

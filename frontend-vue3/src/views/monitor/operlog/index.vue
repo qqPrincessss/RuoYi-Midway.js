@@ -3,18 +3,18 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
         <el-form-item label="系统模块" prop="title">
-          <el-input  v-model="queryParams.title" placeholder="请输入系统模块" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.title" placeholder="请输入系统模块" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="操作人员" prop="operName">
-          <el-input  v-model="queryParams.operName" placeholder="请输入操作人员" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.operName" placeholder="请输入操作人员" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="类型" prop="businessType">
-          <el-select  v-model="queryParams.businessType" placeholder="操作类型" clearable style="width: 200px">
+          <el-select v-model="queryParams.businessType" placeholder="操作类型" clearable style="width: 200px">
             <el-option v-for="dict in sys_oper_type" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-select  v-model="queryParams.status" placeholder="操作状态" clearable style="width: 200px">
+          <el-select v-model="queryParams.status" placeholder="操作状态" clearable style="width: 200px">
             <el-option v-for="dict in sys_common_status" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
@@ -98,6 +98,7 @@
 
     <!-- 操作日志详细 -->
     <el-dialog title="操作日志详细" v-model="open" width="700px" append-to-body>
+      <Title :title="title" />
       <el-form :model="form" label-width="100px">
         <el-row>
           <el-col :span="12">
@@ -147,6 +148,7 @@
 import { list, delOperlog, cleanOperlog } from '@/api/monitor/operlog'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_oper_type, sys_common_status } = proxy.useDict('sys_oper_type', 'sys_common_status')
 
 const operlogList = ref([])

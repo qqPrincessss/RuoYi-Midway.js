@@ -16,7 +16,7 @@
             <el-table-column label="备注" align="center" prop="remark" :show-overflow-tooltip="true" />
             <el-table-column label="操作" width="60" align="center" class-name="small-padding fixed-width">
               <template #default="scope">
-                <el-button link type="primary" icon="Delete" @click="handleClearCacheName(scope.row)"></el-button>
+                <el-button link type="danger" icon="Delete" @click="handleClearCacheName(scope.row)"></el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -35,7 +35,7 @@
             <el-table-column label="缓存键名" align="center" :show-overflow-tooltip="true" :formatter="keyFormatter"></el-table-column>
             <el-table-column label="操作" width="60" align="center" class-name="small-padding fixed-width">
               <template #default="scope">
-                <el-button link type="primary" icon="Delete" @click="handleClearCacheKey(scope.row)"></el-button>
+                <el-button link type="danger" icon="Delete" @click="handleClearCacheKey(scope.row)"></el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -53,12 +53,12 @@
             <el-row :gutter="32">
               <el-col :offset="1" :span="22">
                 <el-form-item label="缓存名称:" prop="cacheName">
-                  <el-input  v-model="cacheForm.cacheName" :readOnly="true" />
+                  <el-input v-model="cacheForm.cacheName" :readOnly="true" />
                 </el-form-item>
               </el-col>
               <el-col :offset="1" :span="22">
                 <el-form-item label="缓存键名:" prop="cacheKey">
-                  <el-input  v-model="cacheForm.cacheKey" :readOnly="true" />
+                  <el-input v-model="cacheForm.cacheKey" :readOnly="true" />
                 </el-form-item>
               </el-col>
               <el-col :offset="1" :span="22">

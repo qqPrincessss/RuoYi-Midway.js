@@ -21,104 +21,89 @@
 
       <!-- 登录表单 -->
       <transition name="form-slide" mode="out-in">
-        <el-form
-          v-if="!isRegisterMode"
-          key="login-form"
-          ref="loginRef"
-          :model="loginForm"
-          :rules="rules"
-          class="login-form"
-          label-position="top">
-        <el-form-item prop="userName" label="账号" >
-          <el-input  v-model.trim="loginForm.userName" maxlength="20" type="text"  auto-complete="off" placeholder="请输入账号" style="height: 52px">
-            <template #prefix>
-              <User class="input-icon" />
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="password" label="密码">
-          <el-input v-model="loginForm.password" maxlength="20" type="password"  auto-complete="off" placeholder="请输入密码" @keyup.enter="handleLogin" style="height: 52px">
-            <template #prefix>
-              <Lock class="input-icon" />
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="code" v-if="captchaEnabled" label="验证码">
-          <el-input v-model.trim="loginForm.code" maxlength="5"  auto-complete="off" placeholder="请输入验证码" style="width: 63%; height: 52px" @keyup.enter="handleLogin" >
-            <template #prefix>
-              <svg-icon icon-class="validCode" class="input-icon" />
-            </template>
-          </el-input>
-          <div class="login-code">
-            <img :src="codeUrl" @click="getCode" class="login-code-img" style="height: 52px" />
+        <el-form v-if="!isRegisterMode" key="login-form" ref="loginRef" :model="loginForm" :rules="rules" class="login-form" label-position="top">
+          <el-form-item prop="userName" label="账号">
+            <el-input v-model.trim="loginForm.userName" maxlength="20" type="text" auto-complete="off" placeholder="请输入账号" style="height: 52px">
+              <template #prefix>
+                <User class="input-icon" />
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="password" label="密码">
+            <el-input v-model="loginForm.password" maxlength="20" type="password" auto-complete="off" placeholder="请输入密码" @keyup.enter="handleLogin" style="height: 52px">
+              <template #prefix>
+                <Lock class="input-icon" />
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="code" v-if="captchaEnabled" label="验证码">
+            <el-input v-model.trim="loginForm.code" maxlength="5" auto-complete="off" placeholder="请输入验证码" style="width: 63%; height: 52px" @keyup.enter="handleLogin">
+              <template #prefix>
+                <svg-icon icon-class="validCode" class="input-icon" />
+              </template>
+            </el-input>
+            <div class="login-code">
+              <img :src="codeUrl" @click="getCode" class="login-code-img" style="height: 52px" />
+            </div>
+          </el-form-item>
+
+          <div class="login-tips">
+            <el-checkbox v-model="loginForm.rememberMe">记住密码</el-checkbox>
+            <el-link v-if="register" class="login-tips-link" type="primary" @click="isRegisterMode = true">立即注册</el-link>
           </div>
-        </el-form-item>
 
-        <div class="login-tips">
-          <el-checkbox v-model="loginForm.rememberMe">记住密码</el-checkbox>
-          <el-link v-if="register" class="login-tips-link" type="primary" @click="isRegisterMode = true">立即注册</el-link>
-        </div>
-
-        <el-form-item style="width: 100%">
-          <el-button :loading="loading" type="primary" style="width: 100%; height: 52px" @click.prevent="handleLogin">
-            <span v-if="!loading">登 录</span>
-            <span v-else>登 录 中...</span>
-          </el-button>
-        </el-form-item>
-      </el-form>
+          <el-form-item style="width: 100%">
+            <el-button :loading="loading" type="primary" style="width: 100%; height: 52px" @click.prevent="handleLogin">
+              <span v-if="!loading">登 录</span>
+              <span v-else>登 录 中...</span>
+            </el-button>
+          </el-form-item>
+        </el-form>
 
         <!-- 注册表单 -->
-        <el-form
-          v-else
-          key="register-form"
-          ref="registerRef"
-          :model="registerForm"
-          size="large"
-          :rules="registerRules"
-          class="login-form"
-          label-position="top">
-        <el-form-item prop="userName" label="账号">
-          <el-input v-model.trim="registerForm.userName" maxlength="20" type="text"  auto-complete="off" placeholder="请输入账号" style="height: 52px">
-            <template #prefix>
-              <User class="input-icon" />
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="password" label="密码">
-          <el-input v-model="registerForm.password" maxlength="20" type="password"  auto-complete="off" placeholder="请输入密码" @keyup.enter="handleRegister" style="height: 52px">
-            <template #prefix>
-              <Lock class="input-icon" />
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="confirmPassword" label="确认密码">
-          <el-input v-model="registerForm.confirmPassword" maxlength="20" type="password" auto-complete="off" placeholder="请再次输入密码" @keyup.enter="handleRegister" style="height: 52px">
-            <template #prefix>
-              <Lock class="input-icon" />
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="code" v-if="captchaEnabled" label="验证码">
-          <el-input v-model.trim="registerForm.code" maxlength="5"  auto-complete="off" placeholder="请输入验证码" style="width: 63%; height: 52px" @keyup.enter="handleRegister">
-            <template #prefix>
-              <svg-icon icon-class="validCode" class="input-icon" />
-            </template>
-          </el-input>
-          <div class="login-code">
-            <img :src="codeUrl" @click="getCode" class="login-code-img" />
-          </div>
-           <div style="text-align: right; margin-top: 10px">
-            <el-link class="link-type" type="primary" @click="isRegisterMode = false">使用已有账户登录</el-link>
-          </div>
-        </el-form-item>
+        <el-form v-else key="register-form" ref="registerRef" :model="registerForm" size="large" :rules="registerRules" class="login-form" label-position="top">
+          <el-form-item prop="userName" label="账号">
+            <el-input v-model.trim="registerForm.userName" maxlength="20" type="text" auto-complete="off" placeholder="请输入账号" style="height: 52px">
+              <template #prefix>
+                <User class="input-icon" />
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="password" label="密码">
+            <el-input v-model="registerForm.password" maxlength="20" type="password" auto-complete="off" placeholder="请输入密码" @keyup.enter="handleRegister" style="height: 52px">
+              <template #prefix>
+                <Lock class="input-icon" />
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="confirmPassword" label="确认密码">
+            <el-input v-model="registerForm.confirmPassword" maxlength="20" type="password" auto-complete="off" placeholder="请再次输入密码" @keyup.enter="handleRegister" style="height: 52px">
+              <template #prefix>
+                <Lock class="input-icon" />
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="code" v-if="captchaEnabled" label="验证码">
+            <el-input v-model.trim="registerForm.code" maxlength="5" auto-complete="off" placeholder="请输入验证码" style="width: 63%; height: 52px" @keyup.enter="handleRegister">
+              <template #prefix>
+                <svg-icon icon-class="validCode" class="input-icon" />
+              </template>
+            </el-input>
+            <div class="login-code">
+              <img :src="codeUrl" @click="getCode" class="login-code-img" />
+            </div>
+            <div style="text-align: right; margin-top: 10px">
+              <el-link class="link-type" type="primary" @click="isRegisterMode = false">使用已有账户登录</el-link>
+            </div>
+          </el-form-item>
 
-        <el-form-item style="width: 100%">
-          <el-button :loading="loading"  type="primary" style="width: 100%; height: 52px" @click.prevent="handleRegister">
-            <span v-if="!loading">注 册</span>
-            <span v-else>注 册 中...</span>
-          </el-button>
-        </el-form-item>
-      </el-form>
+          <el-form-item style="width: 100%">
+            <el-button :loading="loading" type="primary" style="width: 100%; height: 52px" @click.prevent="handleRegister">
+              <span v-if="!loading">注 册</span>
+              <span v-else>注 册 中...</span>
+            </el-button>
+          </el-form-item>
+        </el-form>
       </transition>
     </div>
   </div>
@@ -134,6 +119,7 @@ const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 // 切换登录/注册模式
 const isRegisterMode = ref(false)
@@ -310,7 +296,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   height: 100vh;
-  background: #FFFFFF;
+  background: #ffffff;
   overflow: hidden;
 }
 

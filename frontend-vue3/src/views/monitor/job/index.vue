@@ -3,15 +3,15 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
         <el-form-item label="任务名称" prop="jobName">
-          <el-input  v-model="queryParams.jobName" placeholder="请输入任务名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.jobName" placeholder="请输入任务名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="任务组名" prop="jobGroup">
-          <el-select  v-model="queryParams.jobGroup" placeholder="请选择任务组名" clearable style="width: 200px">
+          <el-select v-model="queryParams.jobGroup" placeholder="请选择任务组名" clearable style="width: 200px">
             <el-option v-for="dict in sys_job_group" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="任务状态" prop="status">
-          <el-select  v-model="queryParams.status" placeholder="请选择任务状态" clearable style="width: 200px">
+          <el-select v-model="queryParams.status" placeholder="请选择任务状态" clearable style="width: 200px">
             <el-option v-for="dict in sys_job_status" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
@@ -83,17 +83,18 @@
     </div>
 
     <!-- 添加或修改定时任务对话框 -->
-    <el-dialog :title="title" v-model="open" width="820px" append-to-body>
+    <el-dialog v-model="open" width="820px" append-to-body>
+      <Title :title="title" />
       <el-form ref="jobRef" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="12">
             <el-form-item label="任务名称" prop="jobName">
-              <el-input  v-model="form.jobName" placeholder="请输入任务名称" />
+              <el-input v-model="form.jobName" placeholder="请输入任务名称" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="任务分组" prop="jobGroup">
-              <el-select  v-model="form.jobGroup" placeholder="请选择">
+              <el-select v-model="form.jobGroup" placeholder="请选择">
                 <el-option v-for="dict in sys_job_group" :key="dict.value" :label="dict.label" :value="dict.value"></el-option>
               </el-select>
             </el-form-item>
@@ -117,12 +118,12 @@
                   </el-tooltip>
                 </span>
               </template>
-              <el-input  v-model="form.invokeTarget" placeholder="请输入调用目标字符串" />
+              <el-input v-model="form.invokeTarget" placeholder="请输入调用目标字符串" />
             </el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="cron表达式" prop="cronExpression">
-              <el-input  v-model="form.cronExpression" placeholder="请输入cron执行表达式">
+              <el-input v-model="form.cronExpression" placeholder="请输入cron执行表达式">
                 <template #append>
                   <el-button type="primary" @click="handleShowCron">
                     生成表达式
@@ -172,6 +173,7 @@
 
     <!-- 任务日志详细 -->
     <el-dialog title="任务详细" v-model="openView" width="700px" append-to-body>
+      <Title :title="title" />
       <el-form :model="form" label-width="120px">
         <el-row>
           <el-col :span="12">
@@ -227,6 +229,7 @@ import { listJob, getJob, delJob, addJob, updateJob, runJob, changeJobStatus } f
 import Crontab from '@/components/Crontab'
 const router = useRouter()
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_job_group, sys_job_status } = proxy.useDict('sys_job_group', 'sys_job_status')
 
 const jobList = ref([])

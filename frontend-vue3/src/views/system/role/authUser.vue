@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form class="search-container" :model="queryParams" ref="queryRef" v-show="showSearch" :inline="true">
       <el-form-item label="用户账号" prop="userName">
-        <el-input  v-model="queryParams.userName" placeholder="请输入用户账号" clearable style="width: 200px" @keyup.enter="handleQuery" />
+        <el-input v-model="queryParams.userName" placeholder="请输入用户账号" clearable style="width: 200px" @keyup.enter="handleQuery" />
       </el-form-item>
       <el-form-item label="手机号码" prop="phonenumber">
-        <el-input  v-model="queryParams.phonenumber" placeholder="请输入手机号码" clearable style="width: 200px" @keyup.enter="handleQuery" />
+        <el-input v-model="queryParams.phonenumber" placeholder="请输入手机号码" clearable style="width: 200px" @keyup.enter="handleQuery" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -15,7 +15,7 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" @click="openSelectUser" v-hasPermi="['system:role:add']">添加用户</el-button>
+        <el-button type="primary" plain icon="Plus" @click="openSelectUser" v-hasPermi="['system:role:add']"> 添加用户</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button type="danger" plain icon="CircleClose" :disabled="multiple" @click="cancelAuthUserAll" v-hasPermi="['system:role:remove']">批量取消授权</el-button>
@@ -60,6 +60,7 @@ import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/syst
 
 const route = useRoute()
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
 
 const userList = ref([])

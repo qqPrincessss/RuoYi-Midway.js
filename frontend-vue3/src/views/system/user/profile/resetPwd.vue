@@ -20,6 +20,7 @@
 import { updateUserPwd } from '@/api/system/user'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 const user = reactive({
   oldPassword: undefined,

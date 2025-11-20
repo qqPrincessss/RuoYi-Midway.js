@@ -3,10 +3,10 @@
     <div class="table">
       <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
         <el-form-item label="菜单名称" prop="menuName">
-          <el-input  v-model="queryParams.menuName" placeholder="请输入菜单名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
+          <el-input v-model="queryParams.menuName" placeholder="请输入菜单名称" clearable style="width: 200px" @keyup.enter="handleQuery" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-select  v-model="queryParams.status" placeholder="菜单状态" clearable style="width: 200px">
+          <el-select v-model="queryParams.status" placeholder="菜单状态" clearable style="width: 200px">
             <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
           </el-select>
         </el-form-item>
@@ -62,7 +62,8 @@
     </div>
 
     <!-- 添加或修改菜单对话框 -->
-    <el-dialog :title="title" v-model="open" width="680px" append-to-body>
+    <el-dialog v-model="open" width="680px" append-to-body>
+      <Title :title="title" />
       <el-form ref="menuRef" :model="form" :rules="rules" label-width="100px">
         <el-row>
           <el-col :span="24">
@@ -90,7 +91,7 @@
             <el-form-item label="菜单图标" prop="icon">
               <el-popover placement="bottom-start" :width="540" v-model:visible="showChooseIcon" trigger="click" @show="showSelectIcon">
                 <template #reference>
-                  <el-input  v-model="form.icon" placeholder="点击选择图标" @blur="showSelectIcon" v-click-outside="hideSelectIcon" readonly>
+                  <el-input v-model="form.icon" placeholder="点击选择图标" @blur="showSelectIcon" v-click-outside="hideSelectIcon" readonly>
                     <template #prefix>
                       <svg-icon v-if="form.icon" :icon-class="form.icon" class="el-input__icon" style="height: 32px; width: 16px" />
                       <el-icon v-else style="height: 32px; width: 16px">
@@ -105,7 +106,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="菜单名称" prop="menuName">
-              <el-input  v-model="form.menuName" placeholder="请输入菜单名称" />
+              <el-input v-model="form.menuName" placeholder="请输入菜单名称" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -139,7 +140,7 @@
                   路由地址
                 </span>
               </template>
-              <el-input  v-model="form.path" placeholder="请输入路由地址" />
+              <el-input v-model="form.path" placeholder="请输入路由地址" />
             </el-form-item>
           </el-col>
           <el-col :span="12" v-if="form.menuType == 'C'">
@@ -152,12 +153,12 @@
                   组件路径
                 </span>
               </template>
-              <el-input  v-model="form.component" placeholder="请输入组件路径" />
+              <el-input v-model="form.component" placeholder="请输入组件路径" />
             </el-form-item>
           </el-col>
           <el-col :span="12" v-if="form.menuType != 'M'">
             <el-form-item>
-              <el-input  v-model="form.perms" placeholder="请输入权限标识" maxlength="100" />
+              <el-input v-model="form.perms" placeholder="请输入权限标识" maxlength="100" />
               <template #label>
                 <span>
                   <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasPermi('system:user:list')`)" placement="top">
@@ -170,7 +171,7 @@
           </el-col>
           <el-col :span="12" v-if="form.menuType == 'C'">
             <el-form-item>
-              <el-input  v-model="form.query" placeholder="请输入路由参数" maxlength="255" />
+              <el-input v-model="form.query" placeholder="请输入路由参数" maxlength="255" />
               <template #label>
                 <span>
                   <el-tooltip content='访问路由的默认传递参数，如：`{"id": 1, "name": "ry"}`' placement="top">
@@ -246,6 +247,7 @@ import IconSelect from '@/components/IconSelect'
 import { ClickOutside as vClickOutside } from 'element-plus'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_show_hide, sys_normal_disable } = proxy.useDict('sys_show_hide', 'sys_normal_disable')
 
 const menuList = ref([])
