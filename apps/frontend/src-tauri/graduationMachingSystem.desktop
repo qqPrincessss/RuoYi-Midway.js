@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=RuoYi-Midwayjs管理系统
+Comment=毕业设计师生双选管理系统
+Exec=ruoyi %U
+Icon=ruoyi
+Terminal=false
+Categories=Education;Office;
+MimeType=x-scheme-handler/ruoyi;
+StartupNotify=true
+StartupWMClass=ruoyi
+Keywords=graduation;education;management;

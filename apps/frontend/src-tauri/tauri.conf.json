@@ -1,0 +1,103 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "RuoYi-Midwayjs管理系统",
+  "version": "3.8.6",
+  "identifier": "com.ruoyi.admin",
+  "build": {
+    "beforeDevCommand": "pnpm dev:tauri",
+    "devUrl": "http://localhost:8888",
+    "beforeBuildCommand": "pnpm build:tauri",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "RuoYi-Midwayjs管理系统",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "closable": true,
+        "decorations": true,
+        "alwaysOnTop": false,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["**"]
+      },
+      "capabilities": [
+        {
+          "identifier": "main-capability",
+          "windows": ["main"],
+          "permissions": [
+            "http:default",
+            {
+              "identifier": "http:allow-fetch",
+              "allow": [
+                {
+                  "url": "https://sxxt.gdmu-stuorg.com/prod-api/*"
+                },
+                {
+                  "url": "http://localhost:8888/*"
+                },
+                {
+                  "url": "http://localhost:7725/*"
+                }
+              ]
+            },
+            "dialog:default",
+            "dialog:allow-save",
+            "fs:default",
+            "fs:allow-write-file",
+            "fs:allow-read-file"
+          ]
+        }
+      ]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
+    "publisher": "ruoyi Team",
+    "homepage": "https://github.com/ruoyi",
+    "shortDescription": "RuoYi-Midwayjs管理系统",
+    "longDescription": "一个用于毕业设计师生双向选择的管理系统，支持学生选题、教师审核、进度跟踪等功能。",
+    "category": "Education",
+    "copyright": "Copyright © 2024-2025 ruoyi Team",
+    "createUpdaterArtifacts": false,
+    "linux": {
+      "deb": {
+        "depends": []
+      },
+      "appimage": {
+        "bundleMediaFramework": false
+      }
+    },
+    "macOS": {
+      "frameworks": [],
+      "minimumSystemVersion": "10.13"
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": "",
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "nsis": {
+        "languages": ["SimpChinese"],
+        "displayLanguageSelector": false
+      }
+    }
+  }
+}

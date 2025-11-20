@@ -1,0 +1,22 @@
+[package]
+name = "ruoyi"
+version = "3.8.6"
+description = "RuoYi-Midwayjs管理系统"
+authors = ["青青"]
+edition = "2021"
+
+[lib]
+name = "graduation_maching_system_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-opener = "2"
+tauri-plugin-http = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
