@@ -163,11 +163,10 @@ const frontendTech = [
 const backendTech = [
   { name: 'Midway.js', type: 'primary' },
   { name: 'TypeORM', type: 'success' },
-  { name: 'MySQL', type: 'info' },
+  { name: 'PostgreSQL', type: 'info' },
   { name: 'Redis', type: 'danger' },
   { name: 'JWT', type: 'warning' },
   { name: 'Swagger', type: 'success' },
-  { name: 'MinIO', type: 'info' },
   { name: 'TypeScript', type: 'primary' }
 ]
 
@@ -208,12 +207,12 @@ const authorInfo = {
 // 其他版本
 const otherVersions = [
   {
-    icon: Coin,
-    title: '页面优化 + PostgreSQL 版本',
-    desc: '基于 PostgreSQL 数据库，页面体验优化，性能更强劲',
-    color: '#336791',
-    tags: ['PostgreSQL', '页面优化', '性能提升'],
-    link: 'https://github.com/qqPrincesss/RuoYi-Midway.js/tree/pg'
+    icon: Platform,
+    title: 'MySQL 原版',
+    desc: '基于 MySQL 数据库的原始版本，稳定可靠',
+    color: '#00758f',
+    tags: ['MySQL', '稳定版本'],
+    link: 'https://github.com/qqPrincesss/RuoYi-Midway.js/tree/main'
   },
   {
     icon: Platform,

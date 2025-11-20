@@ -4,11 +4,13 @@
   <img src="https://img.shields.io/badge/Vue-3.2.45-brightgreen.svg"/>
   <img src="https://img.shields.io/badge/Element%20Plus-2.2.27-blue.svg"/>
   <img src="https://img.shields.io/badge/Midway.js-3.20-orange.svg"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-13+-336791.svg"/>
   <img src="https://img.shields.io/badge/TypeORM-0.3.25-red.svg"/>
   <img src="https://img.shields.io/badge/License-MIT-green.svg"/>
 </p>
 
-<p align="center">基于 Midway.js + Vue3 + Element Plus 的现代化后台管理系统</p>
+<p align="center">基于 Midway.js + Vue3 + Element Plus + PostgreSQL 的现代化后台管理系统</p>
+<p align="center">🐘 <strong>PostgreSQL 版本</strong> - 页面体验优化，性能更强劲 🚀</p>
 
 <p align="center">
   中文 | <a href="./README.md">English</a>
@@ -17,6 +19,8 @@
 ## 项目介绍
 
 RuoYi-Midwayjs 是一个基于若依框架思想，使用 Node.js 全栈技术重构的后台管理系统。后端采用 Midway.js 框架，前端使用 Vue3 + Element Plus，提供了一套完整的企业级后台管理解决方案。
+
+**这是 PostgreSQL 版本**，页面体验优化，性能更强劲，扩展性更好。PostgreSQL 提供强大的 ACID 合规性、先进的特性和卓越的数据完整性，适用于企业级应用。
 
 ## 技术栈
 
@@ -39,7 +43,7 @@ RuoYi-Midwayjs 是一个基于若依框架思想，使用 Node.js 全栈技术�
 | --- | --- |
 | Midway.js | Node.js 企业级框架 |
 | TypeORM | TypeScript ORM 框架 |
-| MySQL | 关系型数据库 |
+| PostgreSQL | 先进的开源关系型数据库 |
 | Redis | 缓存数据库 |
 | JWT | 身份认证 |
 | Swagger | API 文档 |
@@ -94,7 +98,7 @@ RuoYi-Midwayjs
 ### 环境要求
 
 - Node.js >= 16
-- MySQL >= 5.7
+- PostgreSQL >= 13
 - Redis >= 5.0
 
 ### 后端启动
@@ -106,8 +110,18 @@ cd backend-midway
 # 安装依赖
 npm install
 
+# 导入数据库
+# 创建 PostgreSQL 数据库并导入 SQL 文件
+psql -U postgres -d your_database -f sql/ruoyi_pg.sql
+
 # 配置数据库连接
-# 修改 .env.development 文件中的数据库配置
+# 修改 .env.development 文件中的 PostgreSQL 配置
+# DB_TYPE=postgres
+# DB_HOST=localhost
+# DB_PORT=5432
+# DB_USERNAME=postgres
+# DB_PASSWORD=your_password
+# DB_DATABASE=your_database
 
 # 启动开发服务
 npm run dev
@@ -136,7 +150,7 @@ npm run dev
 
 | 版本 | 说明 | 链接 |
 | --- | --- | --- |
-| PostgreSQL 版本 | 基于 PostgreSQL 数据库，页面体验优化 | [查看](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/pg) |
+| MySQL 原版 | 基于 MySQL 数据库的原始版本 | [查看](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/main) |
 | Tauri 跨平台版本 | 基于 Tauri 构建跨平台桌面应用，Monorepo 统一管理 | [查看](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/Tauri) |
 
 ## 关于作者

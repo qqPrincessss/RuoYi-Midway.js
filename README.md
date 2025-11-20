@@ -4,11 +4,13 @@
   <img src="https://img.shields.io/badge/Vue-3.2.45-brightgreen.svg"/>
   <img src="https://img.shields.io/badge/Element%20Plus-2.2.27-blue.svg"/>
   <img src="https://img.shields.io/badge/Midway.js-3.20-orange.svg"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-13+-336791.svg"/>
   <img src="https://img.shields.io/badge/TypeORM-0.3.25-red.svg"/>
   <img src="https://img.shields.io/badge/License-MIT-green.svg"/>
 </p>
 
-<p align="center">A modern admin management system based on Midway.js + Vue3 + Element Plus</p>
+<p align="center">A modern admin management system based on Midway.js + Vue3 + Element Plus + PostgreSQL</p>
+<p align="center">🐘 <strong>PostgreSQL Version</strong> - Enhanced page experience & robust performance 🚀</p>
 
 <p align="center">
   <a href="./README.zh-CN.md">中文</a> | English
@@ -17,6 +19,8 @@
 ## Introduction
 
 RuoYi-Midwayjs is a modern admin management system rebuilt with Node.js full-stack technology based on the RuoYi framework concept. The backend uses Midway.js framework, and the frontend uses Vue3 + Element Plus, providing a complete enterprise-level admin management solution.
+
+**This is the PostgreSQL version** with optimized page experience, enhanced performance, and better scalability. PostgreSQL provides robust ACID compliance, advanced features, and excellent data integrity for enterprise applications.
 
 ## Tech Stack
 
@@ -39,7 +43,7 @@ RuoYi-Midwayjs is a modern admin management system rebuilt with Node.js full-sta
 | --- | --- |
 | Midway.js | Node.js Enterprise Framework |
 | TypeORM | TypeScript ORM Framework |
-| MySQL | Relational Database |
+| PostgreSQL | Advanced Open Source Relational Database |
 | Redis | Cache Database |
 | JWT | Authentication |
 | Swagger | API Documentation |
@@ -94,7 +98,7 @@ RuoYi-Midwayjs
 ### Requirements
 
 - Node.js >= 16
-- MySQL >= 5.7
+- PostgreSQL >= 13
 - Redis >= 5.0
 
 ### Backend Setup
@@ -106,8 +110,18 @@ cd backend-midway
 # Install dependencies
 npm install
 
+# Import database
+# Create PostgreSQL database and import SQL file
+psql -U postgres -d your_database -f sql/ruoyi_pg.sql
+
 # Configure database connection
-# Modify database configuration in .env.development file
+# Modify PostgreSQL configuration in .env.development file
+# DB_TYPE=postgres
+# DB_HOST=localhost
+# DB_PORT=5432
+# DB_USERNAME=postgres
+# DB_PASSWORD=your_password
+# DB_DATABASE=your_database
 
 # Start development server
 npm run dev
@@ -136,7 +150,7 @@ npm run dev
 
 | Version | Description | Link |
 | --- | --- | --- |
-| PostgreSQL Version | Based on PostgreSQL database, optimized page experience | [View](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/pg) |
+| MySQL Version | Original version based on MySQL database | [View](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/main) |
 | Tauri Cross-platform Version | Cross-platform desktop app built with Tauri, Monorepo management | [View](https://github.com/qqPrincesss/RuoYi-Midway.js/tree/Tauri) |
 
 ## About Author
