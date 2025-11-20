@@ -7,7 +7,10 @@
           <div class="welcome-content">
             <h1 class="welcome-title">RuoYi-Midwayjs 管理系统</h1>
             <p class="welcome-desc">
-              基于 Midway.js + Vue3 + Element Plus 的现代化后台管理系统
+              基于 Midway.js + Vue3 + Element Plus + Tauri 的跨平台桌面应用
+            </p>
+            <p class="welcome-subdesc">
+              🖥️ Tauri + Monorepo 跨平台版本 - 支持 Windows、macOS、Linux
             </p>
           </div>
         </el-card>
@@ -151,6 +154,7 @@ import { Monitor, Cpu, Star, User, Link, ChatDotRound, Lightning, Lock, Setting,
 const frontendTech = [
   { name: 'Vue 3', type: 'success' },
   { name: 'Vite', type: 'warning' },
+  { name: 'Tauri 2.x', type: 'danger' },
   { name: 'Element Plus', type: 'primary' },
   { name: 'Pinia', type: 'success' },
   { name: 'Vue Router', type: 'success' },
@@ -211,16 +215,16 @@ const otherVersions = [
     title: 'MySQL 原版',
     desc: '基于 MySQL 数据库的原始版本，稳定可靠',
     color: '#00758f',
-    tags: ['MySQL', '稳定版本'],
+    tags: ['MySQL', 'Web应用', '稳定版本'],
     link: 'https://github.com/qqPrincesss/RuoYi-Midway.js/tree/main'
   },
   {
-    icon: Platform,
-    title: 'Tauri + Monorepo 跨平台版本',
-    desc: '基于 Tauri 构建跨平台桌面应用，Monorepo 统一管理',
-    color: '#ffc131',
-    tags: ['Tauri', 'Monorepo', '跨平台', '桌面应用'],
-    link: 'https://github.com/qqPrincesss/RuoYi-Midway.js/tree/Tauri'
+    icon: Coin,
+    title: 'PostgreSQL 版本',
+    desc: 'PostgreSQL 数据库版本，页面体验优化，性能更强劲',
+    color: '#336791',
+    tags: ['PostgreSQL', 'Web应用', '性能优化'],
+    link: 'https://github.com/qqPrincesss/RuoYi-Midway.js/tree/pg'
   }
 ]
 </script>
@@ -253,7 +257,14 @@ const otherVersions = [
     .welcome-desc {
       color: rgba(255, 255, 255, 0.9);
       font-size: 16px;
+      margin: 0 0 8px;
+    }
+
+    .welcome-subdesc {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
       margin: 0;
+      font-weight: 500;
     }
   }
 }
