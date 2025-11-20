@@ -8,7 +8,7 @@ export const indexVue = (options) => {
   `;
 };
 const htmlTemplate = (options) => {
-  const { columns, moduleName, businessName } = options;
+  const { columns, moduleName, businessName, functionName } = options;
   const queryTem = indexQueryTemplate(columns);
   const buttonTem = indexButtomTemplate(moduleName, businessName);
   const tableTem = indexTableTemplate(columns, businessName, moduleName);
@@ -16,22 +16,34 @@ const htmlTemplate = (options) => {
   let html = '';
 
   html += `
-   <template>
-        <div class="app-container">
-            <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
+    <template>
+      <div class="app-container">
+        <div class="table">
+            <el-form class="search-container" :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
             ${queryTem}
             </el-form>
-            ${buttonTem}
-            <el-table v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange">
+          <div class="table-container">
+            <el-row :gutter="10" class="mb8">
+              <span>${functionName}列表</span>
+              <right-toolbar
+              v-model:showSearch="showSearch"
+              @queryTable="getList"
+              ${buttonTem}
+              ></right-toolbar>
+            </el-row>
+            <el-table v-loading="loading" class="table-content" border :data="${businessName}List" @selection-change="handleSelectionChange">
              ${tableTem}
             </el-table>
             <pagination
+                class="pagination-container"
                 v-show="total>0"
                 :total="total"
                 v-model:page="queryParams.pageNum"
                 v-model:limit="queryParams.pageSize"
                 @pagination="getList"
             />
+            </div>
+         </div>
         </div>
         <index-dialog ref="dialogRef" @update="updateHandler"></index-dialog>
     </template>
@@ -130,7 +142,7 @@ const indexScript = (options) => {
 };
 const indexQueryTemplate = (columns) => {
   let html = ``;
-  let dictType, parentheseIndex, comment;
+  let dictType,  parentheseIndex, comment;
   columns.forEach((item) => {
     if (item.isQuery === '1') {
       dictType = item.dictType;
@@ -274,7 +286,7 @@ const indexTableTemplate = (columns, businessName, moduleName) => {
   html += `<el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template v-slot="{row}">
             <el-button link type="primary" icon="Edit" @click="handleUpdate(row)" v-hasPermi="['${moduleName}:${businessName}:edit']">修改</el-button>
-            <el-button link type="danger" icon="Delete" @click="handleDelete(row)" v-hasPermi="['${moduleName}:${businessName}:remove']">删除</el-button>
+            <el-button link type="primary" icon="Delete" @click="handleDelete(row)" v-hasPermi="['${moduleName}:${businessName}:remove']">删除</el-button>
             </template>
         </el-table-column>
         `;

@@ -1,9 +1,9 @@
-import { Column, CreateDateColumn, Entity,  PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 // 登录日志表 -  实体类
 @Entity('monitor_login_infor', { comment: '登录日志记录' })
 export class MonitorLogininfor {
-@PrimaryGeneratedColumn({ type: 'int', name: 'info_id', comment: '访问ID' })
+  @PrimaryGeneratedColumn({ type: 'int', name: 'info_id', comment: '访问ID' })
   infoId: number;
 
   @Column({ type: 'varchar', name: 'user_name', default: '', comment: '用户账号' })
@@ -27,6 +27,6 @@ export class MonitorLogininfor {
   @Column({ type: 'varchar', name: 'msg', default: '', comment: '提示消息' })
   msg: string;
 
-  @CreateDateColumn({ type: 'datetime', name: 'login_time', comment: '访问时间' })
+  @CreateDateColumn({ type: "timestamp without time zone", name: 'login_time', comment: '访问时间' })
   loginTime: Date;
 }
