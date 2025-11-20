@@ -3,16 +3,16 @@
   <el-dialog :title="form.title" v-model="dialogTableVisible" width="600px" append-to-body>
     <el-form ref="formRef" :model="form.model" :rules="form.rules" label-width="100px">
       <el-form-item label="字典类型">
-        <el-input v-model="form.model.dictType" :disabled="true" />
+        <el-input  v-model="form.model.dictType" :disabled="true" />
       </el-form-item>
       <el-form-item label="数据标签" prop="dictLabel">
-        <el-input v-model="form.model.dictLabel" placeholder="请输入数据标签" />
+        <el-input  v-model="form.model.dictLabel" placeholder="请输入数据标签" />
       </el-form-item>
       <el-form-item label="数据键值" prop="dictValue">
-        <el-input v-model="form.model.dictValue" placeholder="请输入数据键值" />
+        <el-input  v-model="form.model.dictValue" placeholder="请输入数据键值" />
       </el-form-item>
       <el-form-item label="回显样式" prop="listClass">
-        <el-select v-model="form.model.listClass">
+        <el-select  v-model="form.model.listClass">
           <el-option v-for="item in listClassOptions" :key="item.value" :label="`${item.label}(${item.value})`" :value="item.value" />
         </el-select>
       </el-form-item>
@@ -23,13 +23,13 @@
         <template #label>
           <el-tooltip effect="dark" :content="tips" placement="top-start">
             <div class="tips">
-              <QuestionFilled class="tips-icon" :size="'14px'"/>
+              <QuestionFilled class="tips-icon" :size="'14px'" />
             </div>
           </el-tooltip>
           <span style="width: 80px">样式属性</span>
         </template>
 
-        <el-input v-model="form.model.cssClass" placeholder="请输入样式属性" />
+        <el-input  v-model="form.model.cssClass" placeholder="请输入样式属性" />
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="form.model.status">
@@ -37,7 +37,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="form.model.remark" type="textarea" placeholder="请输入内容"></el-input>
+        <el-input  v-model="form.model.remark" type="textarea" placeholder="请输入内容"></el-input>
       </el-form-item>
     </el-form>
     <template #footer>

@@ -3,10 +3,10 @@
   <el-dialog :title="form.title" v-model="dialogTableVisible" width="600px" append-to-body>
     <el-form ref="formRef" :model="form.model" :rules="form.rules" label-width="100px">
       <el-form-item label="字典名称" prop="dictName">
-        <el-input v-model="form.model.dictName" placeholder="请输入字典名称" />
+        <el-input  v-model="form.model.dictName" placeholder="请输入字典名称" />
       </el-form-item>
       <el-form-item label="字典类型" prop="dictType">
-        <el-input v-model="form.model.dictType" placeholder="请输入字典类型" />
+        <el-input  v-model="form.model.dictType" placeholder="请输入字典类型" />
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="form.model.status">
@@ -14,7 +14,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="form.model.remark" type="textarea" placeholder="请输入内容"></el-input>
+        <el-input  v-model="form.model.remark" type="textarea" placeholder="请输入内容"></el-input>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -60,7 +60,7 @@ const form = reactive({
     formRef.value.validate((valid) => {
       if (valid) {
         form.loading = true
-        if (form.model.dictId != undefined) {
+        if (form.model.dictCode != undefined) {
           updateType(form.model).then(() => {
             proxy.$modal.msgSuccess('修改成功')
             form.reset()
