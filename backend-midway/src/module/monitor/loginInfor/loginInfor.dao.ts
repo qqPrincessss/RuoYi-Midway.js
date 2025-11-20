@@ -20,7 +20,6 @@ export class LoginInforDao {
 
   // 列表
   async list(queryParams: ListLoginInforDTO) {
-    console.log('queryParams', queryParams);
     const queryBuilder = this.loginInforRepo.createQueryBuilder('entity');
     if (queryParams.ipaddr) {
       queryBuilder.andWhere('entity.ipaddr LIKE :ipaddr', { ipaddr: `%${queryParams.ipaddr}%` });

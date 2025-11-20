@@ -42,8 +42,6 @@ export class EncryptMiddleware implements IMiddleware<Context, NextFunction> {
           } else if(['POST', 'PUT'].includes(requestMethod)) {
             const body: any = ctx.request.body
             // post、put等，先对参数解密
-            console.log('body', ctx.request)
-             console.log(body)
             ctx.request.body = JSON.parse((Decrypt(body?.param)));
             await next();
             // 然后对接口返回的数据进行加密

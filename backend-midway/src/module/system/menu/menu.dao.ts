@@ -22,7 +22,6 @@ export class MenuDao {
 
   //获取菜单列表
   async getMenuList(queryParams: ListMenuDTO) {
-    console.log(queryParams);
     const queryBuilder = this.menuModel.createQueryBuilder('entity');
     if (queryParams.menuName) {
       queryBuilder.andWhere('entity.menuName LIKE :menuName', { menuName: `%${queryParams.menuName}%` });
@@ -42,7 +41,6 @@ export class MenuDao {
     await checkIfExsit(this.menuModel, "menuName", addMenu.menuName)
     const myEntity = this.menuModel.create(addMenu);
     myEntity.setCreateBy(getOperator(this.ctx))
-    console.log(myEntity);
     await this.menuModel.save(myEntity);
     if (myEntity.menuType === 'C') {
       const parent = await this.menuModel.findOne({ where: { menuName: addMenu.menuName } });
@@ -69,7 +67,6 @@ export class MenuDao {
   async update(menu: UpdateMenuDTO) {
     const entity = this.menuModel.create(menu);
     entity.setUpdateBy(getOperator(this.ctx))
-    console.log(entity);
     await this.menuModel.update(entity.menuId, entity);
     return resBuild.success();
   }

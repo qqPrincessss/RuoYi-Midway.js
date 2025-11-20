@@ -229,7 +229,6 @@ export class GenTableDao {
     const data = await this.genTableRepo.findOne({ where: { tableId: id } });
     const columns = await this.genTableColumnRepo.find({ where: { tableId: id } });
     const primaryKey = await this.getPrimaryKey(columns);
-    console.log(primaryKey, data.businessName, capitalize(data.businessName));
     const info = { primaryKey, BusinessName: capitalize(data.businessName), ...data, columns };
     return resBuild.data(templateIndex(info));
   }
@@ -277,7 +276,6 @@ export class GenTableDao {
         const data = await this.genTableRepo.findOne({ where: { tableName: item } });
         const columns = await this.genTableColumnRepo.find({ where: { tableId: data.tableId } });
         const primaryKey = await this.getPrimaryKey(columns);
-        console.log(primaryKey, data.businessName, capitalize(data.businessName), columns);
         return { primaryKey, BusinessName: capitalize(data.businessName), ...data, columns };
       }),
     );
