@@ -6,7 +6,7 @@ import { tansParams, blobValidate } from '@/utils/ruoyi'
 import cache from '@/plugins/cache'
 import { saveAs } from 'file-saver'
 import useUserStore from '@/store/modules/user'
-
+import { Decrypt, Encrypt, isOpenCrypt } from '@/utils/aes'
 let downloadLoadingInstance
 // 是否显示重新登录
 export let isRelogin = { show: false }
@@ -23,7 +23,7 @@ const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   baseURL: getBaseURL(),
   // 超时
-  timeout: 10000,
+  timeout: 60 * 1000,
   // 跨域请求时发送Cookie
   withCredentials: true
 })
@@ -45,11 +45,30 @@ service.interceptors.request.use(
       config.params = {}
       config.url = url
     }
+    // post/put 请求加密
+    if (['post', 'put'].includes(config.method)) {
+      let params = {}
+      const contentType = config.headers['Content-Type'] || ''
+      if (contentType.indexOf('application/json') !== -1) {
+        if (isOpenCrypt) {
+          if (config.data) {
+            params.param = Encrypt(JSON.stringify(config.data))
+            config.data = params
+          }
+        }
+      }
+    }
     if (!isRepeatSubmit && (config.method === 'post' || config.method === 'put')) {
       const requestObj = {
         url: config.url,
         data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
         time: new Date().getTime()
+      }
+      const requestSize = Object.keys(JSON.stringify(requestObj)).length // 请求数据大小
+      const limitSize = 5 * 1024 * 1024 // 限制存放数据5M
+      if (requestSize >= limitSize) {
+        console.warn(`[${config.url}]: ` + '请求数据大小超出允许的5M限制，无法进行防重复提交验证。')
+        return config
       }
       const sessionObj = cache.session.getJSON('sessionObj')
       if (sessionObj === undefined || sessionObj === null || sessionObj === '') {
@@ -78,6 +97,14 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (res) => {
+    // 响应解密
+    if (isOpenCrypt) {
+      // 注意，这里有个空格，以后优化后端
+      if (res.headers['content-type'] === 'application/json; charset=utf-8' && typeof res.data === 'string') {
+        res.data = JSON.parse(Decrypt(res.data))
+      }
+    }
+
     // 未设置状态码则默认成功状态
     const code = res.data.code || 200
     // 获取错误信息

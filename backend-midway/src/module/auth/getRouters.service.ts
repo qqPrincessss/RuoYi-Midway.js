@@ -6,6 +6,10 @@ import { SysMenu } from "../system/menu/entites/SysMenu";
 import { SysUser } from "../system/user/entites/SysUser";
 import { handleMenuTree } from '@utils/tree';
 import { resBuild } from "@utils/resBuild";
+import { RedisService } from '@midwayjs/redis';
+import { RedisEnum } from "@utils/enum";
+
+
 
 /**
  * getRouters()：获取基本的菜单路由表，按身份
@@ -17,6 +21,9 @@ export class GetRouterService {
   @Inject()
   ctx: Context;
 
+  @Inject()
+  redisService: RedisService;
+
   @InjectEntityModel(SysMenu)
   protected SysMenu: Repository<SysMenu>;
 
@@ -27,8 +34,10 @@ export class GetRouterService {
   async getRouters() {
     // 如果user_id为1，则为超管，获取所有菜单；否则根据user_id获取菜单
     const userId = this.ctx.session.userInfo.userId;
+    const temp = await this.redisService.get(`${RedisEnum.SYS_CONFIG_KEY}sys.permission.enable`)
+    const isUsePermission = temp === null ? true : JSON.parse(temp)
     // 如果是超级管理员，则获取所有菜单
-    if (userId === 1) {
+    if (userId === 1 || !isUsePermission) {
       // 所有菜单，取其中一部分字段
       const allMenus = await this.SysMenu.find({
         select: ['menuId', 'menuName', 'parentId', 'path', 'component', 'menuType', 'visible', 'status', 'icon', 'isCache', 'isFrame'],
