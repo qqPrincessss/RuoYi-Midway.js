@@ -11,7 +11,7 @@
  Target Server Version : 80407 (8.4.7)
  File Encoding         : 65001
 
- Date: 19/11/2025 16:57:26
+ Date: 20/11/2025 21:39:24
 */
 
 SET NAMES utf8mb4;
@@ -173,7 +173,7 @@ CREATE TABLE `monitor_login_infor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 116 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 144 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of monitor_login_infor
@@ -194,6 +194,34 @@ INSERT INTO `monitor_login_infor` VALUES (112, 'admin', '::1', 'Chrome 142.0.0',
 INSERT INTO `monitor_login_infor` VALUES (113, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-19 15:46:50');
 INSERT INTO `monitor_login_infor` VALUES (114, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-19 15:53:03');
 INSERT INTO `monitor_login_infor` VALUES (115, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-19 16:22:12');
+INSERT INTO `monitor_login_infor` VALUES (116, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-19 18:37:05');
+INSERT INTO `monitor_login_infor` VALUES (117, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 00:03:01');
+INSERT INTO `monitor_login_infor` VALUES (118, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 00:39:21');
+INSERT INTO `monitor_login_infor` VALUES (119, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 00:39:41');
+INSERT INTO `monitor_login_infor` VALUES (120, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 00:39:51');
+INSERT INTO `monitor_login_infor` VALUES (121, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 00:39:55');
+INSERT INTO `monitor_login_infor` VALUES (122, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 00:55:54');
+INSERT INTO `monitor_login_infor` VALUES (123, 'xier', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 01:22:17');
+INSERT INTO `monitor_login_infor` VALUES (124, 'xier', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 01:22:26');
+INSERT INTO `monitor_login_infor` VALUES (125, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 13:25:08');
+INSERT INTO `monitor_login_infor` VALUES (126, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 13:25:13');
+INSERT INTO `monitor_login_infor` VALUES (127, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 13:25:17');
+INSERT INTO `monitor_login_infor` VALUES (128, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 13:25:30');
+INSERT INTO `monitor_login_infor` VALUES (129, 'xier', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 13:47:21');
+INSERT INTO `monitor_login_infor` VALUES (130, 'xier', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 13:47:35');
+INSERT INTO `monitor_login_infor` VALUES (131, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 14:00:48');
+INSERT INTO `monitor_login_infor` VALUES (132, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 14:00:58');
+INSERT INTO `monitor_login_infor` VALUES (133, 'xier', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 14:04:16');
+INSERT INTO `monitor_login_infor` VALUES (134, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 14:05:36');
+INSERT INTO `monitor_login_infor` VALUES (135, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 14:05:44');
+INSERT INTO `monitor_login_infor` VALUES (136, 'xier', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 14:06:45');
+INSERT INTO `monitor_login_infor` VALUES (137, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 14:07:21');
+INSERT INTO `monitor_login_infor` VALUES (138, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 21:04:59');
+INSERT INTO `monitor_login_infor` VALUES (139, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 21:05:07');
+INSERT INTO `monitor_login_infor` VALUES (140, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '1', '', '2025-11-20 21:21:01');
+INSERT INTO `monitor_login_infor` VALUES (141, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 21:21:03');
+INSERT INTO `monitor_login_infor` VALUES (142, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 21:26:37');
+INSERT INTO `monitor_login_infor` VALUES (143, 'admin', '::1', 'Chrome 142.0.0', 'Windows', '', '0', '', '2025-11-20 21:32:56');
 
 -- ----------------------------
 -- Table structure for monitor_oper_log
@@ -221,7 +249,7 @@ CREATE TABLE `monitor_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 164 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 170 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of monitor_oper_log
@@ -290,6 +318,12 @@ INSERT INTO `monitor_oper_log` VALUES (160, '代码生成', 3, 'GenTableControll
 INSERT INTO `monitor_oper_log` VALUES (161, '代码生成', 3, 'GenTableController.delete', 'DELETE', 0, 'admin', '', '/tool/gen/4', '::1', '', '{\"tableId\":\"4\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-19 13:55:10', 18);
 INSERT INTO `monitor_oper_log` VALUES (162, '通知公告', 1, 'NoticeController.create', 'POST', 0, 'admin', '', '/system/notice', '::1', '', '{\"noticeTitle\":\"11\",\"noticeType\":\"1\",\"noticeContent\":\"<p>111</p>\",\"status\":\"0\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-19 16:00:00', 199);
 INSERT INTO `monitor_oper_log` VALUES (163, '通知公告', 3, 'NoticeController.delete', 'DELETE', 0, 'admin', '', '/system/notice/10', '::1', '', '{\"noticeId\":\"10\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-19 16:00:03', 43);
+INSERT INTO `monitor_oper_log` VALUES (164, '参数配置', 9, 'ConfigController.refreshCache', 'DELETE', 0, 'admin', '', '/system/config/refreshCache', '::1', '', '{}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-19 18:38:43', 42);
+INSERT INTO `monitor_oper_log` VALUES (165, '参数配置', 2, 'ConfigController.update', 'PUT', 0, 'admin', '', '/system/config', '::1', '', '{\"createBy\":\"admin\",\"createTime\":\"2024-09-15T17:02:26.000Z\",\"updateBy\":\"\",\"updateTime\":\"2024-09-15T17:02:26.000Z\",\"configId\":100,\"configName\":\"用户登录-是否开启验证码\",\"configKey\":\"sys.account.captchaEnabled\",\"configValue\":\"true\",\"configType\":\"N\",\"remark\":\"true开启 false关闭\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-20 00:12:43', 129);
+INSERT INTO `monitor_oper_log` VALUES (166, '参数配置', 2, 'ConfigController.update', 'PUT', 0, 'admin', '', '/system/config', '::1', '', '{\"createBy\":\"admin\",\"createTime\":\"2025-11-18T07:16:55.000Z\",\"updateBy\":\"\",\"updateTime\":null,\"configId\":4,\"configName\":\"账号自助-是否开启用户注册功能\",\"configKey\":\"sys.account.registerUser\",\"configValue\":\"true\",\"configType\":\"Y\",\"remark\":\"是否开启注册用户功能（true开启，false关闭）\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-20 00:44:16', 49);
+INSERT INTO `monitor_oper_log` VALUES (167, '参数配置', 2, 'ConfigController.update', 'PUT', 0, 'admin', '', '/system/config', '::1', '', '{\"createBy\":\"admin\",\"createTime\":\"2024-09-15T17:57:04.000Z\",\"updateBy\":\"\",\"updateTime\":\"2024-09-15T17:57:04.000Z\",\"configId\":101,\"configName\":\"是否开启操作日志\",\"configKey\":\"sys.operLog.enable\",\"configValue\":\"false\",\"configType\":\"N\",\"remark\":\"true开启 false关闭\\n关闭的话节约服务器流量等资源\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-20 13:45:25', 52);
+INSERT INTO `monitor_oper_log` VALUES (168, '参数配置', 2, 'ConfigController.update', 'PUT', 0, 'admin', '', '/system/config', '::1', '', '{\"createBy\":\"admin\",\"createTime\":\"2024-09-15T17:27:00.000Z\",\"updateBy\":\"\",\"updateTime\":null,\"configId\":103,\"configName\":\"是否开启权限校验\",\"configKey\":\"sys.permission.enable\",\"configValue\":\"false\",\"configType\":\"N\",\"remark\":\"true开启 false关闭（建议开启）\\n关闭的话：用于开发测试，最后统一添加，便于调试\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-20 13:47:11', 61);
+INSERT INTO `monitor_oper_log` VALUES (169, '参数配置', 2, 'ConfigController.update', 'PUT', 0, 'admin', '', '/system/config', '::1', '', '{\"createBy\":\"admin\",\"createTime\":\"2024-09-17T16:13:34.000Z\",\"updateBy\":\"\",\"updateTime\":\"2024-09-17T16:13:34.000Z\",\"configId\":104,\"configName\":\"是否开启接口数据加密\",\"configKey\":\"sys.interface.enable\",\"configValue\":\"true\",\"configType\":\"N\",\"remark\":\"true开启：接口数据显示密文，更安全\\nfalse关闭：接口数据返回明文\"}', '{\"code\":200,\"message\":\"操作成功\"}', 0, '', '2025-11-20 14:07:46', 56);
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -307,7 +341,7 @@ CREATE TABLE `sys_config`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 105 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -315,8 +349,13 @@ CREATE TABLE `sys_config`  (
 INSERT INTO `sys_config` VALUES (1, '主框架页-默认皮肤样式名称', 'sys.index.skinName', 'skin-blue', 'Y', 'admin', '2025-11-18 15:16:55', '', NULL, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
 INSERT INTO `sys_config` VALUES (2, '用户管理-账号初始密码', 'sys.user.initPassword', '123456', 'Y', 'admin', '2025-11-18 15:16:55', '', NULL, '初始化密码 123456');
 INSERT INTO `sys_config` VALUES (3, '主框架页-侧边栏主题', 'sys.index.sideTheme', 'theme-dark', 'Y', 'admin', '2025-11-18 15:16:55', '', NULL, '深色主题theme-dark，浅色主题theme-light');
-INSERT INTO `sys_config` VALUES (4, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'false', 'Y', 'admin', '2025-11-18 15:16:55', '', NULL, '是否开启注册用户功能（true开启，false关闭）');
+INSERT INTO `sys_config` VALUES (4, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'true', 'Y', 'admin', '2025-11-18 15:16:55', 'admin', '2025-11-20 00:44:16', '是否开启注册用户功能（true开启，false关闭）');
 INSERT INTO `sys_config` VALUES (5, '用户登录-黑名单列表', 'sys.login.blackIPList', '', 'Y', 'admin', '2025-11-18 15:16:55', '', NULL, '设置登录IP黑名单限制，多个匹配项以;分隔，支持匹配（*通配、网段）');
+INSERT INTO `sys_config` VALUES (100, '用户登录-是否开启验证码', 'sys.account.captchaEnabled', 'true', 'N', 'admin', '2024-09-16 01:02:26', 'admin', '2025-11-20 00:12:44', 'true开启 false关闭');
+INSERT INTO `sys_config` VALUES (101, '是否开启操作日志', 'sys.operLog.enable', 'true', 'N', 'admin', '2024-09-16 01:57:04', 'admin', '2025-11-20 13:46:25', 'true开启 false关闭\n关闭的话节约服务器流量等资源');
+INSERT INTO `sys_config` VALUES (102, '是否开启登录日志', 'sys.loginLog.enable', 'true', 'N', 'admin', '2024-09-16 01:25:35', '', NULL, 'true开启 false关闭\n关闭的话节约服务器流量等资源');
+INSERT INTO `sys_config` VALUES (103, '是否开启权限校验', 'sys.permission.enable', 'false', 'N', 'admin', '2024-09-16 01:27:00', 'admin', '2025-11-20 13:47:12', 'true开启 false关闭（建议开启）\n关闭的话：用于开发测试，最后统一添加，便于调试');
+INSERT INTO `sys_config` VALUES (104, '是否开启接口数据加密', 'sys.interface.enable', 'true', 'N', 'admin', '2024-09-18 00:13:34', 'admin', '2025-11-20 14:07:47', 'true开启：接口数据显示密文，更安全\nfalse关闭：接口数据返回明文');
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -780,13 +819,14 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-11-18 15:16:51', 'admin', '2025-11-18 15:16:51', '', NULL, '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-11-18 15:16:51', 'admin', '2025-11-18 15:16:51', 'admin', '2025-11-18 20:44:22', '测试员');
+INSERT INTO `sys_user` VALUES (101, NULL, 'xier', 'xier', '01', '', '', '0', '', '$2a$05$YPXBhgR0QMiECiiiLhT2nOGca/HMko.bxlSn9wnvYftZ369vY1zfG', '0', '0', '', NULL, '', NULL, '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
