@@ -1,0 +1,49 @@
+/*
+ * 这是 TypeScript 配置文件
+ * 它定义了 TypeScript 编译器的行为
+ * 你可以根据项目需求进行修改
+ * 更多配置选项请参考 TypeScript 官方文档
+ * https://www.typescriptlang.org/tsconfig
+
+ * compilerOptions 编译选项
+ * -baseUrl 设置模块解析的基础目录，"." 表示当前目录
+ * -module 设置编译输出的模块系统，"esnext" 表示使用 ES 模块
+ * -target 设置编译输出的目标版本，"esnext" 表示使用最新的 ECMAScript 版本
+ * -types 设置编译时需要包含的类型声明文件，这里为空数组表示不包含任何类型声明文件
+ * -lib 设置编译时需要包含的库文件，这里包含 "esnext" 表示包含最新的 ECMAScript 库文件
+ * -sourceMap 设置是否生成源映射文件，这里设置为 true 表示生成源映射文件
+ * -declaration 设置是否生成声明文件，这里设置为 true 表示生成声明文件
+ * -declarationMap 设置是否生成声明映射文件，这里设置为 true 表示生成声明映射文件
+ * -noUncheckedIndexedAccess 设置是否禁止未检查的索引访问，这里设置为 true 表示禁止未检查的索引访问
+ * -exactOptionalPropertyTypes 设置是否开启严格的可选属性类型检查，这里设置为 true 表示开启严格的可选属性类型检查
+ * -strict 设置是否开启严格模式，这里设置为 true 表示开启严格模式
+ * -verbatimModuleSyntax 设置是否开启原始模块语法，这里设置为 false 表示不开启原始模块语法
+ * -moduleResolution 设置模块解析策略，"bundler" 表示使用 bundler 解析策略
+ * -isolatedModules 设置是否开启独立模块模式，这里设置为 true 表示开启独立模块模式
+ * -noUncheckedSideEffectImports 设置是否禁止未检查的副作用导入，这里设置为 true 表示禁止未检查的副作用导入
+ * -moduleDetection 设置模块检测策略，"force" 表示强制检测模块
+ * -skipLibCheck 设置是否跳过库文件的类型检查，这里设置为 true 表示跳过库文件的类型检查
+ * exclude 排除不需要编译的目录和文件
+ */
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "esnext",
+    "target": "esnext",
+    "types": [],
+    "lib": ["esnext"],
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "strict": true,
+    "verbatimModuleSyntax": false,
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist"]
+}

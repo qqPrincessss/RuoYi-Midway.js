@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@xierfloat-monorepo/utils",
+  "version": "1.0.6",
+  "description": "",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/src/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./xlsx": {
+      "import": "./dist/xlsx.esm.js",
+      "require": "./dist/xlsx.cjs.js",
+      "types": "./dist/src/xlsx/index.d.ts"
+    },
+    "./request": {
+      "import": "./dist/request.esm.js",
+      "require": "./dist/request.cjs.js",
+      "types": "./dist/src/request/index.d.ts"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "buildOptions": {
+    "name": "xierfloatMonorepoUtils",
+    "formats": [
+      "esm",
+      "cjs",
+      "iife"
+    ],
+    "entries": {
+      "index": "./src/index.ts",
+      "xlsx": "./src/xlsx/index.ts",
+      "request": "./src/requests/index.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

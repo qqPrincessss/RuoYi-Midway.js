@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "xierfloat-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "lint:prettier": "prettier --write \"**/*.{js,ts,mjs,cjs,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:eslint": "eslint",
+    "lint:spellcheck": "cspell lint \"(packages|apps)/**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
+    "commit": "git-cz",
+    "prepare": "husky",
+    "precommit": "lint-staged",
+    "build": "node ./scripts/build.js",
+    "dev": "node ./scripts/dev.js",
+    "test": "vitest",
+    "publish:utils": "node ./scripts/publish.js"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "engines": {
+    "node": ">=20.19.0",
+    "npm": ">=10.9.0",
+    "pnpm": ">=10.17.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@cspell/dict-lorem-ipsum": "^4.0.5",
+    "@eslint/js": "^9.37.0",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^24.7.1",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitest/browser": "^3.2.4",
+    "autoprefixer": "^10.4.21",
+    "commitizen": "^4.3.1",
+    "cspell": "^9.2.1",
+    "cz-git": "^1.12.0",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-vue": "^10.5.0",
+    "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "less": "^4.4.2",
+    "lint-staged": "^16.2.4",
+    "postcss-pxtorem": "^6.1.0",
+    "prettier": "^3.6.2",
+    "rollup": "^4.52.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^3.2.4",
+    "vitest-browser-vue": "^1.1.0",
+    "vue": "^3.5.22"
+  },
+  "dependencies": {
+    "pinia": "^3.0.3",
+    "vue-router": "^4.5.1"
+  }
+}
