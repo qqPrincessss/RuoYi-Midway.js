@@ -26,7 +26,7 @@ export class EncryptMiddleware implements IMiddleware<Context, NextFunction> {
       const routerUrl = ctx.request.url.split('?')[0];
 
       // 如果白名单，直接放行, 或者包含导入导出接口，因为导入导出是流式数据，不用加密，上传等接口
-      if (whiteList.includes(routerUrl) || routerUrl.includes('/importData') || routerUrl.includes('/export') || routerUrl.includes('/profile/avatar')) {
+     if (whiteList.includes(routerUrl) || routerUrl.includes('/importData') || routerUrl.includes('/export') || routerUrl.includes('/profile/avatar') || routerUrl.includes('/batchGenCode/zip')) {
         await next();
       } else {
         const temp = await this.redisService.get(`${RedisEnum.SYS_CONFIG_KEY}sys.interface.enable`)
