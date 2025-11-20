@@ -60,25 +60,27 @@ export class GenTableDao {
   async genDbList(query: GenDbTableList) {
     const params: any[] = [];
     let where = `
-      table_schema = DATABASE()
-      AND table_type = 'BASE TABLE'
-      AND table_name NOT LIKE 'qrtz_%'
-      AND table_name NOT LIKE 'gen_%'
-      AND table_name NOT IN (SELECT table_name FROM gen_table)
+      n.nspname = 'public'
+      AND c.relkind = 'r'  -- 仅基础表
+      AND c.relname NOT LIKE 'qrtz_%'
+      AND c.relname NOT LIKE 'gen_%'
+      AND c.relname NOT IN (SELECT gt.table_name FROM public.gen_table gt)
     `;
 
     if (query.tableName) {
       params.push(`%${query.tableName}%`);
-      where += ` AND table_name LIKE ?`;
+      where += ` AND c.relname ILIKE $${params.length}`;
     }
     if (query.tableComment) {
       params.push(`%${query.tableComment}%`);
-      where += ` AND COALESCE(TABLE_COMMENT, '') LIKE ?`;
+      where += ` AND COALESCE(d.description, '') ILIKE $${params.length}`;
     }
 
     const countSql = `
       SELECT COUNT(*) AS total
-      FROM information_schema.TABLES
+      FROM pg_catalog.pg_class c
+      JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+      LEFT JOIN pg_catalog.pg_description d ON d.objoid = c.oid AND d.objsubid = 0
       WHERE ${where}
     `;
     const countRes = await this.genTableRepo.query(countSql, params);
@@ -92,13 +94,15 @@ export class GenTableDao {
 
     const listSql = `
       SELECT
-        table_name AS "tableName",
-        COALESCE(TABLE_COMMENT, '') AS "tableComment",
-        NOW() AS "createTime",
-        NOW() AS "updateTime"
-      FROM information_schema.TABLES
+        c.relname AS "tableName",
+        COALESCE(d.description, '') AS "tableComment",
+        NULL::timestamp AS "createTime",
+        NULL::timestamp AS "updateTime"
+      FROM pg_catalog.pg_class c
+      JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+      LEFT JOIN pg_catalog.pg_description d ON d.objoid = c.oid AND d.objsubid = 0
       WHERE ${where}
-      ORDER BY table_name ASC
+      ORDER BY c.relname ASC
       ${paginationClause}
     `;
     const rows = await this.genTableRepo.query(listSql, params);
@@ -277,7 +281,6 @@ export class GenTableDao {
         const data = await this.genTableRepo.findOne({ where: { tableName: item } });
         const columns = await this.genTableColumnRepo.find({ where: { tableId: data.tableId } });
         const primaryKey = await this.getPrimaryKey(columns);
-        console.log(primaryKey, data.businessName, capitalize(data.businessName), columns);
         return { primaryKey, BusinessName: capitalize(data.businessName), ...data, columns };
       }),
     );
@@ -294,7 +297,7 @@ export class GenTableDao {
         { content: list['tool/template/vue/api.js.vm'], path: `vue/api/${item.businessName}.js` },
         { content: list['tool/template/vue/index.vue.vm'], path: `vue/views/${item.businessName}/index.vue` },
         { content: list['tool/template/vue/dialogVue.vue.vm'], path: `vue/views/${item.businessName}/components/indexDialog.vue` },
-        { content: list['tool/template/mysql/mysql.sql.vm'], path: `sql/${item.businessName}.sql` },
+        { content: list['tool/template/pg/pg.sql.vm'], path: `sql/${item.businessName}.sql` },
       ];
 
       for (const template of templates) {
@@ -313,24 +316,25 @@ export class GenTableDao {
  */
   async selectDbTableListByNames(tableNames: string[]) {
     if (!tableNames.length) return [];
-    const placeholders = tableNames.map(() => '?').join(',');
     const sql = `
       SELECT
-        table_name AS "tableName",
-        COALESCE(TABLE_COMMENT, '') AS "tableComment",
-        NOW() AS "createTime",
-        NOW() AS "updateTime"
-      FROM information_schema.TABLES
+        c.relname AS "tableName",
+        COALESCE(d.description, '') AS "tableComment",
+        NULL::timestamp AS "createTime",
+        NULL::timestamp AS "updateTime"
+      FROM pg_catalog.pg_class c
+      JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+      LEFT JOIN pg_catalog.pg_description d ON d.objoid = c.oid AND d.objsubid = 0
       WHERE
-        table_schema = DATABASE()
-        AND table_type = 'BASE TABLE'
-        AND table_name NOT LIKE 'qrtz_%'
-        AND table_name NOT LIKE 'gen_%'
-        AND table_name NOT IN (SELECT table_name FROM gen_table)
-        AND table_name IN (${placeholders})
-      ORDER BY table_name ASC
+        n.nspname = 'public'
+        AND c.relkind = 'r'
+        AND c.relname NOT LIKE 'qrtz_%'
+        AND c.relname NOT LIKE 'gen_%'
+        AND c.relname NOT IN (SELECT gt.table_name FROM public.gen_table gt)
+        AND c.relname = ANY($1::text[])
+      ORDER BY c.relname ASC
     `;
-    return this.genTableRepo.query(sql, tableNames);
+    return this.genTableRepo.query(sql, [tableNames]);
   }
   /**
    * 根据表名获取表的字段信息以及注释
@@ -341,38 +345,36 @@ export class GenTableDao {
     if (!tableName) return null;
     const sql = `
       SELECT
-        cols.COLUMN_NAME AS "columnName",
-        CASE WHEN cols.IS_NULLABLE = 'NO' AND pk.COLUMN_NAME IS NULL THEN '1' ELSE '0' END AS "isRequired",
-        CASE WHEN pk.COLUMN_NAME IS NOT NULL THEN '1' ELSE '0' END AS "isPk",
-        cols.ORDINAL_POSITION AS "sort",
-        COALESCE(cols.COLUMN_COMMENT, '') AS "columnComment",
-        cols.COLUMN_DEFAULT AS "columnDefault",
+        cols.column_name AS "columnName",
+        CASE WHEN cols.is_nullable = 'NO' AND pk.column_name IS NULL THEN '1' ELSE '0' END AS "isRequired",
+        CASE WHEN pk.column_name IS NOT NULL THEN '1' ELSE '0' END AS "isPk",
+        cols.ordinal_position AS "sort",
+        COALESCE(col_description(cl.oid, att.attnum), '') AS "columnComment",
+        cols.column_default AS "columnDefault",
         CASE
-          WHEN cols.EXTRA LIKE '%auto_increment%' THEN '1'
+          WHEN cols.is_identity = 'YES' OR cols.column_default LIKE 'nextval(%' THEN '1'
           ELSE '0'
         END AS "isIncrement",
-        CASE
-          WHEN LOCATE('(', cols.DATA_TYPE) > 0
-          THEN SUBSTRING_INDEX(cols.DATA_TYPE, '(', 1)
-          ELSE cols.DATA_TYPE
-        END AS "columnType"
-      FROM information_schema.COLUMNS cols
+        TRIM(SPLIT_PART(format_type(att.atttypid, att.atttypmod), '(', 1)) AS "columnType"
+      FROM information_schema.columns cols
+      JOIN pg_class cl ON cl.relname = $1
+      JOIN pg_namespace n ON n.oid = cl.relnamespace AND n.nspname = 'public'
+      JOIN pg_attribute att ON att.attrelid = cl.oid AND att.attname = cols.column_name
       LEFT JOIN (
-        SELECT kcu.COLUMN_NAME
-        FROM information_schema.TABLE_CONSTRAINTS tc
-        JOIN information_schema.KEY_COLUMN_USAGE kcu
-          ON tc.CONSTRAINT_NAME = kcu.CONSTRAINT_NAME
-         AND tc.TABLE_SCHEMA = kcu.TABLE_SCHEMA
-         AND tc.TABLE_NAME = kcu.TABLE_NAME
-        WHERE tc.TABLE_SCHEMA = DATABASE()
-          AND tc.TABLE_NAME = ?
-          AND tc.CONSTRAINT_TYPE = 'PRIMARY KEY'
-      ) pk ON pk.COLUMN_NAME = cols.COLUMN_NAME
-      WHERE cols.TABLE_SCHEMA = DATABASE()
-        AND cols.TABLE_NAME = ?
-      ORDER BY cols.ORDINAL_POSITION
+        SELECT kcu.column_name
+        FROM information_schema.table_constraints tc
+        JOIN information_schema.key_column_usage kcu
+          ON tc.constraint_name = kcu.constraint_name
+         AND tc.table_schema = kcu.table_schema
+         AND tc.table_name = kcu.table_name
+        WHERE tc.table_schema = 'public'
+          AND tc.table_name = $1
+          AND tc.constraint_type = 'PRIMARY KEY'
+      ) pk ON pk.column_name = cols.column_name
+      WHERE cols.table_schema = 'public' AND cols.table_name = $1
+      ORDER BY cols.ordinal_position
     `;
-    return this.genTableRepo.query(sql, [tableName, tableName]);
+    return this.genTableRepo.query(sql, [tableName]);
   }
   /**
      * 初始化表列的字段信息

@@ -125,7 +125,6 @@ export class DeptDao {
       select: ['deptId', 'parentId', 'deptName'],
       where: { status: '0' },
     });
-    console.log(rows);
     // 构造树状结构
     const deptTreeList = listToTree(rows, 'deptId', 'deptName');
     return resBuild.data(deptTreeList);

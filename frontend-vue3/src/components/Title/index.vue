@@ -20,7 +20,7 @@ defineProps({
   margin-bottom: 20px;
 }
   .title {
-  height: 30px;
+  height: 35px;
   padding: 15px;
   border-left: 5px solid var(--el-color-primary);
   display: flex;

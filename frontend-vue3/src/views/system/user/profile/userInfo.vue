@@ -32,6 +32,7 @@ const props = defineProps({
 })
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 const rules = ref({
   nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],

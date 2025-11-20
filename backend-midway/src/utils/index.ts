@@ -3,7 +3,6 @@ import * as Lodash from 'lodash';
 
 // 获取操作人，新建或修改时设置该值
 export const getOperator = (ctx: any) => {
-  console.log(ctx.request.header.cookie);
   
   return ctx.request.header.cookie.split('; ').find((item: any) => item.startsWith('userName='))?.split('=')[1]
 }

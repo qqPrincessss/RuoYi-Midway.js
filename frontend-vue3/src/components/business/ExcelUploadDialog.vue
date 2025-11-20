@@ -1,5 +1,7 @@
 <template>
-  <el-dialog v-model="visible" :title="title" width="400px" append-to-body @close="handleClose">
+  <el-dialog v-model="visible"  width="400px" append-to-body @close="handleClose">
+          <Title :title="title" />
+
     <el-upload
       ref="uploadRef"
       :limit="1"
@@ -77,6 +79,7 @@ const props = defineProps({
 const emit = defineEmits(['success', 'error', 'close'])
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 
 // 状态管理
 const visible = ref(false)

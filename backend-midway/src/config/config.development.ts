@@ -22,7 +22,7 @@ export default {
   typeorm: {
     dataSource: {
       default: {
-        type: 'mysql',
+        type: 'postgres',
         host: process.env.DB_HOST, //数据库地址
         port: Number(process.env.DB_PORT), //数据库端口
         username: process.env.DB_USER, //数据库用户名
@@ -76,6 +76,30 @@ export default {
     description: 'midway-admin API 文档',
     version: '1.0.0',
     path: '/swagger-ui/index.html',
+  },
+  midwayLogger: {
+    default: {
+      dir: './logs',
+      level: 'info',
+      consoleLevel: 'info',
+      enableFile: true,
+      enableError: true,
+      format: (info) => {
+        return `${info.timestamp} ${info.LEVEL} ${info.pid} ${info.message}`;
+      },
+    },
+    clients: {
+      appLogger: {
+        fileLogName: 'ruoyi-midway-project.log',
+        level: 'info',
+        enableFile: true,
+      },
+      coreLogger: {
+        fileLogName: 'ruoyi-midway-core.log',
+        level: 'warn',
+        enableFile: true,
+      },
+    },
   },
 } as MidwayConfig;
 

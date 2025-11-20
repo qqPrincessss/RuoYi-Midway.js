@@ -1,6 +1,7 @@
 <template>
   <!-- 添加或修改数据字典内容配置 -->
-  <el-dialog :title="form.title" v-model="dialogTableVisible" width="600px" append-to-body>
+  <el-dialog  v-model="dialogTableVisible" width="600px" append-to-body>
+    <Title :title="form.title" />
     <el-form ref="formRef" :model="form.model" :rules="form.rules" label-width="100px">
       <el-form-item label="字典类型">
         <el-input v-model="form.model.dictType" :disabled="true" />
@@ -23,7 +24,7 @@
         <template #label>
           <el-tooltip effect="dark" :content="tips" placement="top-start">
             <div class="tips">
-              <QuestionFilled class="tips-icon" :size="'14px'"/>
+              <QuestionFilled class="tips-icon" :size="'14px'" />
             </div>
           </el-tooltip>
           <span style="width: 80px">样式属性</span>
@@ -53,6 +54,7 @@
 import { addData, updateData } from '@/api/system/dict/data'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
 
 // 数据标签回显样式

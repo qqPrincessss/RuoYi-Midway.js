@@ -39,14 +39,14 @@
     </el-form>
     <!--  底部  -->
     <div class="el-register-footer">
-      <span>Copyright © 2018-2024 midway-admin All Rights Reserved.</span>
+      <span>Copyright © 2018-2025 midway-admin All Rights Reserved.</span>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ElMessageBox } from 'element-plus'
-import { register } from '@/api/login'
+import { registerUser } from '@/api/login'
 import useAuthCode from '@/hooks/useAuthCode'
 const authCodeInfo = useAuthCode.authCodeInfo
 
@@ -90,7 +90,7 @@ const handleRegister = () => {
   registerRef.value.validate((valid) => {
     if (valid) {
       authCodeInfo.loading = true
-      register(registerForm.model)
+      registerUser(registerForm.model)
         .then(() => {
           const userName = registerForm.model.userName
           ElMessageBox.alert("<font color='red'>恭喜你，您的账号 " + userName + ' 注册成功！</font>', '系统提示', {

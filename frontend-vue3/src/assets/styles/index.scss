@@ -129,15 +129,68 @@ aside {
 //main-container全局样式
 .app-container {
   padding: 20px;
+  height: calc(100dvh - 84px);
+  background-color: $bgColor;
 }
 
-.components-container {
-  margin: 30px 50px;
-  position: relative;
+.table {
+  height: calc(100dvh - 124px);
+  display: flex;
+  flex-direction: column;
 }
 
+.search-container {
+  padding: 15px 15px 0 15px;
+  background-color: $componentColor;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+.table-container {
+  padding: 15px 15px 0 15px;
+  background-color: $componentColor;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.dialog-container {
+  max-height: 72dvh;
+  width: 100%;
+  overflow-y: auto;
+}
+.table-content {
+  flex: 1;
+  min-height: 0;
+}
 .pagination-container {
-  margin-top: 30px;
+  flex-shrink: 0;
+  height: 50px;
+  margin: 0;
+}
+.tree {
+  @extend .table;
+  background: $componentColor;
+  padding: 10px;
+  border-radius: 8px;
+}
+.tree-header {
+  flex-shrink: 0;
+  width: 100%;
+}
+.tree-body {
+  padding: 5px;
+  border: 1px solid $bgColor;
+  border-radius: 6px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  display: none;
 }
 
 .text-center {

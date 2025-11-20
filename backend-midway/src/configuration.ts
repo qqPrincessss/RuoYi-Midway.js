@@ -11,10 +11,9 @@ import * as axios from '@midwayjs/axios';
 import * as redis from '@midwayjs/redis';
 import { join } from 'path';
 import { ErrorFilter } from './filter/error.filter';
-// import { DefaultErrorFilter } from './filter/default.filter';
 import { ReportMiddleware } from './middleware/report.middleware';
 import { JwtMiddleware } from './middleware/jwt.middleware'; // token校验
-// import { EncryptMiddleware } from "./middleware/encrypt.middleware"; // 接口加密
+import { EncryptMiddleware } from "./middleware/encrypt.middleware"; // 接口加密
 import { AuthGuard } from "./gaurd/auth.guard"; // 权限校验守卫
 import { LogGuard } from "./gaurd/log.guard";
 import * as swagger from '@midwayjs/swagger';
@@ -45,8 +44,8 @@ export class MainConfiguration {
 
   async onReady() {
     // add middleware
-    // this.app.useMiddleware([JwtMiddleware, EncryptMiddleware, ReportMiddleware]);
-    this.app.useMiddleware([JwtMiddleware, ReportMiddleware]);
+    this.app.useMiddleware([JwtMiddleware, EncryptMiddleware, ReportMiddleware]);
+    // this.app.useMiddleware([JwtMiddleware, ReportMiddleware]);
     // add filter
     this.app.useFilter([ErrorFilter]);
     // guard守卫

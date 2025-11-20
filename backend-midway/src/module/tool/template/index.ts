@@ -6,7 +6,7 @@ import { dtoTem } from './midwayjs/dto.js';
 import { controllerTem } from './midwayjs/controller.js';
 import { serviceTem } from './midwayjs/service.js';
 import { daoTem } from './midwayjs/dao.js';
-import { mysqlSql } from './mysql/mysql.sql.js';
+import { pgSql } from './pg/pg.sql.js';
 
 const templates = {
   'tool/template/midwayjs/entity.ts.vm': entityTem,
@@ -17,7 +17,7 @@ const templates = {
   'tool/template/vue/api.js.vm': apiTemplate,
   'tool/template/vue/index.vue.vm': indexVue,
   'tool/template/vue/dialogVue.vue.vm': dialogVue,
-  'tool/template/mysql/mysql.sql.vm': mysqlSql,
+  'tool/template/pg/pg.sql.vm': pgSql,
 };
 
 export const index = (options) => {

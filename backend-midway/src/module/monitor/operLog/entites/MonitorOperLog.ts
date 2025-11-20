@@ -1,8 +1,8 @@
-import { Column, CreateDateColumn, Entity,  PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('monitor_oper_log', { comment: '操作日志记录' })
 export class MonitorOperLog {
- @PrimaryGeneratedColumn({ type: 'int', name: 'oper_id', comment: '日志主键' })
+  @PrimaryGeneratedColumn({ type: 'int', name: 'oper_id', comment: '日志主键' })
   operId: number;
 
   @Column({ type: 'varchar', name: 'title', default: '', comment: '模块标题' })
@@ -44,7 +44,7 @@ export class MonitorOperLog {
   @Column({ type: 'varchar', name: 'error_msg', default: '', comment: '错误消息' })
   errorMsg: string;
 
-  @CreateDateColumn({ type: 'datetime', name: 'oper_time', comment: '操作时间' })
+  @CreateDateColumn({ type: "timestamp without time zone", name: 'oper_time', comment: '操作时间' })
   operTime: Date;
 
   @Column({ type: 'int', name: 'cost_time', default: 0, comment: '消耗时间' })

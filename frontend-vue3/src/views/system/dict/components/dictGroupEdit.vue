@@ -1,6 +1,7 @@
 <template>
   <!-- 添加或修改数据字典项配置 -->
-  <el-dialog :title="form.title" v-model="dialogTableVisible" width="600px" append-to-body>
+  <el-dialog  v-model="dialogTableVisible" width="600px" append-to-body>
+    <Title :title="form.title" />
     <el-form ref="formRef" :model="form.model" :rules="form.rules" label-width="100px">
       <el-form-item label="字典名称" prop="dictName">
         <el-input v-model="form.model.dictName" placeholder="请输入字典名称" />
@@ -31,6 +32,7 @@
 import { addType, updateType } from '@/api/system/dict/type'
 
 const { proxy } = getCurrentInstance()
+import Title from '@/components/Title/index.vue'
 const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
 
 const dialogTableVisible = ref(false)
@@ -60,7 +62,7 @@ const form = reactive({
     formRef.value.validate((valid) => {
       if (valid) {
         form.loading = true
-        if (form.model.dictId != undefined) {
+        if (form.model.dictCode != undefined) {
           updateType(form.model).then(() => {
             proxy.$modal.msgSuccess('修改成功')
             form.reset()

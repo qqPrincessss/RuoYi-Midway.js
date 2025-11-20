@@ -3,11 +3,11 @@ import { AuthDao } from './auth.dao';
 import { JwtService } from '@midwayjs/jwt';
 import { Context } from '@midwayjs/koa';
 import { RedisService } from '@midwayjs/redis';
-import { LoginDTO } from './dto/auth.dto';
+import { LoginDTO, RegisterDTO } from './dto/auth.dto';
 import { UserService } from '../system/user/user.service';
 import { CaptchaService } from '@midwayjs/captcha';
 import { HttpService } from '@midwayjs/axios';
-import { isEqualPsw } from '../../utils/password';
+import { isEqualPsw, genHashPsw } from '../../utils/password';
 import { resBuild } from '../../utils/resBuild';
 import { formatDate } from '../../utils/time';
 import { getIp } from '../../utils/device';
@@ -48,17 +48,19 @@ export class AuthService {
   async captchaImage() {
     const temp = await this.redisService.get(`${RedisEnum.SYS_CONFIG_KEY}sys.account.captchaEnabled`);
     const isCaptchaEnabled = temp === null ? true : JSON.parse(temp)
-    if (JSON.parse(isCaptchaEnabled)) {
+    // 将验证码开关状态存到 session，供登录时校验使用
+    this.ctx.session.isCaptchaEnabled = isCaptchaEnabled;
+
+    if (isCaptchaEnabled) {
       // 如果开启了验证码，则生成验证码
       const { id, imageBase64 } = await this.captchaService.formula({ noise: 1 }); // noise是干扰项条数，具体配置可看文档
       // 把校验id存起来，和后面的登录时的参数、对比值是否一致
       this.ctx.session.codeId = id;
-      return {
-        code: 200,
-        message: '操作成功',
+     return resBuild.data( {
         img: imageBase64, // 此处直接返回base64图片，和若依的base64位字符串不一样
         captchaEnabled: isCaptchaEnabled, // 是否开启验证码校验
-      }
+        uuid: id // 添加 uuid 字段，与前端保持一致
+      })
     } else {
       // 如果关闭了验证码，则返回captchaEnabled值为false
       return resBuild.data({
@@ -135,29 +137,76 @@ export class AuthService {
       token: token
     })
   }
+  //获取是否开启注册
+  async getRegisterUser() {
+    const temp = await this.redisService.get(`${RedisEnum.SYS_CONFIG_KEY}sys.login.registerUser`);
+    return resBuild.data({
+      register: temp === null ? true : JSON.parse(temp)
+    })
+  }
+
+  // 注册接口
+  async register(user: RegisterDTO) {
+    const { userName, password, confirmPassword, code } = user;
+
+    // 检查两次密码是否一致
+    if (password !== confirmPassword) {
+      throw new Error('两次输入的密码不一致');
+    }
+
+    // 如果开启了验证码，验证验证码是否正确
+    if (this.ctx.session.isCaptchaEnabled) {
+      const isEqualCode: boolean = await this.captchaService.check(this.ctx.session.codeId, code);
+      if (!isEqualCode) {
+        throw new Error('验证码错误');
+      }
+    }
+
+    // 检查用户名是否已存在
+    const existUser = await this.AuthDao.getUserByUserName(userName);
+    if (existUser) {
+      throw new Error('用户名已存在');
+    }
+
+    // 加密密码
+    const hashedPassword = genHashPsw(password);
+
+    // 创建新用户
+    await this.AuthDao.createUser({
+      userName,
+      nickName: userName,
+      password: hashedPassword,
+      userType: '01', // 01表示注册用户
+      status: '0', // 0表示正常状态
+    });
+
+    return resBuild.success('注册成功');
+  }
+
+
 
   /** 退出登录 */
   async logout() {
     try {
-     this.ctx.cookies.set('token', '', {
-      maxAge: 0,
-      httpOnly: true,
-      signed: true,
-      overwrite: true,
-    })
+      this.ctx.cookies.set('token', '', {
+        maxAge: 0,
+        httpOnly: true,
+        signed: true,
+        overwrite: true,
+      })
 
-    // 同步清理 userName
-    this.ctx.cookies.set('userName', '', {
-      maxAge: 0,
-      httpOnly: false,
-      overwrite: true,
-    })
-    const tokenId = this.ctx.session.userInfo.tokenId;
-    this.ctx.session.userInfo = null;
-    await this.redisService.del(`${RedisEnum.LOGIN_TOKEN_KEY}${tokenId}`);
-     return resBuild.success();
+      // 同步清理 userName
+      this.ctx.cookies.set('userName', '', {
+        maxAge: 0,
+        httpOnly: false,
+        overwrite: true,
+      })
+      const tokenId = this.ctx.session.userInfo.tokenId;
+      this.ctx.session.userInfo = null;
+      await this.redisService.del(`${RedisEnum.LOGIN_TOKEN_KEY}${tokenId}`);
+      return resBuild.success();
     } catch (error) {
-      throw new  httpError.UnauthorizedError('token已失效，请重新登录');
+      throw new httpError.UnauthorizedError('token已失效，请重新登录');
     }
   }
   async getLogData(userName: string) {
@@ -214,7 +263,6 @@ export class AuthService {
   // 记录登录日志
   // 位于类 AuthService 中的 recordLog 方法
   async recordLog(logData: any) {
-    console.log('logData', logData)
     await this.AuthDao.saveLoginLog(logData)
   }
 }
