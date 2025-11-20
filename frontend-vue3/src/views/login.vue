@@ -420,7 +420,7 @@ $count: 1000;
 
 .login-form {
   display: flex;
-  width: 100%;
+  width: 80%;
   flex-direction: column;
   justify-content: center;
 
