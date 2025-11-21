@@ -13,8 +13,8 @@
 <p align="center">
   中文 | <a href="./README.md">English</a>
 </p>
-## 📎 演示地址
-**在线演示：** https://ruoyi.gdmu-stuorg.com/
+📎 演示地址
+在线演示： https://ruoyi.gdmu-stuorg.com/
 
 ## 项目介绍
 
