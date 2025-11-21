@@ -13,9 +13,9 @@
 <p align="center">
   <a href="./README.zh-CN.md">中文</a> | English
 </p>
-## 📎 Demo
+📎 Demo
 
-**Live Demo:** https://ruoyi.gdmu-stuorg.com/
+Live Demo: https://ruoyi.gdmu-stuorg.com/
 
 ## Introduction
 
@@ -157,4 +157,5 @@ Thanks to the following open source projects for reference and inspiration:
 ## License
 
 [MIT](LICENSE)
+
 
